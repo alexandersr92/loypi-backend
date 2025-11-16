@@ -1,0 +1,1321 @@
+{
+    "info": {
+        "_postman_id": "loypi-api-collection",
+        "name": "Loypi API",
+        "description": "Colección completa de endpoints para la API de Loypi - Sistema de Programas de Lealtad",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Autenticación Owner",
+            "item": [
+                {
+                    "name": "Login Owner",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.environment.set(\"owner_token\", jsonData.token);",
+                                    "    pm.environment.set(\"user_id\", jsonData.user.id);",
+                                    "    if (jsonData.businesses && jsonData.businesses.length > 0) {",
+                                    "        pm.environment.set(\"slug\", jsonData.businesses[0].slug);",
+                                    "    }",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"owner1@example.com\",\n    \"password\": \"password\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/owner/auth/login",
+                            "host": ["{{base_url}}"],
+                            "path": ["owner", "auth", "login"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Info Owner",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{owner_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/owner/auth/me",
+                            "host": ["{{base_url}}"],
+                            "path": ["owner", "auth", "me"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Logout Owner",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{owner_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/owner/auth/logout",
+                            "host": ["{{base_url}}"],
+                            "path": ["owner", "auth", "logout"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Campañas (Owner)",
+            "item": [
+                {
+                    "name": "Listar Campañas",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    if (jsonData.data && jsonData.data.length > 0) {",
+                                    "        pm.environment.set(\"campaign_id\", jsonData.data[0].id);",
+                                    "    }",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{owner_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/owner/campaigns?active=true&per_page=15",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "owner", "campaigns"],
+                            "query": [
+                                {
+                                    "key": "active",
+                                    "value": "true",
+                                    "description": "Filtrar por estado activo"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "15"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Ver Campaña con Estadísticas",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{owner_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/owner/campaigns/{{campaign_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "owner", "campaigns", "{{campaign_id}}"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Ver Clientes en Campaña",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{owner_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/owner/campaigns/{{campaign_id}}/customers?search=&per_page=15",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "owner", "campaigns", "{{campaign_id}}", "customers"],
+                            "query": [
+                                {
+                                    "key": "search",
+                                    "value": "",
+                                    "description": "Buscar por nombre, teléfono o código de cliente"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "15"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Autenticación Clientes",
+            "item": [
+                {
+                    "name": "Solicitar OTP",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"phone\": \"+1234567890\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/customer/auth/request-otp",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "customer",
+                                "auth",
+                                "request-otp"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Verificar OTP y Login",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.environment.set(\"customer_token\", jsonData.token);",
+                                    "    pm.environment.set(\"customer_id\", jsonData.customer.id);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"phone\": \"+1234567890\",\n    \"otp\": \"123456\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/customer/auth/verify-otp",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "customer",
+                                "auth",
+                                "verify-otp"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Info Cliente",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{customer_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/customer/auth/me",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "customer", "auth", "me"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Logout Cliente",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{customer_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/customer/auth/logout",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "customer", "auth", "logout"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Autenticación Staff",
+            "item": [
+                {
+                    "name": "Login Staff",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    var jsonData = pm.response.json();",
+                                    "    pm.environment.set(\"staff_token\", jsonData.token);",
+                                    "    pm.environment.set(\"staff_id\", jsonData.staff.id);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"pin\": \"1234\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/auth/login",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "auth", "login"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Info Staff",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/auth/me",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "auth", "me"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Logout Staff",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/auth/logout",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "auth", "logout"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Campañas (Staff)",
+            "item": [
+                {
+                    "name": "Listar Campañas",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns?active=true&per_page=15",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "campaigns"],
+                            "query": [
+                                {
+                                    "key": "active",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "15"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear Campaña",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Campaña de Verano\",\n    \"description\": \"Obtén descuentos especiales en verano\",\n    \"limit\": 1000,\n    \"required_stamps\": 10,\n    \"active\": true,\n    \"cover_color\": \"#FF5733\",\n    \"reward_json\": {\n        \"title\": \"Descuento del 20%\",\n        \"description\": \"Obtén 10 sellos y gana un descuento\"\n    }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "campaigns"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Ver Campaña",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns/{{campaign_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "campaigns",
+                                "{{campaign_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Campaña",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Campaña de Verano Actualizada\",\n    \"active\": false\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns/{{campaign_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "campaigns",
+                                "{{campaign_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Campaña",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns/{{campaign_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "campaigns",
+                                "{{campaign_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Premios (Staff)",
+            "item": [
+                {
+                    "name": "Listar Premios",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns/{{campaign_id}}/rewards?active=true",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "campaigns",
+                                "{{campaign_id}}",
+                                "rewards"
+                            ],
+                            "query": [
+                                {
+                                    "key": "active",
+                                    "value": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear Premio Punch",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Premio por 10 Sellos\",\n    \"type\": \"punch\",\n    \"threshold_int\": 10,\n    \"description\": \"Obtén 10 sellos para desbloquear este premio\",\n    \"per_customer_limit\": 1,\n    \"global_limit\": 100,\n    \"active\": true,\n    \"reward_json\": {\n        \"title\": \"Descuento del 20%\",\n        \"value\": 20\n    }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns/{{campaign_id}}/rewards",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "campaigns",
+                                "{{campaign_id}}",
+                                "rewards"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear Premio Streak",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Premio por 7 Días de Racha\",\n    \"type\": \"streak\",\n    \"threshold_int\": 7,\n    \"description\": \"Visita 7 días seguidos para desbloquear\",\n    \"per_customer_limit\": null,\n    \"global_limit\": null,\n    \"active\": true,\n    \"reward_json\": {\n        \"title\": \"Producto Gratis\",\n        \"description\": \"Elige cualquier producto del menú\"\n    }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns/{{campaign_id}}/rewards",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "campaigns",
+                                "{{campaign_id}}",
+                                "rewards"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Ver Premio",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns/{{campaign_id}}/rewards/{{reward_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "campaigns",
+                                "{{campaign_id}}",
+                                "rewards",
+                                "{{reward_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Premio",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Premio Actualizado\",\n    \"active\": false\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns/{{campaign_id}}/rewards/{{reward_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "campaigns",
+                                "{{campaign_id}}",
+                                "rewards",
+                                "{{reward_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Premio",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/campaigns/{{campaign_id}}/rewards/{{reward_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "campaigns",
+                                "{{campaign_id}}",
+                                "rewards",
+                                "{{reward_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Sellos (Staff)",
+            "item": [
+                {
+                    "name": "Agregar Sello",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"customer_id\": \"{{customer_id}}\",\n    \"campaign_id\": \"{{campaign_id}}\",\n    \"meta\": {\n        \"notes\": \"Cliente visitó el local\"\n    }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/stamps",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "stamps"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Listar Sellos",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/stamps?customer_id={{customer_id}}&campaign_id={{campaign_id}}&per_page=15",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "stamps"],
+                            "query": [
+                                {
+                                    "key": "customer_id",
+                                    "value": "{{customer_id}}",
+                                    "description": "Filtrar por cliente"
+                                },
+                                {
+                                    "key": "campaign_id",
+                                    "value": "{{campaign_id}}",
+                                    "description": "Filtrar por campaña"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "15"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Canjes (Staff)",
+            "item": [
+                {
+                    "name": "Canjear Premio",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"customer_campaign_id\": \"{{customer_campaign_id}}\",\n    \"reward_id\": \"{{reward_id}}\",\n    \"meta\": {\n        \"require_pin\": false,\n        \"notes\": \"Canje realizado en caja\"\n    }\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/redemptions",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "redemptions"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Listar Canjes",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/redemptions?customer_id={{customer_id}}&reward_id={{reward_id}}&per_page=15",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "redemptions"],
+                            "query": [
+                                {
+                                    "key": "customer_id",
+                                    "value": "{{customer_id}}",
+                                    "description": "Filtrar por cliente"
+                                },
+                                {
+                                    "key": "reward_id",
+                                    "value": "{{reward_id}}",
+                                    "description": "Filtrar por premio"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "15"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Clientes (Staff)",
+            "item": [
+                {
+                    "name": "Listar Clientes",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/customers?search=&per_page=15",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "customers"],
+                            "query": [
+                                {
+                                    "key": "search",
+                                    "value": "",
+                                    "description": "Buscar por nombre, teléfono o código"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "15"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Ver Cliente",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/customers/{{customer_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "customers",
+                                "{{customer_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Cliente",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Nombre Actualizado\",\n    \"phone\": \"+1234567890\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/customers/{{customer_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "customers",
+                                "{{customer_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Staff Management",
+            "item": [
+                {
+                    "name": "Listar Staff",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/staff?active=true&per_page=15",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "staff"],
+                            "query": [
+                                {
+                                    "key": "active",
+                                    "value": "true"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "15"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear Staff",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Nuevo Staff\",\n    \"passcode\": \"5678\",\n    \"active\": true\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/staff",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "staff", "staff"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Ver Staff",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/staff/{{staff_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "staff",
+                                "{{staff_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Staff",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Staff Actualizado\",\n    \"passcode\": \"9999\",\n    \"active\": false\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/staff/{{staff_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "staff",
+                                "{{staff_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Staff",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{staff_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/staff/staff/{{staff_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "staff",
+                                "staff",
+                                "{{staff_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Campañas (Cliente)",
+            "item": [
+                {
+                    "name": "Listar Campañas Activas",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{customer_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/customer/campaigns?active=true",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "customer", "campaigns"],
+                            "query": [
+                                {
+                                    "key": "active",
+                                    "value": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Ver Campaña",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{customer_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/customer/campaigns/{{campaign_id}}",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "customer",
+                                "campaigns",
+                                "{{campaign_id}}"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Premios (Cliente)",
+            "item": [
+                {
+                    "name": "Ver Premios Desbloqueados",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{customer_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/customer/rewards/unlocked?redeemed=false&per_page=15",
+                            "host": ["{{base_url}}"],
+                            "path": [
+                                "{{slug}}",
+                                "customer",
+                                "rewards",
+                                "unlocked"
+                            ],
+                            "query": [
+                                {
+                                    "key": "redeemed",
+                                    "value": "false",
+                                    "description": "true para ver solo canjeados, false para no canjeados"
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "15"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Progreso (Cliente)",
+            "item": [
+                {
+                    "name": "Ver Mi Progreso",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{customer_token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/{{slug}}/customer/progress",
+                            "host": ["{{base_url}}"],
+                            "path": ["{{slug}}", "customer", "progress"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000/api",
+            "type": "string"
+        },
+        {
+            "key": "slug",
+            "value": "negocio-1",
+            "type": "string"
+        },
+        {
+            "key": "customer_token",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "staff_token",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "owner_token",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "user_id",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "customer_id",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "staff_id",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "campaign_id",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "reward_id",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "customer_campaign_id",
+            "value": "",
+            "type": "string"
+        }
+    ]
+}
