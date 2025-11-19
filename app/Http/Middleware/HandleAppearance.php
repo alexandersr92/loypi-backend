@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
 
 class HandleAppearance
@@ -16,8 +15,14 @@ class HandleAppearance
      */
     public function handle(Request $request, Closure $next): Response
     {
-        View::share('appearance', $request->cookie('appearance') ?? 'system');
-
+        if ($request->is('dashboard*')) {
+            return $next($request);
+        }
+        
+        // Este middleware maneja la cookie de appearance (tema dark/light)
+        // La cookie se establece desde el frontend y se lee aquí si es necesario
+        
         return $next($request);
     }
 }
+

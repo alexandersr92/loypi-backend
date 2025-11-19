@@ -5,7 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -27,6 +27,12 @@ class User extends Authenticatable
         'password',
         'phone',
         'role',
+        'avatar',
+        'status',
+        'last_login_at',
+        'timezone',
+        'locale',
+        'email_verified_at',
     ];
 
     /**
@@ -52,12 +58,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
+            'last_login_at' => 'datetime',
         ];
     }
 
-    public function businesses(): HasMany
+    public function business(): HasOne
     {
-        return $this->hasMany(Business::class);
+        return $this->hasOne(Business::class);
     }
 
     public function isAdmin(): bool

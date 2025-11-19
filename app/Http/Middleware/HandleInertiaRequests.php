@@ -18,9 +18,7 @@ class HandleInertiaRequests extends Middleware
     protected $rootView = 'app';
 
     /**
-     * Determines the current asset version.
-     *
-     * @see https://inertiajs.com/asset-versioning
+     * Determine the current asset version.
      */
     public function version(Request $request): ?string
     {
@@ -49,3 +47,4 @@ class HandleInertiaRequests extends Middleware
         ];
     }
 }
+

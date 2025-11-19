@@ -19,6 +19,11 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone')->nullable();
             $table->enum('role', ['admin', 'owner'])->default('owner');
+            $table->string('avatar')->nullable();
+            $table->enum('status', ['active', 'inactive', 'suspended'])->default('active');
+            $table->timestamp('last_login_at')->nullable();
+            $table->string('timezone')->nullable()->default('UTC');
+            $table->string('locale')->nullable()->default('es');
             $table->rememberToken();
             $table->timestamps();
         });

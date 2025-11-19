@@ -2,52 +2,101 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
-class Staff extends Authenticatable
+class Staff extends Model implements Authenticatable
 {
-    use HasFactory, HasUuids, HasApiTokens, Notifiable;
+    use HasFactory, HasUuids, HasApiTokens;
+    
+    use \Illuminate\Auth\Authenticatable;
 
     protected $fillable = [
         'business_id',
+        'code',
         'name',
         'passcode_hash',
         'active',
+        'failed_login_attempts',
+        'locked_until',
+        'last_login_at',
     ];
 
-    protected $casts = [
-        'active' => 'boolean',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'active' => 'boolean',
+            'failed_login_attempts' => 'integer',
+            'locked_until' => 'datetime',
+            'last_login_at' => 'datetime',
+        ];
+    }
 
-    protected $hidden = [
-        'passcode_hash',
-    ];
-
+    /**
+     * Relación con el negocio
+     */
     public function business(): BelongsTo
     {
         return $this->belongsTo(Business::class);
     }
 
-    public function stamps(): HasMany
+    /**
+     * Verifica si el PIN es correcto
+     */
+    public function verifyPin(string $pin): bool
     {
-        return $this->hasMany(Stamp::class);
+        return Hash::check($pin, $this->passcode_hash);
     }
 
-    public function redemptions(): HasMany
+    /**
+     * Verifica si el staff está bloqueado
+     */
+    public function isLocked(): bool
     {
-        return $this->hasMany(Redemption::class);
+        if ($this->locked_until === null) {
+            return false;
+        }
+
+        return $this->locked_until->isFuture();
     }
 
-    public function verifyPasscode(string $passcode): bool
+    /**
+     * Incrementa los intentos fallidos de login
+     */
+    public function incrementFailedAttempts(int $maxAttempts = 5, int $lockMinutes = 30): void
     {
-        return Hash::check($passcode, $this->passcode_hash);
+        $this->increment('failed_login_attempts');
+
+        if ($this->failed_login_attempts >= $maxAttempts) {
+            $this->locked_until = now()->addMinutes($lockMinutes);
+            $this->save();
+        }
+    }
+
+    /**
+     * Resetea los intentos fallidos (después de login exitoso)
+     */
+    public function resetFailedAttempts(): void
+    {
+        $this->update([
+            'failed_login_attempts' => 0,
+            'locked_until' => null,
+        ]);
+    }
+
+    /**
+     * Desbloquea el staff (solo owner puede hacer esto)
+     */
+    public function unlock(): void
+    {
+        $this->update([
+            'failed_login_attempts' => 0,
+            'locked_until' => null,
+        ]);
     }
 }
-

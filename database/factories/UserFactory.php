@@ -27,10 +27,14 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= 'password',
+            'phone' => '+52' . fake()->numerify('##########'),
+            'role' => fake()->randomElement([ 'owner']),
+            'avatar' => fake()->optional()->imageUrl(200, 200, 'people'),
+            'status' => fake()->randomElement(['active', 'inactive', 'suspended']),
+            'last_login_at' => fake()->optional()->dateTimeBetween('-1 month', 'now'),
+            'timezone' => fake()->timezone(),
+            'locale' => fake()->randomElement(['es', 'en']),
             'remember_token' => Str::random(10),
-            'two_factor_secret' => Str::random(10),
-            'two_factor_recovery_codes' => Str::random(10),
-            'two_factor_confirmed_at' => now(),
         ];
     }
 
