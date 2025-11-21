@@ -121,7 +121,14 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'Resetear contraseña'
-      description: 'Resetea la contraseña usando el token recibido por email.'
+      description: |-
+        Resetea la contraseña usando el token recibido por email.
+
+        **Requisitos:**
+        - `token`: Token recibido por email
+        - `email`: Email del usuario
+        - `password`: Nueva contraseña (mínimo 8 caracteres)
+        - `password_confirmation`: Confirmación de la nueva contraseña (debe coincidir con `password`)
       authenticated: false
       deprecated: false
     headers:
@@ -135,42 +142,74 @@ endpoints:
       token:
         custom: []
         name: token
-        description: ''
+        description: 'El token de reset recibido por email.'
         required: true
-        example: architecto
+        example: abc123def456
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       email:
         custom: []
         name: email
-        description: 'Must be a valid email address.'
+        description: 'El email del usuario.'
         required: true
-        example: zbailey@example.net
+        example: user@example.com
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       password:
         custom: []
         name: password
-        description: 'Must be at least 8 characters.'
+        description: 'La nueva contraseña (mínimo 8 caracteres).'
         required: true
-        example: '-0pBNvYgxw'
+        example: newpassword123
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      password_confirmation:
+        custom: []
+        name: password_confirmation
+        description: 'Confirmación de la nueva contraseña (debe coincidir con password).'
+        required: true
+        example: newpassword123
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      token: architecto
-      email: zbailey@example.net
-      password: '-0pBNvYgxw'
+      token: abc123def456
+      email: user@example.com
+      password: newpassword123
+      password_confirmation: newpassword123
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Password reset successfully."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+            "success": false,
+            "message": "Invalid or expired reset token."
+          }
+        headers: []
+        description: ''
     responseFields: []
     auth: []
     controller: null

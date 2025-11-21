@@ -129,7 +129,7 @@ endpoints:
         description: ''
         required: false
         example:
-          - false
+          - true
         type: 'boolean[]'
         enumValues: []
         exampleWasSpecified: false
@@ -141,7 +141,7 @@ endpoints:
       sort_orders:
         - 84
       required_overrides:
-        - false
+        - true
     fileParameters: []
     responses: []
     responseFields: []

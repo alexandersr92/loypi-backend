@@ -138,7 +138,26 @@ class AuthController extends Controller
      * 
      * Resetea la contraseña usando el token recibido por email.
      * 
+     * **Requisitos:**
+     * - `token`: Token recibido por email
+     * - `email`: Email del usuario
+     * - `password`: Nueva contraseña (mínimo 8 caracteres)
+     * - `password_confirmation`: Confirmación de la nueva contraseña (debe coincidir con `password`)
+     * 
      * @unauthenticated
+     * @bodyParam token string required El token de reset recibido por email. Example: abc123def456
+     * @bodyParam email string required El email del usuario. Example: user@example.com
+     * @bodyParam password string required La nueva contraseña (mínimo 8 caracteres). Example: newpassword123
+     * @bodyParam password_confirmation string required Confirmación de la nueva contraseña (debe coincidir con password). Example: newpassword123
+     * 
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Password reset successfully."
+     * }
+     * @response 400 {
+     *   "success": false,
+     *   "message": "Invalid or expired reset token."
+     * }
      */
     public function resetPassword(Request $request): JsonResponse
     {

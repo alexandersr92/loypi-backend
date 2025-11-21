@@ -113,7 +113,7 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: select
+        example: text
         type: string
         enumValues:
           - text
@@ -151,7 +151,7 @@ endpoints:
         name: active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -217,7 +217,7 @@ endpoints:
         name: 'validations[].operator'
         description: 'This field is required when <code>validations</code> is present.'
         required: false
-        example: '<'
+        example: regex
         type: string
         enumValues:
           - '='
@@ -259,7 +259,7 @@ endpoints:
         name: 'validations[].value_date'
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-21T06:09:22'
+        example: '2025-11-21T06:29:45'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -280,9 +280,9 @@ endpoints:
       key: b
       label: 'n'
       description: 'Eius et animi quos velit et.'
-      type: select
+      type: text
       required: true
-      active: false
+      active: true
       options:
         -
           value: v
@@ -290,10 +290,10 @@ endpoints:
           sort_order: 37
       validations:
         -
-          operator: '<'
+          operator: regex
           value_string: architecto
           value_number: 4326.41688
-          value_date: '2025-11-21T06:09:22'
+          value_date: '2025-11-21T06:29:45'
           message: m
     fileParameters: []
     responses: []
@@ -538,7 +538,7 @@ endpoints:
         name: 'validations[].operator'
         description: 'This field is required when <code>validations</code> is present.'
         required: false
-        example: not_in
+        example: in
         type: string
         enumValues:
           - '='
@@ -580,7 +580,7 @@ endpoints:
         name: 'validations[].value_date'
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-21T06:09:22'
+        example: '2025-11-21T06:29:45'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -611,10 +611,10 @@ endpoints:
       validations:
         -
           id: cd1eb1ea-4697-3b9a-9dd0-988044a83af6
-          operator: not_in
+          operator: in
           value_string: architecto
           value_number: 4326.41688
-          value_date: '2025-11-21T06:09:22'
+          value_date: '2025-11-21T06:29:45'
           message: m
     fileParameters: []
     responses: []
@@ -691,7 +691,7 @@ endpoints:
         name: required
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -801,7 +801,7 @@ endpoints:
         name: 'validations[].operator'
         description: 'This field is required when <code>validations</code> is present.'
         required: false
-        example: in
+        example: '='
         type: string
         enumValues:
           - '='
@@ -843,7 +843,7 @@ endpoints:
         name: 'validations[].value_date'
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-21T06:09:22'
+        example: '2025-11-21T06:29:45'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -863,7 +863,7 @@ endpoints:
     cleanBodyParameters:
       label: b
       description: 'Eius et animi quos velit et.'
-      required: false
+      required: true
       active: true
       options:
         -
@@ -874,10 +874,10 @@ endpoints:
       validations:
         -
           id: cd1eb1ea-4697-3b9a-9dd0-988044a83af6
-          operator: in
+          operator: '='
           value_string: architecto
           value_number: 4326.41688
-          value_date: '2025-11-21T06:09:22'
+          value_date: '2025-11-21T06:29:45'
           message: m
     fileParameters: []
     responses: []

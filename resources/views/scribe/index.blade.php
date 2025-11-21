@@ -750,6 +750,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <p>Resetea la contraseña usando el token recibido por email.</p>
+<p><strong>Requisitos:</strong></p>
+<ul>
+<li><code>token</code>: Token recibido por email</li>
+<li><code>email</code>: Email del usuario</li>
+<li><code>password</code>: Nueva contraseña (mínimo 8 caracteres)</li>
+<li><code>password_confirmation</code>: Confirmación de la nueva contraseña (debe coincidir con <code>password</code>)</li>
+</ul>
 
 <span id="example-requests-POSTapi-v1-auth-reset-password">
 <blockquote>Example request:</blockquote>
@@ -761,9 +768,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"token\": \"architecto\",
-    \"email\": \"zbailey@example.net\",
-    \"password\": \"-0pBNvYgxw\"
+    \"token\": \"abc123def456\",
+    \"email\": \"user@example.com\",
+    \"password\": \"newpassword123\",
+    \"password_confirmation\": \"newpassword123\"
 }"
 </code></pre></div>
 
@@ -779,9 +787,10 @@ const headers = {
 };
 
 let body = {
-    "token": "architecto",
-    "email": "zbailey@example.net",
-    "password": "-0pBNvYgxw"
+    "token": "abc123def456",
+    "email": "user@example.com",
+    "password": "newpassword123",
+    "password_confirmation": "newpassword123"
 };
 
 fetch(url, {
@@ -793,7 +802,27 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-auth-reset-password">
-</span>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Password reset successfully.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (400):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Invalid or expired reset token.&quot;
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-auth-reset-password" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-auth-reset-password"></span>:
@@ -873,10 +902,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="token"                data-endpoint="POSTapi-v1-auth-reset-password"
-               value="architecto"
+               value="abc123def456"
                data-component="body">
     <br>
-<p>Example: <code>architecto</code></p>
+<p>El token de reset recibido por email. Example: <code>abc123def456</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -885,10 +914,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-auth-reset-password"
-               value="zbailey@example.net"
+               value="user@example.com"
                data-component="body">
     <br>
-<p>Must be a valid email address. Example: <code>zbailey@example.net</code></p>
+<p>El email del usuario. Example: <code>user@example.com</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -897,10 +926,22 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-v1-auth-reset-password"
-               value="-0pBNvYgxw"
+               value="newpassword123"
                data-component="body">
     <br>
-<p>Must be at least 8 characters. Example: <code>-0pBNvYgxw</code></p>
+<p>La nueva contraseña (mínimo 8 caracteres). Example: <code>newpassword123</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password_confirmation"                data-endpoint="POSTapi-v1-auth-reset-password"
+               value="newpassword123"
+               data-component="body">
+    <br>
+<p>Confirmación de la nueva contraseña (debe coincidir con password). Example: <code>newpassword123</code></p>
         </div>
         </form>
 
@@ -2259,9 +2300,9 @@ Must be one of:
     \"email\": \"zbailey@example.net\",
     \"password\": \"|]|{+-\",
     \"phone\": \"9425593\",
-    \"role\": \"owner\",
+    \"role\": \"admin\",
     \"avatar\": \"n\",
-    \"status\": \"suspended\",
+    \"status\": \"inactive\",
     \"timezone\": \"Africa\\/Dakar\",
     \"locale\": \"kh\"
 }"
@@ -2284,9 +2325,9 @@ let body = {
     "email": "zbailey@example.net",
     "password": "|]|{+-",
     "phone": "9425593",
-    "role": "owner",
+    "role": "admin",
     "avatar": "n",
-    "status": "suspended",
+    "status": "inactive",
     "timezone": "Africa\/Dakar",
     "locale": "kh"
 };
@@ -2453,10 +2494,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="PATCHapi-v1-users--id-"
-               value="owner"
+               value="admin"
                data-component="body">
     <br>
-<p>Example: <code>owner</code></p>
+<p>Example: <code>admin</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>admin</code></li> <li><code>owner</code></li></ul>
         </div>
@@ -2479,10 +2520,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PATCHapi-v1-users--id-"
-               value="suspended"
+               value="inactive"
                data-component="body">
     <br>
-<p>Example: <code>suspended</code></p>
+<p>Example: <code>inactive</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>inactive</code></li> <li><code>suspended</code></li></ul>
         </div>
@@ -4406,7 +4447,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code\": \"g\",
     \"name\": \"z\",
     \"pin\": \"miyv\",
-    \"active\": false
+    \"active\": true
 }"
 </code></pre></div>
 
@@ -4427,7 +4468,7 @@ let body = {
     "code": "g",
     "name": "z",
     "pin": "miyv",
-    "active": false
+    "active": true
 };
 
 fetch(url, {
@@ -4605,7 +4646,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -4632,7 +4673,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code\": \"g\",
     \"name\": \"z\",
     \"pin\": \"miyv\",
-    \"active\": false
+    \"active\": true
 }"
 </code></pre></div>
 
@@ -4653,7 +4694,7 @@ let body = {
     "code": "g",
     "name": "z",
     "pin": "miyv",
-    "active": false
+    "active": true
 };
 
 fetch(url, {
@@ -4831,7 +4872,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -5892,7 +5933,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"06:09:22\",
+    \"streak_reset_time\": \"06:29:45\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -5915,7 +5956,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"rewards\": [
         {
             \"name\": \"l\",
-            \"type\": \"streak\",
+            \"type\": \"punch\",
             \"description\": \"Eius et animi quos velit et.\",
             \"image_url\": \"http:\\/\\/www.ernser.org\\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html\",
             \"threshold_int\": 49,
@@ -5931,7 +5972,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"label\": \"w\",
             \"description\": \"Eius et animi quos velit et.\",
             \"type\": \"select\",
-            \"required\": false,
+            \"required\": true,
             \"options\": [
                 {
                     \"value\": \"v\",
@@ -5941,10 +5982,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
             ],
             \"validations\": [
                 {
-                    \"operator\": \"&gt;\",
+                    \"operator\": \"not_in\",
                     \"value_string\": \"architecto\",
                     \"value_number\": 4326.41688,
-                    \"value_date\": \"2025-11-21T06:09:22\",
+                    \"value_date\": \"2025-11-21T06:29:45\",
                     \"message\": \"m\"
                 }
             ]
@@ -5976,7 +6017,7 @@ let body = {
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "06:09:22",
+    "streak_reset_time": "06:29:45",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -5999,7 +6040,7 @@ let body = {
     "rewards": [
         {
             "name": "l",
-            "type": "streak",
+            "type": "punch",
             "description": "Eius et animi quos velit et.",
             "image_url": "http:\/\/www.ernser.org\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html",
             "threshold_int": 49,
@@ -6015,7 +6056,7 @@ let body = {
             "label": "w",
             "description": "Eius et animi quos velit et.",
             "type": "select",
-            "required": false,
+            "required": true,
             "options": [
                 {
                     "value": "v",
@@ -6025,10 +6066,10 @@ let body = {
             ],
             "validations": [
                 {
-                    "operator": "&gt;",
+                    "operator": "not_in",
                     "value_string": "architecto",
                     "value_number": 4326.41688,
-                    "value_date": "2025-11-21T06:09:22",
+                    "value_date": "2025-11-21T06:29:45",
                     "message": "m"
                 }
             ]
@@ -6281,10 +6322,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="POSTapi-v1-campaigns"
-               value="06:09:22"
+               value="06:29:45"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>06:09:22</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>06:29:45</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -6459,10 +6500,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="rewards.0.type"                data-endpoint="POSTapi-v1-campaigns"
-               value="streak"
+               value="punch"
                data-component="body">
     <br>
-<p>This field is required when <code>rewards</code> is present. Example: <code>streak</code></p>
+<p>This field is required when <code>rewards</code> is present. Example: <code>punch</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
                     </div>
@@ -6668,7 +6709,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -6747,10 +6788,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.validations.0.operator"                data-endpoint="POSTapi-v1-campaigns"
-               value=">"
+               value="not_in"
                data-component="body">
     <br>
-<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>&gt;</code></p>
+<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>not_in</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -6785,10 +6826,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.validations.0.value_date"                data-endpoint="POSTapi-v1-campaigns"
-               value="2025-11-21T06:09:22"
+               value="2025-11-21T06:29:45"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:09:22</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T06:29:45</code></p>
                     </div>
                                                                 <div style="margin-left: 28px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -6981,7 +7022,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"type\": \"punch\",
+    \"type\": \"streak\",
     \"name\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
@@ -6991,7 +7032,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"06:09:22\",
+    \"streak_reset_time\": \"06:29:45\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -7012,7 +7053,7 @@ const headers = {
 };
 
 let body = {
-    "type": "punch",
+    "type": "streak",
     "name": "b",
     "description": "Eius et animi quos velit et.",
     "limit": 16,
@@ -7022,7 +7063,7 @@ let body = {
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "06:09:22",
+    "streak_reset_time": "06:29:45",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -7143,10 +7184,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="PUTapi-v1-campaigns--id-"
-               value="punch"
+               value="streak"
                data-component="body">
     <br>
-<p>Example: <code>punch</code></p>
+<p>Example: <code>streak</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
         </div>
@@ -7287,10 +7328,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="PUTapi-v1-campaigns--id-"
-               value="06:09:22"
+               value="06:29:45"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>06:09:22</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>06:29:45</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -7361,17 +7402,17 @@ Must be one of:
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"type\": \"punch\",
+    \"type\": \"streak\",
     \"name\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": true,
+    \"active\": false,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"06:09:22\",
+    \"streak_reset_time\": \"06:29:45\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -7392,17 +7433,17 @@ const headers = {
 };
 
 let body = {
-    "type": "punch",
+    "type": "streak",
     "name": "b",
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": true,
+    "active": false,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "06:09:22",
+    "streak_reset_time": "06:29:45",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -7523,10 +7564,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="PATCHapi-v1-campaigns--id-"
-               value="punch"
+               value="streak"
                data-component="body">
     <br>
-<p>Example: <code>punch</code></p>
+<p>Example: <code>streak</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
         </div>
@@ -7610,7 +7651,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -7667,10 +7708,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="PATCHapi-v1-campaigns--id-"
-               value="06:09:22"
+               value="06:29:45"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>06:09:22</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>06:29:45</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -8044,7 +8085,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         84
     ],
     \"required_overrides\": [
-        false
+        true
     ]
 }"
 </code></pre></div>
@@ -8069,7 +8110,7 @@ let body = {
         84
     ],
     "required_overrides": [
-        false
+        true
     ]
 };
 
@@ -8541,9 +8582,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"key\": \"b\",
     \"label\": \"n\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"type\": \"select\",
+    \"type\": \"text\",
     \"required\": true,
-    \"active\": false,
+    \"active\": true,
     \"options\": [
         {
             \"value\": \"v\",
@@ -8553,10 +8594,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     ],
     \"validations\": [
         {
-            \"operator\": \"&lt;\",
+            \"operator\": \"regex\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T06:09:22\",
+            \"value_date\": \"2025-11-21T06:29:45\",
             \"message\": \"m\"
         }
     ]
@@ -8579,9 +8620,9 @@ let body = {
     "key": "b",
     "label": "n",
     "description": "Eius et animi quos velit et.",
-    "type": "select",
+    "type": "text",
     "required": true,
-    "active": false,
+    "active": true,
     "options": [
         {
             "value": "v",
@@ -8591,10 +8632,10 @@ let body = {
     ],
     "validations": [
         {
-            "operator": "&lt;",
+            "operator": "regex",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T06:09:22",
+            "value_date": "2025-11-21T06:29:45",
             "message": "m"
         }
     ]
@@ -8737,10 +8778,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-custom-fields"
-               value="select"
+               value="text"
                data-component="body">
     <br>
-<p>Example: <code>select</code></p>
+<p>Example: <code>text</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
         </div>
@@ -8798,7 +8839,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -8865,10 +8906,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="POSTapi-v1-custom-fields"
-               value="<"
+               value="regex"
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>&lt;</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>regex</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -8903,10 +8944,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="POSTapi-v1-custom-fields"
-               value="2025-11-21T06:09:22"
+               value="2025-11-21T06:29:45"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:09:22</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T06:29:45</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -9112,10 +9153,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"validations\": [
         {
             \"id\": \"cd1eb1ea-4697-3b9a-9dd0-988044a83af6\",
-            \"operator\": \"not_in\",
+            \"operator\": \"in\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T06:09:22\",
+            \"value_date\": \"2025-11-21T06:29:45\",
             \"message\": \"m\"
         }
     ]
@@ -9150,10 +9191,10 @@ let body = {
     "validations": [
         {
             "id": "cd1eb1ea-4697-3b9a-9dd0-988044a83af6",
-            "operator": "not_in",
+            "operator": "in",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T06:09:22",
+            "value_date": "2025-11-21T06:29:45",
             "message": "m"
         }
     ]
@@ -9435,10 +9476,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="PUTapi-v1-custom-fields--id-"
-               value="not_in"
+               value="in"
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>not_in</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>in</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -9473,10 +9514,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="PUTapi-v1-custom-fields--id-"
-               value="2025-11-21T06:09:22"
+               value="2025-11-21T06:29:45"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:09:22</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T06:29:45</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -9515,7 +9556,7 @@ Must be one of:
     --data "{
     \"label\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"required\": false,
+    \"required\": true,
     \"active\": true,
     \"options\": [
         {
@@ -9528,10 +9569,10 @@ Must be one of:
     \"validations\": [
         {
             \"id\": \"cd1eb1ea-4697-3b9a-9dd0-988044a83af6\",
-            \"operator\": \"in\",
+            \"operator\": \"=\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T06:09:22\",
+            \"value_date\": \"2025-11-21T06:29:45\",
             \"message\": \"m\"
         }
     ]
@@ -9553,7 +9594,7 @@ const headers = {
 let body = {
     "label": "b",
     "description": "Eius et animi quos velit et.",
-    "required": false,
+    "required": true,
     "active": true,
     "options": [
         {
@@ -9566,10 +9607,10 @@ let body = {
     "validations": [
         {
             "id": "cd1eb1ea-4697-3b9a-9dd0-988044a83af6",
-            "operator": "in",
+            "operator": "=",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T06:09:22",
+            "value_date": "2025-11-21T06:29:45",
             "message": "m"
         }
     ]
@@ -9726,7 +9767,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -9851,10 +9892,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="PATCHapi-v1-custom-fields--id-"
-               value="in"
+               value="="
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>in</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>=</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -9889,10 +9930,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="PATCHapi-v1-custom-fields--id-"
-               value="2025-11-21T06:09:22"
+               value="2025-11-21T06:29:45"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:09:22</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T06:29:45</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -12377,7 +12418,7 @@ El flujo es:</p>
             \"custom_field_id\": \"5707ca55-f609-3528-be8b-1baeaee1567e\",
             \"string_value\": \"architecto\",
             \"number_value\": 4326.41688,
-            \"date_value\": \"2025-11-21T06:09:21\",
+            \"date_value\": \"2025-11-21T06:29:45\",
             \"boolean_value\": false
         }
     ]
@@ -12406,7 +12447,7 @@ let body = {
             "custom_field_id": "5707ca55-f609-3528-be8b-1baeaee1567e",
             "string_value": "architecto",
             "number_value": 4326.41688,
-            "date_value": "2025-11-21T06:09:21",
+            "date_value": "2025-11-21T06:29:45",
             "boolean_value": false
         }
     ]
@@ -12607,10 +12648,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="field_values.0.date_value"                data-endpoint="POSTapi-v1-campaigns-register"
-               value="2025-11-21T06:09:21"
+               value="2025-11-21T06:29:45"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:09:21</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T06:29:45</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>boolean_value</code></b>&nbsp;&nbsp;
@@ -12962,7 +13003,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"custom_field_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
             \"string_value\": \"architecto\",
             \"number_value\": 4326.41688,
-            \"date_value\": \"2025-11-21T06:09:22\",
+            \"date_value\": \"2025-11-21T06:29:45\",
             \"boolean_value\": true
         }
     ]
@@ -12987,7 +13028,7 @@ let body = {
             "custom_field_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
             "string_value": "architecto",
             "number_value": 4326.41688,
-            "date_value": "2025-11-21T06:09:22",
+            "date_value": "2025-11-21T06:29:45",
             "boolean_value": true
         }
     ]
@@ -13165,10 +13206,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="values.0.date_value"                data-endpoint="POSTapi-v1-campaigns--id--customers--customerId--field-values"
-               value="2025-11-21T06:09:22"
+               value="2025-11-21T06:29:45"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:09:22</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T06:29:45</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>boolean_value</code></b>&nbsp;&nbsp;
