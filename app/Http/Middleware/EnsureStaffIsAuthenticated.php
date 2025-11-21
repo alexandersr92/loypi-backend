@@ -32,8 +32,14 @@ class EnsureStaffIsAuthenticated
         // Si no está en bearerToken, intentar obtenerlo del header Authorization directamente
         if (! $token) {
             $authHeader = $request->header('Authorization');
-            if ($authHeader && str_starts_with($authHeader, 'Bearer ')) {
-                $token = substr($authHeader, 7);
+            if ($authHeader) {
+                // Si tiene el prefijo "Bearer ", extraerlo
+                if (str_starts_with($authHeader, 'Bearer ')) {
+                    $token = substr($authHeader, 7);
+                } else {
+                    // Si no tiene prefijo, usar el valor directamente
+                    $token = $authHeader;
+                }
             }
         }
 

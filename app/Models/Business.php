@@ -53,6 +53,30 @@ class Business extends Model
     }
 
     /**
+     * Relación con las campaigns
+     */
+    public function campaigns(): HasMany
+    {
+        return $this->hasMany(Campaign::class);
+    }
+
+    /**
+     * Relación con los custom fields
+     */
+    public function customFields(): HasMany
+    {
+        return $this->hasMany(CustomField::class);
+    }
+
+    /**
+     * Relación con los customers
+     */
+    public function customers(): HasMany
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+    /**
      * Boot del modelo - genera slug automáticamente si no existe
      */
     protected static function boot(): void

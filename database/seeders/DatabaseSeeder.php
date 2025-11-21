@@ -15,6 +15,14 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             BusinessSeeder::class,
             StaffSeeder::class,
+            CampaignSeeder::class,
+            CustomFieldSeeder::class,
+            CustomerSeeder::class,
+            CustomerCampaignSeeder::class,
+            StampSeeder::class,
+            RewardUnlockSeeder::class,
+            RedemptionSeeder::class,
+            AuditLogSeeder::class,
         ]);
     }
 }

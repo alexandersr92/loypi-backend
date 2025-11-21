@@ -1,0 +1,33 @@
+{
+  "type": "punch",
+  "name": "Café Gratis - Punch Card",
+  "description": "Después de 8 visitas obtén un café gratis de cualquier tamaño",
+  "required_stamps": 8,
+  "limit": 500,
+  "active": true,
+  "cover_image": "https://via.placeholder.com/800x400.png/FF5733?text=Cafe+Gratis",
+  "cover_color": "#FF5733",
+  "logo_url": "https://via.placeholder.com/200x200.png/FF5733?text=Logo",
+  "per_customer_limit": 2,
+  "per_week_limit": 10,
+  "per_month_limit": 50,
+  "max_redemptions_per_day": 5,
+  "rewards": [
+    {
+      "name": "Café Gratis",
+      "type": "punch",
+      "threshold_int": 8,
+      "description": "Un café gratis de cualquier tamaño después de 8 visitas",
+      "per_customer_limit": 1,
+      "global_limit": 200,
+      "active": true,
+      "reward_json": {
+        "type": "free_item",
+        "item": "Café",
+        "size": "Cualquier tamaño",
+        "valid_days": ["lunes", "martes", "miércoles", "jueves", "viernes"]
+      }
+    }
+  ]
+}
+

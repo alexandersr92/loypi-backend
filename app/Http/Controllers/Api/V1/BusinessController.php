@@ -10,6 +10,14 @@ use App\Models\Business;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @group 🏢 Negocios
+ * 
+ * CRUD de negocios (businesses)
+ * 
+ * @authenticated
+ * @header Authorization Bearer {user_token} Requiere token de usuario (owner/admin)
+ */
 class BusinessController extends Controller
 {
     /**

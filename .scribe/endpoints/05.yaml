@@ -1,0 +1,313 @@
+name: '🔐 Autenticación Customer'
+description: |-
+
+  Endpoints para autenticación de customers (clientes)
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/customers/check-phone
+    metadata:
+      custom: []
+      groupName: '🔐 Autenticación Customer'
+      groupDescription: |-
+
+        Endpoints para autenticación de customers (clientes)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Verificar si el teléfono ya está registrado'
+      description: |-
+        Verifica si un número de teléfono ya está registrado en un negocio específico.
+        Útil para mostrar mensajes como "Este número ya está registrado" o "Número disponible para registro".
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      phone:
+        custom: []
+        name: phone
+        description: 'Must match the regex /^\+?[1-9]\d{1,14}$/.'
+        required: true
+        example: '9425593'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      business_slug:
+        custom: []
+        name: business_slug
+        description: 'The <code>slug</code> of an existing record in the businesses table.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      phone: '9425593'
+      business_slug: architecto
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/customers/register
+    metadata:
+      custom: []
+      groupName: '🔐 Autenticación Customer'
+      groupDescription: |-
+
+        Endpoints para autenticación de customers (clientes)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Registro de customer (después de verificar OTP)'
+      description: |-
+        Registra un nuevo customer en el sistema. Requiere:
+        1. Enviar OTP usando `/api/v1/otp/send`
+        2. Verificar OTP usando `/api/v1/otp/verify`
+        3. Llamar a este endpoint con el código OTP verificado
+
+        El customer recibirá un token de autenticación y un short_code único de 6 caracteres.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      phone:
+        custom: []
+        name: phone
+        description: 'Must match the regex /^\+?[1-9]\d{1,14}$/.'
+        required: true
+        example: '9425593'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      business_slug:
+        custom: []
+        name: business_slug
+        description: 'The <code>slug</code> of an existing record in the businesses table.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      otp_code:
+        custom: []
+        name: otp_code
+        description: 'Must be 6 characters.'
+        required: true
+        example: ngzmiy
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      phone: '9425593'
+      name: 'n'
+      business_slug: architecto
+      otp_code: ngzmiy
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/customers/login
+    metadata:
+      custom: []
+      groupName: '🔐 Autenticación Customer'
+      groupDescription: |-
+
+        Endpoints para autenticación de customers (clientes)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Login de customer (después de verificar OTP)'
+      description: |-
+        Autentica un customer existente. Requiere:
+        1. Enviar OTP usando `/api/v1/otp/send`
+        2. Verificar OTP usando `/api/v1/otp/verify`
+        3. Llamar a este endpoint con el código OTP verificado
+
+        El customer recibirá un nuevo token de autenticación.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      phone:
+        custom: []
+        name: phone
+        description: 'Must match the regex /^\+?[1-9]\d{1,14}$/.'
+        required: true
+        example: '9425593'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      business_slug:
+        custom: []
+        name: business_slug
+        description: 'The <code>slug</code> of an existing record in the businesses table.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      otp_code:
+        custom: []
+        name: otp_code
+        description: 'Must be 6 characters.'
+        required: true
+        example: ngzmiy
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      phone: '9425593'
+      business_slug: architecto
+      otp_code: ngzmiy
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/customers/logout
+    metadata:
+      custom: []
+      groupName: '🔐 Autenticación Customer'
+      groupDescription: |-
+
+        Endpoints para autenticación de customers (clientes)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Logout de customer'
+      description: 'Cierra la sesión del customer actual, invalidando su token de autenticación.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/customers/me
+    metadata:
+      custom: []
+      groupName: '🔐 Autenticación Customer'
+      groupDescription: |-
+
+        Endpoints para autenticación de customers (clientes)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Obtener customer autenticado con sus campaigns y stamps'
+      description: |-
+        Devuelve la información del customer autenticado, incluyendo:
+        - Datos básicos (id, short_code, phone, name)
+        - Información del negocio
+        - Lista de campaigns con stamps
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Invalid token. Token not found in database."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

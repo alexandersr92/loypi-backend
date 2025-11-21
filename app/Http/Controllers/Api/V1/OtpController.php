@@ -10,11 +10,18 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @group 📱 OTP
+ * 
+ * Endpoints para envío y verificación de códigos OTP
+ */
 class OtpController extends Controller
 {
     /**
      * Envía un código OTP por WhatsApp
      * Por ahora siempre devuelve 123456
+     * 
+     * @unauthenticated
      */
     public function send(SendOtpRequest $request): JsonResponse
     {
@@ -66,6 +73,8 @@ class OtpController extends Controller
 
     /**
      * Verifica un código OTP
+     * 
+     * @unauthenticated
      */
     public function verify(VerifyOtpRequest $request): JsonResponse
     {

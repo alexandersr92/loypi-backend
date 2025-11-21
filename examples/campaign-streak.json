@@ -1,0 +1,79 @@
+{
+  "type": "streak",
+  "name": "Desafío de Rachas - Visitas Consecutivas",
+  "description": "Mantén tu racha de visitas diarias y gana premios increíbles. Visita todos los días y acumula recompensas cada vez mejores",
+  "limit": 1000,
+  "active": true,
+  "cover_image": "https://via.placeholder.com/800x400.png/00ADD2?text=Streak+Challenge",
+  "cover_color": "#00ADD2",
+  "logo_url": "https://via.placeholder.com/200x200.png/00ADD2?text=Streak",
+  "streak_time_limit_hours": 24,
+  "streak_reset_time": "00:00:00",
+  "per_customer_limit": null,
+  "per_week_limit": 20,
+  "per_month_limit": 100,
+  "max_redemptions_per_day": 3,
+  "rewards": [
+    {
+      "name": "Descuento 10%",
+      "type": "streak",
+      "threshold_int": 10,
+      "description": "Después de 10 días consecutivos de visitas",
+      "per_customer_limit": 1,
+      "global_limit": 500,
+      "active": true,
+      "reward_json": {
+        "type": "discount",
+        "value": 10,
+        "description": "10% de descuento en tu próxima compra"
+      }
+    },
+    {
+      "name": "Descuento 20%",
+      "type": "streak",
+      "threshold_int": 20,
+      "description": "Después de 20 días consecutivos de visitas",
+      "per_customer_limit": 1,
+      "global_limit": 300,
+      "active": true,
+      "reward_json": {
+        "type": "discount",
+        "value": 20,
+        "description": "20% de descuento en tu próxima compra"
+      }
+    },
+    {
+      "name": "Producto Gratis",
+      "type": "streak",
+      "threshold_int": 50,
+      "description": "Después de 50 días consecutivos de visitas",
+      "per_customer_limit": 1,
+      "global_limit": 100,
+      "active": true,
+      "reward_json": {
+        "type": "free_item",
+        "item": "Producto del día",
+        "description": "Elige cualquier producto del menú del día"
+      }
+    },
+    {
+      "name": "Premio Especial - VIP",
+      "type": "streak",
+      "threshold_int": 100,
+      "description": "Después de 100 días consecutivos de visitas - ¡Eres un cliente VIP!",
+      "per_customer_limit": 1,
+      "global_limit": 50,
+      "active": true,
+      "reward_json": {
+        "type": "special",
+        "title": "Cliente VIP",
+        "benefits": [
+          "Descuento permanente del 15%",
+          "Acceso a productos exclusivos",
+          "Invitación a eventos especiales"
+        ]
+      }
+    }
+  ]
+}
+

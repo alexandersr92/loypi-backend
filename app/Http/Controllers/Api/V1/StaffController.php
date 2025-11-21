@@ -11,6 +11,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @group 👨‍💼 Staff
+ * 
+ * CRUD de staff (empleados). Requiere token de usuario (owner/admin)
+ * 
+ * @authenticated
+ * @header Authorization Bearer {user_token} Requiere token de usuario (owner/admin)
+ */
 class StaffController extends Controller
 {
     /**

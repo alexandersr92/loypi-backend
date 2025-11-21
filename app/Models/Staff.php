@@ -46,6 +46,14 @@ class Staff extends Model implements Authenticatable
     }
 
     /**
+     * Relación con stamps
+     */
+    public function stamps(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Stamp::class);
+    }
+
+    /**
      * Verifica si el PIN es correcto
      */
     public function verifyPin(string $pin): bool

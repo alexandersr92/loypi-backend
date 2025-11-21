@@ -19,9 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
             AddLinkHeadersForPreloadedAssets::class,
         ]);
         
-        // Registrar middleware de autenticación de staff
+        // Registrar middleware de autenticación de staff y customer
         $middleware->alias([
             'staff.auth' => \App\Http\Middleware\EnsureStaffIsAuthenticated::class,
+            'customer.auth' => \App\Http\Middleware\EnsureCustomerIsAuthenticated::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

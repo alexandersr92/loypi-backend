@@ -10,10 +10,20 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @group 🔑 Autenticación Staff
+ * 
+ * Endpoints para autenticación de staff (empleados)
+ * 
+ * @authenticated
+ * @header Authorization Bearer {staff_token} Requiere token de staff (obtenido con /staff/login)
+ */
 class StaffAuthController extends Controller
 {
     /**
      * Login del staff
+     * 
+     * @unauthenticated
      */
     public function login(StaffLoginRequest $request): JsonResponse
     {
@@ -112,6 +122,9 @@ class StaffAuthController extends Controller
 
     /**
      * Logout del staff
+     * 
+     * @authenticated
+     * @header Authorization Bearer {staff_token} Requiere token de staff
      */
     public function logout(Request $request): JsonResponse
     {
@@ -145,6 +158,9 @@ class StaffAuthController extends Controller
 
     /**
      * Obtener el staff autenticado
+     * 
+     * @authenticated
+     * @header Authorization Bearer {staff_token} Requiere token de staff
      */
     public function me(Request $request): JsonResponse
     {

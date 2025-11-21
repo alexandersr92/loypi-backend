@@ -12,10 +12,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 
+/**
+ * @group 👤 Usuarios
+ * 
+ * CRUD de usuarios del sistema
+ * 
+ * @authenticated
+ * @header Authorization Bearer {user_token} Requiere token de usuario (owner/admin) - excepto POST /users (registro público)
+ */
 class UserController extends Controller
 {
     /**
      * Store a newly created resource in storage.
+     * 
+     * @unauthenticated
      */
     public function store(StoreUserRequest $request): JsonResponse
     {
