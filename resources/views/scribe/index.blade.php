@@ -77,6 +77,12 @@
                                                                                 <li class="tocify-item level-2" data-unique="autenticacion-POSTapi-v1-auth-login-with-otp">
                                 <a href="#autenticacion-POSTapi-v1-auth-login-with-otp">Login with OTP (after OTP verification)</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="autenticacion-POSTapi-v1-auth-forgot-password">
+                                <a href="#autenticacion-POSTapi-v1-auth-forgot-password">Solicitar reset de contraseña</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="autenticacion-POSTapi-v1-auth-reset-password">
+                                <a href="#autenticacion-POSTapi-v1-auth-reset-password">Resetear contraseña</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="autenticacion-POSTapi-v1-auth-logout">
                                 <a href="#autenticacion-POSTapi-v1-auth-logout">Logout the authenticated user</a>
                             </li>
@@ -348,16 +354,6 @@ Por ahora siempre devuelve 123456</a>
                             </li>
                                                                         </ul>
                             </ul>
-                    <ul id="tocify-header-otros" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="otros">
-                    <a href="#otros">Otros</a>
-                </li>
-                                    <ul id="tocify-subheader-otros" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="otros-GETapi-v1">
-                                <a href="#otros-GETapi-v1">GET api/v1</a>
-                            </li>
-                                                                        </ul>
-                            </ul>
                     <ul id="tocify-header-stamps" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="stamps">
                     <a href="#stamps">🎫 Stamps</a>
@@ -371,6 +367,67 @@ Por ahora siempre devuelve 123456</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="stamps-GETapi-v1-customers--customerId--campaigns--campaignId--stamps">
                                 <a href="#stamps-GETapi-v1-customers--customerId--campaigns--campaignId--stamps">Historial de stamps de un customer en una campaign (Owner)</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-otros" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="otros">
+                    <a href="#otros">Otros</a>
+                </li>
+                                    <ul id="tocify-subheader-otros" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="otros-GETapi-v1">
+                                <a href="#otros-GETapi-v1">GET api/v1</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-redemptions" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="redemptions">
+                    <a href="#redemptions">✅ Redemptions</a>
+                </li>
+                                    <ul id="tocify-subheader-redemptions" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="redemptions-POSTapi-v1-staff-verify-redemption-pin">
+                                <a href="#redemptions-POSTapi-v1-staff-verify-redemption-pin">Verificar PIN y mostrar premio (Staff)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="redemptions-POSTapi-v1-staff-redeem-reward">
+                                <a href="#redemptions-POSTapi-v1-staff-redeem-reward">Canjear premio (Staff)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="redemptions-GETapi-v1-customers-me-unlocks">
+                                <a href="#redemptions-GETapi-v1-customers-me-unlocks">Listar premios desbloqueados del customer (Customer)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="redemptions-POSTapi-v1-customers-me-unlocks-generate-pin">
+                                <a href="#redemptions-POSTapi-v1-customers-me-unlocks-generate-pin">Generar PIN para canjear premio (Customer)</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-audit-logs" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="audit-logs">
+                    <a href="#audit-logs">📊 Audit Logs</a>
+                </li>
+                                    <ul id="tocify-subheader-audit-logs" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="audit-logs-GETapi-v1-audit-logs">
+                                <a href="#audit-logs-GETapi-v1-audit-logs">Listar audit logs (Owner/Admin)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="audit-logs-GETapi-v1-audit-logs--id-">
+                                <a href="#audit-logs-GETapi-v1-audit-logs--id-">Obtener audit log específico (Owner/Admin)</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-reward-unlocks" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="reward-unlocks">
+                    <a href="#reward-unlocks">🔓 Reward Unlocks</a>
+                </li>
+                                    <ul id="tocify-subheader-reward-unlocks" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="reward-unlocks-GETapi-v1-campaigns--id--unlocks">
+                                <a href="#reward-unlocks-GETapi-v1-campaigns--id--unlocks">Listar unlocks de una campaign (Owner)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="reward-unlocks-GETapi-v1-customers--id--unlocks">
+                                <a href="#reward-unlocks-GETapi-v1-customers--id--unlocks">Listar unlocks de un customer (Owner)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="reward-unlocks-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks">
+                                <a href="#reward-unlocks-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks">Listar unlocks de un customer en una campaign específica (Owner)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="reward-unlocks-GETapi-v1-reward-unlocks--id-">
+                                <a href="#reward-unlocks-GETapi-v1-reward-unlocks--id-">Obtener unlock específico (Owner)</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -702,6 +759,298 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>Must be 6 characters. Example: <code>nikhwa</code></p>
+        </div>
+        </form>
+
+                    <h2 id="autenticacion-POSTapi-v1-auth-forgot-password">Solicitar reset de contraseña</h2>
+
+<p>
+</p>
+
+<p>Envía un email con el link para resetear la contraseña.</p>
+
+<span id="example-requests-POSTapi-v1-auth-forgot-password">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://loypi-api.test/api/v1/auth/forgot-password" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"gbailey@example.net\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/auth/forgot-password"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "gbailey@example.net"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-auth-forgot-password">
+</span>
+<span id="execution-results-POSTapi-v1-auth-forgot-password" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-auth-forgot-password"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-auth-forgot-password"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-auth-forgot-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-auth-forgot-password">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-auth-forgot-password" data-method="POST"
+      data-path="api/v1/auth/forgot-password"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-auth-forgot-password', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-auth-forgot-password"
+                    onclick="tryItOut('POSTapi-v1-auth-forgot-password');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-auth-forgot-password"
+                    onclick="cancelTryOut('POSTapi-v1-auth-forgot-password');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-auth-forgot-password"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/auth/forgot-password</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-auth-forgot-password"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-auth-forgot-password"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-auth-forgot-password"
+               value="gbailey@example.net"
+               data-component="body">
+    <br>
+<p>Must be a valid email address. Example: <code>gbailey@example.net</code></p>
+        </div>
+        </form>
+
+                    <h2 id="autenticacion-POSTapi-v1-auth-reset-password">Resetear contraseña</h2>
+
+<p>
+</p>
+
+<p>Resetea la contraseña usando el token recibido por email.</p>
+
+<span id="example-requests-POSTapi-v1-auth-reset-password">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://loypi-api.test/api/v1/auth/reset-password" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"token\": \"architecto\",
+    \"email\": \"zbailey@example.net\",
+    \"password\": \"-0pBNvYgxw\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/auth/reset-password"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "token": "architecto",
+    "email": "zbailey@example.net",
+    "password": "-0pBNvYgxw"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-auth-reset-password">
+</span>
+<span id="execution-results-POSTapi-v1-auth-reset-password" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-auth-reset-password"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-auth-reset-password"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-auth-reset-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-auth-reset-password">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-auth-reset-password" data-method="POST"
+      data-path="api/v1/auth/reset-password"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-auth-reset-password', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-auth-reset-password"
+                    onclick="tryItOut('POSTapi-v1-auth-reset-password');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-auth-reset-password"
+                    onclick="cancelTryOut('POSTapi-v1-auth-reset-password');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-auth-reset-password"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/auth/reset-password</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-auth-reset-password"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-auth-reset-password"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>token</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="token"                data-endpoint="POSTapi-v1-auth-reset-password"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-auth-reset-password"
+               value="zbailey@example.net"
+               data-component="body">
+    <br>
+<p>Must be a valid email address. Example: <code>zbailey@example.net</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-auth-reset-password"
+               value="-0pBNvYgxw"
+               data-component="body">
+    <br>
+<p>Must be at least 8 characters. Example: <code>-0pBNvYgxw</code></p>
         </div>
         </form>
 
@@ -1681,9 +2030,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"email\": \"zbailey@example.net\",
     \"password\": \"|]|{+-\",
     \"phone\": \"9425593\",
-    \"role\": \"owner\",
+    \"role\": \"admin\",
     \"avatar\": \"n\",
-    \"status\": \"inactive\",
+    \"status\": \"suspended\",
     \"timezone\": \"Africa\\/Dakar\",
     \"locale\": \"kh\"
 }"
@@ -1706,9 +2055,9 @@ let body = {
     "email": "zbailey@example.net",
     "password": "|]|{+-",
     "phone": "9425593",
-    "role": "owner",
+    "role": "admin",
     "avatar": "n",
-    "status": "inactive",
+    "status": "suspended",
     "timezone": "Africa\/Dakar",
     "locale": "kh"
 };
@@ -1875,10 +2224,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="PUTapi-v1-users--id-"
-               value="owner"
+               value="admin"
                data-component="body">
     <br>
-<p>Example: <code>owner</code></p>
+<p>Example: <code>admin</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>admin</code></li> <li><code>owner</code></li></ul>
         </div>
@@ -1901,10 +2250,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-v1-users--id-"
-               value="inactive"
+               value="suspended"
                data-component="body">
     <br>
-<p>Example: <code>inactive</code></p>
+<p>Example: <code>suspended</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>inactive</code></li> <li><code>suspended</code></li></ul>
         </div>
@@ -1948,7 +2297,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://loypi-api.test/api/v1/users/019a9fe0-0dba-737a-a2e5-b0c3594cb380" \
+    "http://loypi-api.test/api/v1/users/019aa4c4-bd37-7229-8869-16dd62f2b724" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin) - excepto POST /users (registro público)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -1959,7 +2308,7 @@ Must be one of:
     \"phone\": \"9425593\",
     \"role\": \"admin\",
     \"avatar\": \"n\",
-    \"status\": \"suspended\",
+    \"status\": \"inactive\",
     \"timezone\": \"Africa\\/Dakar\",
     \"locale\": \"kh\"
 }"
@@ -1968,7 +2317,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/users/019a9fe0-0dba-737a-a2e5-b0c3594cb380"
+    "http://loypi-api.test/api/v1/users/019aa4c4-bd37-7229-8869-16dd62f2b724"
 );
 
 const headers = {
@@ -1984,7 +2333,7 @@ let body = {
     "phone": "9425593",
     "role": "admin",
     "avatar": "n",
-    "status": "suspended",
+    "status": "inactive",
     "timezone": "Africa\/Dakar",
     "locale": "kh"
 };
@@ -2090,10 +2439,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PATCHapi-v1-users--id-"
-               value="019a9fe0-0dba-737a-a2e5-b0c3594cb380"
+               value="019aa4c4-bd37-7229-8869-16dd62f2b724"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>019a9fe0-0dba-737a-a2e5-b0c3594cb380</code></p>
+<p>The ID of the user. Example: <code>019aa4c4-bd37-7229-8869-16dd62f2b724</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -2177,10 +2526,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PATCHapi-v1-users--id-"
-               value="suspended"
+               value="inactive"
                data-component="body">
     <br>
-<p>Example: <code>suspended</code></p>
+<p>Example: <code>inactive</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>inactive</code></li> <li><code>suspended</code></li></ul>
         </div>
@@ -3239,7 +3588,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://loypi-api.test/api/v1/businesses/019a9fe0-181f-71c5-9a36-5c70bf2ec1ba" \
+    "http://loypi-api.test/api/v1/businesses/019aa4c4-c7a9-725c-9a24-8400e94f4fe4" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -3266,7 +3615,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/businesses/019a9fe0-181f-71c5-9a36-5c70bf2ec1ba"
+    "http://loypi-api.test/api/v1/businesses/019aa4c4-c7a9-725c-9a24-8400e94f4fe4"
 );
 
 const headers = {
@@ -3395,10 +3744,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PATCHapi-v1-businesses--id-"
-               value="019a9fe0-181f-71c5-9a36-5c70bf2ec1ba"
+               value="019aa4c4-c7a9-725c-9a24-8400e94f4fe4"
                data-component="url">
     <br>
-<p>The ID of the business. Example: <code>019a9fe0-181f-71c5-9a36-5c70bf2ec1ba</code></p>
+<p>The ID of the business. Example: <code>019aa4c4-c7a9-725c-9a24-8400e94f4fe4</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -3750,7 +4099,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code\": \"b\",
     \"name\": \"n\",
     \"pin\": \"gzmi\",
-    \"active\": true
+    \"active\": false
 }"
 </code></pre></div>
 
@@ -3770,7 +4119,7 @@ let body = {
     "code": "b",
     "name": "n",
     "pin": "gzmi",
-    "active": true
+    "active": false
 };
 
 fetch(url, {
@@ -3923,7 +4272,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -4321,7 +4670,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://loypi-api.test/api/v1/staff/019a9fe0-1a49-73b7-bf5f-348e494fb4c5" \
+    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -4330,14 +4679,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code\": \"g\",
     \"name\": \"z\",
     \"pin\": \"miyv\",
-    \"active\": true
+    \"active\": false
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/staff/019a9fe0-1a49-73b7-bf5f-348e494fb4c5"
+    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf"
 );
 
 const headers = {
@@ -4351,7 +4700,7 @@ let body = {
     "code": "g",
     "name": "z",
     "pin": "miyv",
-    "active": true
+    "active": false
 };
 
 fetch(url, {
@@ -4455,10 +4804,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PATCHapi-v1-staff--id-"
-               value="019a9fe0-1a49-73b7-bf5f-348e494fb4c5"
+               value="019aa4c4-c9cc-7353-96f7-b29325361ebf"
                data-component="url">
     <br>
-<p>The ID of the staff. Example: <code>019a9fe0-1a49-73b7-bf5f-348e494fb4c5</code></p>
+<p>The ID of the staff. Example: <code>019aa4c4-c9cc-7353-96f7-b29325361ebf</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -4529,7 +4878,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -4547,7 +4896,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://loypi-api.test/api/v1/staff/019a9fe0-1a49-73b7-bf5f-348e494fb4c5" \
+    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4555,7 +4904,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/staff/019a9fe0-1a49-73b7-bf5f-348e494fb4c5"
+    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf"
 );
 
 const headers = {
@@ -4664,10 +5013,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-v1-staff--id-"
-               value="019a9fe0-1a49-73b7-bf5f-348e494fb4c5"
+               value="019aa4c4-c9cc-7353-96f7-b29325361ebf"
                data-component="url">
     <br>
-<p>The ID of the staff. Example: <code>019a9fe0-1a49-73b7-bf5f-348e494fb4c5</code></p>
+<p>The ID of the staff. Example: <code>019aa4c4-c9cc-7353-96f7-b29325361ebf</code></p>
             </div>
                     </form>
 
@@ -4685,7 +5034,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://loypi-api.test/api/v1/staff/019a9fe0-1a49-73b7-bf5f-348e494fb4c5/unlock" \
+    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf/unlock" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4693,7 +5042,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/staff/019a9fe0-1a49-73b7-bf5f-348e494fb4c5/unlock"
+    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf/unlock"
 );
 
 const headers = {
@@ -4802,10 +5151,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-staff--id--unlock"
-               value="019a9fe0-1a49-73b7-bf5f-348e494fb4c5"
+               value="019aa4c4-c9cc-7353-96f7-b29325361ebf"
                data-component="url">
     <br>
-<p>The ID of the staff. Example: <code>019a9fe0-1a49-73b7-bf5f-348e494fb4c5</code></p>
+<p>The ID of the staff. Example: <code>019aa4c4-c9cc-7353-96f7-b29325361ebf</code></p>
             </div>
                     </form>
 
@@ -5585,12 +5934,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": true,
+    \"active\": false,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"00:00:01\",
+    \"streak_reset_time\": \"05:15:38\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -5613,7 +5962,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"rewards\": [
         {
             \"name\": \"l\",
-            \"type\": \"punch\",
+            \"type\": \"streak\",
             \"description\": \"Eius et animi quos velit et.\",
             \"image_url\": \"http:\\/\\/www.ernser.org\\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html\",
             \"threshold_int\": 49,
@@ -5628,7 +5977,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"key\": \"p\",
             \"label\": \"w\",
             \"description\": \"Eius et animi quos velit et.\",
-            \"type\": \"text\",
+            \"type\": \"date\",
             \"required\": false,
             \"options\": [
                 {
@@ -5639,10 +5988,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
             ],
             \"validations\": [
                 {
-                    \"operator\": \"not_in\",
+                    \"operator\": \"&gt;=\",
                     \"value_string\": \"architecto\",
                     \"value_number\": 4326.41688,
-                    \"value_date\": \"2025-11-21T00:00:01\",
+                    \"value_date\": \"2025-11-21T05:15:38\",
                     \"message\": \"m\"
                 }
             ]
@@ -5669,12 +6018,12 @@ let body = {
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": true,
+    "active": false,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "00:00:01",
+    "streak_reset_time": "05:15:38",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -5697,7 +6046,7 @@ let body = {
     "rewards": [
         {
             "name": "l",
-            "type": "punch",
+            "type": "streak",
             "description": "Eius et animi quos velit et.",
             "image_url": "http:\/\/www.ernser.org\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html",
             "threshold_int": 49,
@@ -5712,7 +6061,7 @@ let body = {
             "key": "p",
             "label": "w",
             "description": "Eius et animi quos velit et.",
-            "type": "text",
+            "type": "date",
             "required": false,
             "options": [
                 {
@@ -5723,10 +6072,10 @@ let body = {
             ],
             "validations": [
                 {
-                    "operator": "not_in",
+                    "operator": "&gt;=",
                     "value_string": "architecto",
                     "value_number": 4326.41688,
-                    "value_date": "2025-11-21T00:00:01",
+                    "value_date": "2025-11-21T05:15:38",
                     "message": "m"
                 }
             ]
@@ -5922,7 +6271,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -5979,10 +6328,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="POSTapi-v1-campaigns"
-               value="00:00:01"
+               value="05:15:38"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>00:00:01</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>05:15:38</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -6157,10 +6506,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="rewards.0.type"                data-endpoint="POSTapi-v1-campaigns"
-               value="punch"
+               value="streak"
                data-component="body">
     <br>
-<p>This field is required when <code>rewards</code> is present. Example: <code>punch</code></p>
+<p>This field is required when <code>rewards</code> is present. Example: <code>streak</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
                     </div>
@@ -6339,10 +6688,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.type"                data-endpoint="POSTapi-v1-campaigns"
-               value="text"
+               value="date"
                data-component="body">
     <br>
-<p>This field is required when <code>custom_fields</code> is present. Example: <code>text</code></p>
+<p>This field is required when <code>custom_fields</code> is present. Example: <code>date</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
                     </div>
@@ -6445,10 +6794,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.validations.0.operator"                data-endpoint="POSTapi-v1-campaigns"
-               value="not_in"
+               value=">="
                data-component="body">
     <br>
-<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>not_in</code></p>
+<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>&gt;=</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -6483,10 +6832,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.validations.0.value_date"                data-endpoint="POSTapi-v1-campaigns"
-               value="2025-11-21T00:00:01"
+               value="2025-11-21T05:15:38"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T00:00:01</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T05:15:38</code></p>
                     </div>
                                                                 <div style="margin-left: 28px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -6520,7 +6869,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -6528,7 +6877,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7"
 );
 
 const headers = {
@@ -6653,10 +7002,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id-"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                     </form>
 
@@ -6674,7 +7023,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967" \
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -6684,12 +7033,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": false,
+    \"active\": true,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"00:00:01\",
+    \"streak_reset_time\": \"05:15:38\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -6700,7 +7049,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7"
 );
 
 const headers = {
@@ -6715,12 +7064,12 @@ let body = {
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": false,
+    "active": true,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "00:00:01",
+    "streak_reset_time": "05:15:38",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -6828,10 +7177,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PUTapi-v1-campaigns--id-"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -6928,7 +7277,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -6985,10 +7334,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="PUTapi-v1-campaigns--id-"
-               value="00:00:01"
+               value="05:15:38"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>00:00:01</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>05:15:38</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -7054,7 +7403,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967" \
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -7064,12 +7413,12 @@ Must be one of:
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": true,
+    \"active\": false,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"00:00:01\",
+    \"streak_reset_time\": \"05:15:38\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -7080,7 +7429,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7"
 );
 
 const headers = {
@@ -7095,12 +7444,12 @@ let body = {
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": true,
+    "active": false,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "00:00:01",
+    "streak_reset_time": "05:15:38",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -7208,10 +7557,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PATCHapi-v1-campaigns--id-"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -7308,7 +7657,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -7365,10 +7714,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="PATCHapi-v1-campaigns--id-"
-               value="00:00:01"
+               value="05:15:38"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>00:00:01</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>05:15:38</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -7434,7 +7783,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967" \
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7442,7 +7791,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7"
 );
 
 const headers = {
@@ -7551,10 +7900,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-v1-campaigns--id-"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                     </form>
 
@@ -7576,7 +7925,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/custom-fields" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7584,7 +7933,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/custom-fields"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields"
 );
 
 const headers = {
@@ -7709,10 +8058,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--custom-fields"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                     </form>
 
@@ -7730,7 +8079,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/custom-fields" \
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -7750,7 +8099,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/custom-fields"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields"
 );
 
 const headers = {
@@ -7872,10 +8221,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-campaigns--id--custom-fields"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -7936,7 +8285,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/custom-fields/architecto" \
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields/architecto" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7944,7 +8293,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/custom-fields/architecto"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields/architecto"
 );
 
 const headers = {
@@ -8053,10 +8402,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-v1-campaigns--id--custom-fields--fieldId-"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>fieldId</code></b>&nbsp;&nbsp;
@@ -8239,8 +8588,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"key\": \"b\",
     \"label\": \"n\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"type\": \"select\",
-    \"required\": true,
+    \"type\": \"number\",
+    \"required\": false,
     \"active\": true,
     \"options\": [
         {
@@ -8251,10 +8600,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     ],
     \"validations\": [
         {
-            \"operator\": \"&lt;\",
+            \"operator\": \"not_in\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T00:00:01\",
+            \"value_date\": \"2025-11-21T05:15:38\",
             \"message\": \"m\"
         }
     ]
@@ -8277,8 +8626,8 @@ let body = {
     "key": "b",
     "label": "n",
     "description": "Eius et animi quos velit et.",
-    "type": "select",
-    "required": true,
+    "type": "number",
+    "required": false,
     "active": true,
     "options": [
         {
@@ -8289,10 +8638,10 @@ let body = {
     ],
     "validations": [
         {
-            "operator": "&lt;",
+            "operator": "not_in",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T00:00:01",
+            "value_date": "2025-11-21T05:15:38",
             "message": "m"
         }
     ]
@@ -8435,10 +8784,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-custom-fields"
-               value="select"
+               value="number"
                data-component="body">
     <br>
-<p>Example: <code>select</code></p>
+<p>Example: <code>number</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
         </div>
@@ -8462,7 +8811,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -8563,10 +8912,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="POSTapi-v1-custom-fields"
-               value="<"
+               value="not_in"
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>&lt;</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>not_in</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -8601,10 +8950,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="POSTapi-v1-custom-fields"
-               value="2025-11-21T00:00:01"
+               value="2025-11-21T05:15:38"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T00:00:01</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T05:15:38</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -8797,8 +9146,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"label\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"required\": true,
-    \"active\": true,
+    \"required\": false,
+    \"active\": false,
     \"options\": [
         {
             \"id\": \"21c4122b-d554-3723-966c-6d723ea5293f\",
@@ -8810,10 +9159,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"validations\": [
         {
             \"id\": \"cd1eb1ea-4697-3b9a-9dd0-988044a83af6\",
-            \"operator\": \"regex\",
+            \"operator\": \"&lt;=\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T00:00:01\",
+            \"value_date\": \"2025-11-21T05:15:38\",
             \"message\": \"m\"
         }
     ]
@@ -8835,8 +9184,8 @@ const headers = {
 let body = {
     "label": "b",
     "description": "Eius et animi quos velit et.",
-    "required": true,
-    "active": true,
+    "required": false,
+    "active": false,
     "options": [
         {
             "id": "21c4122b-d554-3723-966c-6d723ea5293f",
@@ -8848,10 +9197,10 @@ let body = {
     "validations": [
         {
             "id": "cd1eb1ea-4697-3b9a-9dd0-988044a83af6",
-            "operator": "regex",
+            "operator": "&lt;=",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T00:00:01",
+            "value_date": "2025-11-21T05:15:38",
             "message": "m"
         }
     ]
@@ -9008,7 +9357,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -9042,7 +9391,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -9133,10 +9482,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="PUTapi-v1-custom-fields--id-"
-               value="regex"
+               value="<="
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>regex</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>&lt;=</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -9171,10 +9520,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="PUTapi-v1-custom-fields--id-"
-               value="2025-11-21T00:00:01"
+               value="2025-11-21T05:15:38"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T00:00:01</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T05:15:38</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -9213,8 +9562,8 @@ Must be one of:
     --data "{
     \"label\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"required\": false,
-    \"active\": true,
+    \"required\": true,
+    \"active\": false,
     \"options\": [
         {
             \"id\": \"21c4122b-d554-3723-966c-6d723ea5293f\",
@@ -9226,10 +9575,10 @@ Must be one of:
     \"validations\": [
         {
             \"id\": \"cd1eb1ea-4697-3b9a-9dd0-988044a83af6\",
-            \"operator\": \"&gt;=\",
+            \"operator\": \"in\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T00:00:01\",
+            \"value_date\": \"2025-11-21T05:15:38\",
             \"message\": \"m\"
         }
     ]
@@ -9251,8 +9600,8 @@ const headers = {
 let body = {
     "label": "b",
     "description": "Eius et animi quos velit et.",
-    "required": false,
-    "active": true,
+    "required": true,
+    "active": false,
     "options": [
         {
             "id": "21c4122b-d554-3723-966c-6d723ea5293f",
@@ -9264,10 +9613,10 @@ let body = {
     "validations": [
         {
             "id": "cd1eb1ea-4697-3b9a-9dd0-988044a83af6",
-            "operator": "&gt;=",
+            "operator": "in",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T00:00:01",
+            "value_date": "2025-11-21T05:15:38",
             "message": "m"
         }
     ]
@@ -9424,7 +9773,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -9458,7 +9807,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -9549,10 +9898,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="PATCHapi-v1-custom-fields--id-"
-               value=">="
+               value="in"
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>&gt;=</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>in</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -9587,10 +9936,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="PATCHapi-v1-custom-fields--id-"
-               value="2025-11-21T00:00:01"
+               value="2025-11-21T05:15:38"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T00:00:01</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T05:15:38</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -12075,7 +12424,7 @@ El flujo es:</p>
             \"custom_field_id\": \"5707ca55-f609-3528-be8b-1baeaee1567e\",
             \"string_value\": \"architecto\",
             \"number_value\": 4326.41688,
-            \"date_value\": \"2025-11-21T00:00:01\",
+            \"date_value\": \"2025-11-21T05:15:38\",
             \"boolean_value\": false
         }
     ]
@@ -12104,7 +12453,7 @@ let body = {
             "custom_field_id": "5707ca55-f609-3528-be8b-1baeaee1567e",
             "string_value": "architecto",
             "number_value": 4326.41688,
-            "date_value": "2025-11-21T00:00:01",
+            "date_value": "2025-11-21T05:15:38",
             "boolean_value": false
         }
     ]
@@ -12305,10 +12654,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="field_values.0.date_value"                data-endpoint="POSTapi-v1-campaigns-register"
-               value="2025-11-21T00:00:01"
+               value="2025-11-21T05:15:38"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T00:00:01</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T05:15:38</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>boolean_value</code></b>&nbsp;&nbsp;
@@ -12492,7 +12841,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/customers" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -12500,7 +12849,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/customers"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers"
 );
 
 const headers = {
@@ -12625,10 +12974,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--customers"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                     </form>
 
@@ -12650,7 +12999,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/customers/architecto/field-values" \
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers/architecto/field-values" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -12660,8 +13009,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"custom_field_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
             \"string_value\": \"architecto\",
             \"number_value\": 4326.41688,
-            \"date_value\": \"2025-11-21T00:00:01\",
-            \"boolean_value\": true
+            \"date_value\": \"2025-11-21T05:15:38\",
+            \"boolean_value\": false
         }
     ]
 }"
@@ -12670,7 +13019,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/customers/architecto/field-values"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers/architecto/field-values"
 );
 
 const headers = {
@@ -12685,8 +13034,8 @@ let body = {
             "custom_field_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
             "string_value": "architecto",
             "number_value": 4326.41688,
-            "date_value": "2025-11-21T00:00:01",
-            "boolean_value": true
+            "date_value": "2025-11-21T05:15:38",
+            "boolean_value": false
         }
     ]
 };
@@ -12792,10 +13141,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-campaigns--id--customers--customerId--field-values"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>customerId</code></b>&nbsp;&nbsp;
@@ -12863,10 +13212,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="values.0.date_value"                data-endpoint="POSTapi-v1-campaigns--id--customers--customerId--field-values"
-               value="2025-11-21T00:00:01"
+               value="2025-11-21T05:15:38"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T00:00:01</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T05:15:38</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>boolean_value</code></b>&nbsp;&nbsp;
@@ -12888,7 +13237,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
                     </div>
                                     </details>
         </div>
@@ -12908,7 +13257,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/customers/architecto/field-values" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers/architecto/field-values" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -12916,7 +13265,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/customers/architecto/field-values"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers/architecto/field-values"
 );
 
 const headers = {
@@ -13041,10 +13390,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--customers--customerId--field-values"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>customerId</code></b>&nbsp;&nbsp;
@@ -13059,137 +13408,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>architecto</code></p>
             </div>
                     </form>
-
-                <h1 id="otros">Otros</h1>
-
-    
-
-                                <h2 id="otros-GETapi-v1">GET api/v1</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre></details>         <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;API v1&quot;,
-    &quot;version&quot;: &quot;1.0.0&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-v1" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-v1" data-method="GET"
-      data-path="api/v1"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1"
-                    onclick="tryItOut('GETapi-v1');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1"
-                    onclick="cancelTryOut('GETapi-v1');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-v1"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-v1"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        </form>
 
                 <h1 id="stamps">🎫 Stamps</h1>
 
@@ -13391,7 +13609,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/stamps" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/stamps" \
     --header "Authorization: Bearer {staff_token} Requiere token de staff" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -13399,7 +13617,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/stamps"
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/stamps"
 );
 
 const headers = {
@@ -13524,10 +13742,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--stamps"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
             </div>
                     </form>
 
@@ -13545,7 +13763,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/stamps" \
+    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/stamps" \
     --header "Authorization: Bearer {staff_token} Requiere token de staff" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -13553,7 +13771,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019a9fe0-5730-72b3-b655-a46a8b4db967/stamps"
+    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/stamps"
 );
 
 const headers = {
@@ -13690,10 +13908,1732 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="campaignId"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId--stamps"
-               value="019a9fe0-5730-72b3-b655-a46a8b4db967"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
                data-component="url">
     <br>
-<p>Example: <code>019a9fe0-5730-72b3-b655-a46a8b4db967</code></p>
+<p>Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+            </div>
+                    </form>
+
+                <h1 id="otros">Otros</h1>
+
+    
+
+                                <h2 id="otros-GETapi-v1">GET api/v1</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;API v1&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1" data-method="GET"
+      data-path="api/v1"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1"
+                    onclick="tryItOut('GETapi-v1');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1"
+                    onclick="cancelTryOut('GETapi-v1');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                <h1 id="redemptions">✅ Redemptions</h1>
+
+    <p>Endpoints para canjear premios desbloqueados</p>
+
+                                <h2 id="redemptions-POSTapi-v1-staff-verify-redemption-pin">Verificar PIN y mostrar premio (Staff)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>El staff escanea el QR del cliente y luego ingresa el PIN.
+El sistema valida el PIN y muestra el premio ganado.</p>
+
+<span id="example-requests-POSTapi-v1-staff-verify-redemption-pin">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://loypi-api.test/api/v1/staff/verify-redemption-pin" \
+    --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"customer_code\": \"bngzmi\",
+    \"campaign_code\": \"yvdl\",
+    \"pin\": \"jnik\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/staff/verify-redemption-pin"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "customer_code": "bngzmi",
+    "campaign_code": "yvdl",
+    "pin": "jnik"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-staff-verify-redemption-pin">
+</span>
+<span id="execution-results-POSTapi-v1-staff-verify-redemption-pin" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-staff-verify-redemption-pin"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-staff-verify-redemption-pin"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-staff-verify-redemption-pin" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-staff-verify-redemption-pin">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-staff-verify-redemption-pin" data-method="POST"
+      data-path="api/v1/staff/verify-redemption-pin"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-staff-verify-redemption-pin', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-staff-verify-redemption-pin"
+                    onclick="tryItOut('POSTapi-v1-staff-verify-redemption-pin');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-staff-verify-redemption-pin"
+                    onclick="cancelTryOut('POSTapi-v1-staff-verify-redemption-pin');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-staff-verify-redemption-pin"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/staff/verify-redemption-pin</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-staff-verify-redemption-pin"
+               value="Bearer {YOUR_AUTH_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-staff-verify-redemption-pin"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-staff-verify-redemption-pin"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>customer_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="customer_code"                data-endpoint="POSTapi-v1-staff-verify-redemption-pin"
+               value="bngzmi"
+               data-component="body">
+    <br>
+<p>Must be 6 characters. Example: <code>bngzmi</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>campaign_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="campaign_code"                data-endpoint="POSTapi-v1-staff-verify-redemption-pin"
+               value="yvdl"
+               data-component="body">
+    <br>
+<p>The <code>code</code> of an existing record in the campaigns table. Must be 4 characters. Example: <code>yvdl</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>pin</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="pin"                data-endpoint="POSTapi-v1-staff-verify-redemption-pin"
+               value="jnik"
+               data-component="body">
+    <br>
+<p>Must match the regex /^[0-9]{4}$/. Must be 4 characters. Example: <code>jnik</code></p>
+        </div>
+        </form>
+
+                    <h2 id="redemptions-POSTapi-v1-staff-redeem-reward">Canjear premio (Staff)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Después de verificar el PIN, el staff confirma el canje.
+Esto cambia el estado del unlock a 'redeemed' y actualiza contadores.</p>
+
+<span id="example-requests-POSTapi-v1-staff-redeem-reward">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://loypi-api.test/api/v1/staff/redeem-reward" \
+    --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"customer_code\": \"bngzmi\",
+    \"campaign_code\": \"yvdl\",
+    \"pin\": \"jnik\",
+    \"unlock_id\": \"5e4f00df-4238-35bd-9edc-0b98dc359c80\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/staff/redeem-reward"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "customer_code": "bngzmi",
+    "campaign_code": "yvdl",
+    "pin": "jnik",
+    "unlock_id": "5e4f00df-4238-35bd-9edc-0b98dc359c80"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-staff-redeem-reward">
+</span>
+<span id="execution-results-POSTapi-v1-staff-redeem-reward" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-staff-redeem-reward"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-staff-redeem-reward"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-staff-redeem-reward" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-staff-redeem-reward">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-staff-redeem-reward" data-method="POST"
+      data-path="api/v1/staff/redeem-reward"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-staff-redeem-reward', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-staff-redeem-reward"
+                    onclick="tryItOut('POSTapi-v1-staff-redeem-reward');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-staff-redeem-reward"
+                    onclick="cancelTryOut('POSTapi-v1-staff-redeem-reward');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-staff-redeem-reward"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/staff/redeem-reward</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-staff-redeem-reward"
+               value="Bearer {YOUR_AUTH_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-staff-redeem-reward"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-staff-redeem-reward"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>customer_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="customer_code"                data-endpoint="POSTapi-v1-staff-redeem-reward"
+               value="bngzmi"
+               data-component="body">
+    <br>
+<p>Must be 6 characters. Example: <code>bngzmi</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>campaign_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="campaign_code"                data-endpoint="POSTapi-v1-staff-redeem-reward"
+               value="yvdl"
+               data-component="body">
+    <br>
+<p>The <code>code</code> of an existing record in the campaigns table. Must be 4 characters. Example: <code>yvdl</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>pin</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="pin"                data-endpoint="POSTapi-v1-staff-redeem-reward"
+               value="jnik"
+               data-component="body">
+    <br>
+<p>Must match the regex /^[0-9]{4}$/. Must be 4 characters. Example: <code>jnik</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>unlock_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="unlock_id"                data-endpoint="POSTapi-v1-staff-redeem-reward"
+               value="5e4f00df-4238-35bd-9edc-0b98dc359c80"
+               data-component="body">
+    <br>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the reward_unlocks table. Example: <code>5e4f00df-4238-35bd-9edc-0b98dc359c80</code></p>
+        </div>
+        </form>
+
+                    <h2 id="redemptions-GETapi-v1-customers-me-unlocks">Listar premios desbloqueados del customer (Customer)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-customers-me-unlocks">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/customers/me/unlocks" \
+    --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/customers/me/unlocks"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-customers-me-unlocks">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Invalid token. Token not found in database.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-customers-me-unlocks" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-customers-me-unlocks"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-customers-me-unlocks"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-customers-me-unlocks" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-customers-me-unlocks">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-customers-me-unlocks" data-method="GET"
+      data-path="api/v1/customers/me/unlocks"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-customers-me-unlocks', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-customers-me-unlocks"
+                    onclick="tryItOut('GETapi-v1-customers-me-unlocks');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-customers-me-unlocks"
+                    onclick="cancelTryOut('GETapi-v1-customers-me-unlocks');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-customers-me-unlocks"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/customers/me/unlocks</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-customers-me-unlocks"
+               value="Bearer {YOUR_AUTH_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-customers-me-unlocks"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-customers-me-unlocks"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="redemptions-POSTapi-v1-customers-me-unlocks-generate-pin">Generar PIN para canjear premio (Customer)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>El cliente presiona &quot;Canjear&quot; en un premio desbloqueado.
+Se genera un PIN de 4 dígitos válido por 3 minutos.</p>
+
+<span id="example-requests-POSTapi-v1-customers-me-unlocks-generate-pin">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://loypi-api.test/api/v1/customers/me/unlocks/generate-pin" \
+    --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"unlock_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/customers/me/unlocks/generate-pin"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "unlock_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-customers-me-unlocks-generate-pin">
+</span>
+<span id="execution-results-POSTapi-v1-customers-me-unlocks-generate-pin" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-customers-me-unlocks-generate-pin"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-customers-me-unlocks-generate-pin"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-customers-me-unlocks-generate-pin" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-customers-me-unlocks-generate-pin">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-customers-me-unlocks-generate-pin" data-method="POST"
+      data-path="api/v1/customers/me/unlocks/generate-pin"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-customers-me-unlocks-generate-pin', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-customers-me-unlocks-generate-pin"
+                    onclick="tryItOut('POSTapi-v1-customers-me-unlocks-generate-pin');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-customers-me-unlocks-generate-pin"
+                    onclick="cancelTryOut('POSTapi-v1-customers-me-unlocks-generate-pin');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-customers-me-unlocks-generate-pin"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/customers/me/unlocks/generate-pin</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-customers-me-unlocks-generate-pin"
+               value="Bearer {YOUR_AUTH_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-customers-me-unlocks-generate-pin"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-customers-me-unlocks-generate-pin"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>unlock_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="unlock_id"                data-endpoint="POSTapi-v1-customers-me-unlocks-generate-pin"
+               value="6ff8f7f6-1eb3-3525-be4a-3932c805afed"
+               data-component="body">
+    <br>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the reward_unlocks table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+        </div>
+        </form>
+
+                <h1 id="audit-logs">📊 Audit Logs</h1>
+
+    <p>Endpoints para ver logs de auditoría (solo para owners/admins)</p>
+
+                                <h2 id="audit-logs-GETapi-v1-audit-logs">Listar audit logs (Owner/Admin)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Obtiene todos los logs de auditoría con filtros opcionales.</p>
+
+<span id="example-requests-GETapi-v1-audit-logs">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/audit-logs" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/audit-logs"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-audit-logs">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-audit-logs" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-audit-logs"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-audit-logs"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-audit-logs" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-audit-logs">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-audit-logs" data-method="GET"
+      data-path="api/v1/audit-logs"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-audit-logs', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-audit-logs"
+                    onclick="tryItOut('GETapi-v1-audit-logs');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-audit-logs"
+                    onclick="cancelTryOut('GETapi-v1-audit-logs');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-audit-logs"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/audit-logs</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-audit-logs"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-audit-logs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-audit-logs"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="audit-logs-GETapi-v1-audit-logs--id-">Obtener audit log específico (Owner/Admin)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Obtiene la información detallada de un log de auditoría específico.</p>
+
+<span id="example-requests-GETapi-v1-audit-logs--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/audit-logs/architecto" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/audit-logs/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-audit-logs--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-audit-logs--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-audit-logs--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-audit-logs--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-audit-logs--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-audit-logs--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-audit-logs--id-" data-method="GET"
+      data-path="api/v1/audit-logs/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-audit-logs--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-audit-logs--id-"
+                    onclick="tryItOut('GETapi-v1-audit-logs--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-audit-logs--id-"
+                    onclick="cancelTryOut('GETapi-v1-audit-logs--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-audit-logs--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/audit-logs/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-audit-logs--id-"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-audit-logs--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-audit-logs--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-audit-logs--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the audit log. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                <h1 id="reward-unlocks">🔓 Reward Unlocks</h1>
+
+    <p>Endpoints de lectura para ver unlocks de premios (solo para owners)</p>
+
+                                <h2 id="reward-unlocks-GETapi-v1-campaigns--id--unlocks">Listar unlocks de una campaign (Owner)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Obtiene todos los unlocks de premios de una campaign específica.</p>
+
+<span id="example-requests-GETapi-v1-campaigns--id--unlocks">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/unlocks" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/unlocks"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-campaigns--id--unlocks">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-campaigns--id--unlocks" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-campaigns--id--unlocks"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-campaigns--id--unlocks"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-campaigns--id--unlocks" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-campaigns--id--unlocks">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-campaigns--id--unlocks" data-method="GET"
+      data-path="api/v1/campaigns/{id}/unlocks"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-campaigns--id--unlocks', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-campaigns--id--unlocks"
+                    onclick="tryItOut('GETapi-v1-campaigns--id--unlocks');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-campaigns--id--unlocks"
+                    onclick="cancelTryOut('GETapi-v1-campaigns--id--unlocks');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-campaigns--id--unlocks"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/campaigns/{id}/unlocks</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-campaigns--id--unlocks"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-campaigns--id--unlocks"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-campaigns--id--unlocks"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-campaigns--id--unlocks"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               data-component="url">
+    <br>
+<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="reward-unlocks-GETapi-v1-customers--id--unlocks">Listar unlocks de un customer (Owner)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Obtiene todos los unlocks de premios de un customer específico.</p>
+
+<span id="example-requests-GETapi-v1-customers--id--unlocks">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/customers/architecto/unlocks" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/customers/architecto/unlocks"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-customers--id--unlocks">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-customers--id--unlocks" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-customers--id--unlocks"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-customers--id--unlocks"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-customers--id--unlocks" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-customers--id--unlocks">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-customers--id--unlocks" data-method="GET"
+      data-path="api/v1/customers/{id}/unlocks"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-customers--id--unlocks', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-customers--id--unlocks"
+                    onclick="tryItOut('GETapi-v1-customers--id--unlocks');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-customers--id--unlocks"
+                    onclick="cancelTryOut('GETapi-v1-customers--id--unlocks');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-customers--id--unlocks"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/customers/{id}/unlocks</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-customers--id--unlocks"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-customers--id--unlocks"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-customers--id--unlocks"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-customers--id--unlocks"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the customer. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="reward-unlocks-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks">Listar unlocks de un customer en una campaign específica (Owner)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Obtiene todos los unlocks de premios de un customer en una campaign específica.</p>
+
+<span id="example-requests-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/unlocks" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/unlocks"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks" data-method="GET"
+      data-path="api/v1/customers/{customerId}/campaigns/{campaignId}/unlocks"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-customers--customerId--campaigns--campaignId--unlocks', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
+                    onclick="tryItOut('GETapi-v1-customers--customerId--campaigns--campaignId--unlocks');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
+                    onclick="cancelTryOut('GETapi-v1-customers--customerId--campaigns--campaignId--unlocks');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/customers/{customerId}/campaigns/{campaignId}/unlocks</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>customerId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="customerId"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>Example: <code>architecto</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>campaignId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="campaignId"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
+               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               data-component="url">
+    <br>
+<p>Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="reward-unlocks-GETapi-v1-reward-unlocks--id-">Obtener unlock específico (Owner)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Obtiene la información detallada de un unlock específico.</p>
+
+<span id="example-requests-GETapi-v1-reward-unlocks--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/reward-unlocks/architecto" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/reward-unlocks/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-reward-unlocks--id-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-reward-unlocks--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-reward-unlocks--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-reward-unlocks--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-reward-unlocks--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-reward-unlocks--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-reward-unlocks--id-" data-method="GET"
+      data-path="api/v1/reward-unlocks/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-reward-unlocks--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-reward-unlocks--id-"
+                    onclick="tryItOut('GETapi-v1-reward-unlocks--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-reward-unlocks--id-"
+                    onclick="cancelTryOut('GETapi-v1-reward-unlocks--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-reward-unlocks--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/reward-unlocks/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-reward-unlocks--id-"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-reward-unlocks--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-reward-unlocks--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="id"                data-endpoint="GETapi-v1-reward-unlocks--id-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The ID of the reward unlock. Example: <code>architecto</code></p>
             </div>
                     </form>
 

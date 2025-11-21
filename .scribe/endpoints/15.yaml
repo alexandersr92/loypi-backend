@@ -1,25 +1,23 @@
-name: '👥 Customers'
+name: '🏆 Rewards'
 description: |-
 
-  CRUD de customers (clientes). Requiere token de usuario (owner/admin)
+  CRUD de rewards (premios/templates). Requiere token de usuario (owner/admin)
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/v1/customers
+    uri: api/v1/rewards
     metadata:
       custom: []
-      groupName: '👥 Customers'
+      groupName: '🏆 Rewards'
       groupDescription: |-
 
-        CRUD de customers (clientes). Requiere token de usuario (owner/admin)
+        CRUD de rewards (premios/templates). Requiere token de usuario (owner/admin)
       subgroup: ''
       subgroupDescription: ''
-      title: 'Listar customers del negocio'
-      description: |-
-        Obtiene todos los customers registrados en el negocio del usuario autenticado.
-        Solo disponible para owners/admins.
+      title: 'Display a listing of the resource.'
+      description: ''
       authenticated: true
       deprecated: false
     headers:
@@ -55,80 +53,17 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/customers/code/{code}'
+    uri: 'api/v1/rewards/{id}'
     metadata:
       custom: []
-      groupName: '👥 Customers'
+      groupName: '🏆 Rewards'
       groupDescription: |-
 
-        CRUD de customers (clientes). Requiere token de usuario (owner/admin)
+        CRUD de rewards (premios/templates). Requiere token de usuario (owner/admin)
       subgroup: ''
       subgroupDescription: ''
-      title: 'Obtener customer por short_code'
-      description: |-
-        Obtiene la información de un customer usando su short_code único de 6 caracteres.
-        Útil para búsquedas rápidas en el punto de venta.
-        Solo disponible para owners/admins del mismo negocio.
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      code:
-        custom: []
-        name: code
-        description: 'The code.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      code: architecto
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/v1/customers/{id}'
-    metadata:
-      custom: []
-      groupName: '👥 Customers'
-      groupDescription: |-
-
-        CRUD de customers (clientes). Requiere token de usuario (owner/admin)
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Obtener customer por ID'
-      description: |-
-        Obtiene la información detallada de un customer específico por su UUID.
-        Solo disponible para owners/admins del mismo negocio.
+      title: 'Display the specified resource.'
+      description: ''
       authenticated: true
       deprecated: false
     headers:
@@ -139,7 +74,7 @@ endpoints:
       id:
         custom: []
         name: id
-        description: 'The ID of the customer.'
+        description: 'The ID of the reward.'
         required: true
         example: architecto
         type: string
@@ -164,156 +99,6 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: '*'
         description: null
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PUT
-    uri: 'api/v1/customers/{id}'
-    metadata:
-      custom: []
-      groupName: '👥 Customers'
-      groupDescription: |-
-
-        CRUD de customers (clientes). Requiere token de usuario (owner/admin)
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Actualizar customer'
-      description: |-
-        Actualiza la información de un customer (nombre y/o teléfono).
-        Solo disponible para owners/admins del mismo negocio.
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the customer.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: architecto
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        custom: []
-        name: name
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: b
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'Must match the regex /^\+?[1-9]\d{1,14}$/.'
-        required: false
-        example: '9425593'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      name: b
-      phone: '9425593'
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PATCH
-    uri: 'api/v1/customers/{id}'
-    metadata:
-      custom: []
-      groupName: '👥 Customers'
-      groupDescription: |-
-
-        CRUD de customers (clientes). Requiere token de usuario (owner/admin)
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Actualizar customer'
-      description: |-
-        Actualiza la información de un customer (nombre y/o teléfono).
-        Solo disponible para owners/admins del mismo negocio.
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the customer.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: architecto
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        custom: []
-        name: name
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: b
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'Must match the regex /^\+?[1-9]\d{1,14}$/.'
-        required: false
-        example: '9425593'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      name: b
-      phone: '9425593'
-    fileParameters: []
-    responses: []
     responseFields: []
     auth:
       - headers
@@ -326,19 +111,17 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/v1/customers/{id}'
+    uri: 'api/v1/rewards/{id}'
     metadata:
       custom: []
-      groupName: '👥 Customers'
+      groupName: '🏆 Rewards'
       groupDescription: |-
 
-        CRUD de customers (clientes). Requiere token de usuario (owner/admin)
+        CRUD de rewards (premios/templates). Requiere token de usuario (owner/admin)
       subgroup: ''
       subgroupDescription: ''
-      title: 'Eliminar customer'
-      description: |-
-        Elimina permanentemente un customer del sistema.
-        Solo disponible para owners/admins del mismo negocio.
+      title: 'Remove the specified resource from storage.'
+      description: ''
       authenticated: true
       deprecated: false
     headers:
@@ -349,7 +132,7 @@ endpoints:
       id:
         custom: []
         name: id
-        description: 'The ID of the customer.'
+        description: 'The ID of the reward.'
         required: true
         example: architecto
         type: string

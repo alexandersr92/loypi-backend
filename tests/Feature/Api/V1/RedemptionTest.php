@@ -30,6 +30,15 @@ class RedemptionTest extends TestCase
         ]);
 
         $token = $customer->createToken('test-token')->plainTextToken;
+        
+        // Crear CustomerToken manualmente para que tenga business_id
+        \App\Models\CustomerToken::create([
+            'customer_id' => $customer->id,
+            'business_id' => $business->id,
+            'token' => explode('|', $token)[1],
+            'expires_at' => null,
+            'active' => true,
+        ]);
 
         $response = $this->withHeader('Authorization', 'Bearer ' . $token)
             ->getJson('/api/v1/customers/me/unlocks');

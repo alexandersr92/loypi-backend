@@ -16,24 +16,28 @@ class CustomerAuthTest extends TestCase
     public function test_customer_can_register_via_qr(): void
     {
         $business = Business::factory()->create();
-        $campaign = Campaign::factory()->create([
-            'business_id' => $business->id,
-            'code' => 'TEST',
+
+        // Crear OTP primero
+        $otp = \App\Models\Otp::factory()->create([
+            'phone' => '+521234567890',
+            'code' => '123456',
+            'status' => 'pending',
+            'expires_at' => now()->addMinutes(10),
         ]);
 
-        $response = $this->postJson('/api/v1/campaigns/register', [
-            'campaign_code' => 'TEST',
+        $response = $this->postJson('/api/v1/customers/register', [
+            'business_slug' => $business->slug,
             'phone' => '+521234567890',
             'name' => 'Test Customer',
+            'otp_code' => '123456',
         ]);
 
-        $response->assertStatus(200)
+        $response->assertStatus(201)
             ->assertJsonStructure([
                 'success',
                 'message',
                 'data' => [
                     'customer',
-                    'campaign',
                     'token',
                 ],
             ]);
@@ -55,8 +59,9 @@ class CustomerAuthTest extends TestCase
         ]);
 
         $response = $this->postJson('/api/v1/customers/login', [
+            'business_slug' => $business->slug,
             'phone' => '+521234567890',
-            'code' => '123456',
+            'otp_code' => '123456',
         ]);
 
         $response->assertStatus(200)
@@ -78,6 +83,15 @@ class CustomerAuthTest extends TestCase
         ]);
 
         $token = $customer->createToken('test-token')->plainTextToken;
+        
+        // Crear CustomerToken manualmente para que tenga business_id
+        \App\Models\CustomerToken::create([
+            'customer_id' => $customer->id,
+            'business_id' => $business->id,
+            'token' => explode('|', $token)[1],
+            'expires_at' => null,
+            'active' => true,
+        ]);
 
         $response = $this->withHeader('Authorization', 'Bearer ' . $token)
             ->getJson('/api/v1/customers/me');

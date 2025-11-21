@@ -1,22 +1,22 @@
-name: '🎯 Campaigns - Custom Fields'
+name: '👨‍💼 Staff'
 description: |-
 
-  Gestión de custom fields asociados a campaigns. Requiere token de usuario (owner/admin)
+  CRUD de staff (empleados). Requiere token de usuario (owner/admin)
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/campaigns/{id}/custom-fields'
+    uri: api/v1/staff
     metadata:
       custom: []
-      groupName: '🎯 Campaigns - Custom Fields'
+      groupName: '👨‍💼 Staff'
       groupDescription: |-
 
-        Gestión de custom fields asociados a campaigns. Requiere token de usuario (owner/admin)
+        CRUD de staff (empleados). Requiere token de usuario (owner/admin)
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get custom fields of a campaign.'
+      title: 'Display a listing of the resource.'
       description: ''
       authenticated: true
       deprecated: false
@@ -24,20 +24,8 @@ endpoints:
       Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the campaign.'
-        required: true
-        example: 019a9fe0-5730-72b3-b655-a46a8b4db967
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: 019a9fe0-5730-72b3-b655-a46a8b4db967
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -65,16 +53,101 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: 'api/v1/campaigns/{id}/custom-fields'
+    uri: api/v1/staff
     metadata:
       custom: []
-      groupName: '🎯 Campaigns - Custom Fields'
+      groupName: '👨‍💼 Staff'
       groupDescription: |-
 
-        Gestión de custom fields asociados a campaigns. Requiere token de usuario (owner/admin)
+        CRUD de staff (empleados). Requiere token de usuario (owner/admin)
       subgroup: ''
       subgroupDescription: ''
-      title: 'Associate custom fields to a campaign.'
+      title: 'Store a newly created resource in storage.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      code:
+        custom: []
+        name: code
+        description: 'Must not be greater than 50 characters.'
+        required: true
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      pin:
+        custom: []
+        name: pin
+        description: 'Must be at least 4 characters. Must not be greater than 6 characters.'
+        required: true
+        example: gzmi
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      active:
+        custom: []
+        name: active
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      code: b
+      name: 'n'
+      pin: gzmi
+      active: false
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/staff/{id}'
+    metadata:
+      custom: []
+      groupName: '👨‍💼 Staff'
+      groupDescription: |-
+
+        CRUD de staff (empleados). Requiere token de usuario (owner/admin)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified resource.'
       description: ''
       authenticated: true
       deprecated: false
@@ -86,62 +159,247 @@ endpoints:
       id:
         custom: []
         name: id
-        description: 'The ID of the campaign.'
+        description: 'The ID of the staff.'
         required: true
-        example: 019a9fe0-5730-72b3-b655-a46a8b4db967
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019a9fe0-5730-72b3-b655-a46a8b4db967
+      id: architecto
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      custom_field_ids:
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
         custom: []
-        name: custom_field_ids
-        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the custom_fields table.'
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/staff/{id}'
+    metadata:
+      custom: []
+      groupName: '👨‍💼 Staff'
+      groupDescription: |-
+
+        CRUD de staff (empleados). Requiere token de usuario (owner/admin)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified resource in storage.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the staff.'
         required: true
-        example:
-          - 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-        type: 'string[]'
+        example: architecto
+        type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      sort_orders:
+    cleanUrlParameters:
+      id: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      business_id:
         custom: []
-        name: sort_orders
-        description: 'Must be at least 0.'
+        name: business_id
+        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the businesses table.'
         required: false
-        example:
-          - 84
-        type: 'integer[]'
+        example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+        type: string
         enumValues: []
         exampleWasSpecified: false
-        nullable: true
+        nullable: false
         deprecated: false
-      required_overrides:
+      code:
         custom: []
-        name: required_overrides
+        name: code
+        description: 'Must not be greater than 50 characters.'
+        required: false
+        example: g
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: z
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      pin:
+        custom: []
+        name: pin
+        description: 'Must be at least 4 characters. Must not be greater than 6 characters.'
+        required: false
+        example: miyv
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      active:
+        custom: []
+        name: active
         description: ''
         required: false
-        example:
-          - true
-        type: 'boolean[]'
+        example: false
+        type: boolean
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      custom_field_ids:
-        - 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-      sort_orders:
-        - 84
-      required_overrides:
-        - true
+      business_id: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+      code: g
+      name: z
+      pin: miyv
+      active: false
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/v1/staff/{id}'
+    metadata:
+      custom: []
+      groupName: '👨‍💼 Staff'
+      groupDescription: |-
+
+        CRUD de staff (empleados). Requiere token de usuario (owner/admin)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified resource in storage.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the staff.'
+        required: true
+        example: 019aa4c4-c9cc-7353-96f7-b29325361ebf
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 019aa4c4-c9cc-7353-96f7-b29325361ebf
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      business_id:
+        custom: []
+        name: business_id
+        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the businesses table.'
+        required: false
+        example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      code:
+        custom: []
+        name: code
+        description: 'Must not be greater than 50 characters.'
+        required: false
+        example: g
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: z
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      pin:
+        custom: []
+        name: pin
+        description: 'Must be at least 4 characters. Must not be greater than 6 characters.'
+        required: false
+        example: miyv
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      active:
+        custom: []
+        name: active
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      business_id: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+      code: g
+      name: z
+      pin: miyv
+      active: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -156,16 +414,16 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/v1/campaigns/{id}/custom-fields/{fieldId}'
+    uri: 'api/v1/staff/{id}'
     metadata:
       custom: []
-      groupName: '🎯 Campaigns - Custom Fields'
+      groupName: '👨‍💼 Staff'
       groupDescription: |-
 
-        Gestión de custom fields asociados a campaigns. Requiere token de usuario (owner/admin)
+        CRUD de staff (empleados). Requiere token de usuario (owner/admin)
       subgroup: ''
       subgroupDescription: ''
-      title: 'Disassociate a custom field from a campaign.'
+      title: 'Remove the specified resource from storage.'
       description: ''
       authenticated: true
       deprecated: false
@@ -177,28 +435,65 @@ endpoints:
       id:
         custom: []
         name: id
-        description: 'The ID of the campaign.'
+        description: 'The ID of the staff.'
         required: true
-        example: 019a9fe0-5730-72b3-b655-a46a8b4db967
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      fieldId:
-        custom: []
-        name: fieldId
-        description: ''
-        required: true
-        example: architecto
+        example: 019aa4c4-c9cc-7353-96f7-b29325361ebf
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019a9fe0-5730-72b3-b655-a46a8b4db967
-      fieldId: architecto
+      id: 019aa4c4-c9cc-7353-96f7-b29325361ebf
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/staff/{id}/unlock'
+    metadata:
+      custom: []
+      groupName: '👨‍💼 Staff'
+      groupDescription: |-
+
+        CRUD de staff (empleados). Requiere token de usuario (owner/admin)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Desbloquear un staff (solo owner)'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the staff.'
+        required: true
+        example: 019aa4c4-c9cc-7353-96f7-b29325361ebf
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 019aa4c4-c9cc-7353-96f7-b29325361ebf
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

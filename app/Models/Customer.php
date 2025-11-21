@@ -58,9 +58,17 @@ class Customer extends Model implements Authenticatable
     }
 
     /**
-     * Relación con los tokens
+     * Relación con los tokens de Sanctum (PersonalAccessToken)
      */
-    public function tokens(): HasMany
+    public function tokens(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(\Laravel\Sanctum\PersonalAccessToken::class, 'tokenable');
+    }
+
+    /**
+     * Relación con los customer tokens
+     */
+    public function customerTokens(): HasMany
     {
         return $this->hasMany(CustomerToken::class);
     }
@@ -97,7 +105,7 @@ class Customer extends Model implements Authenticatable
      */
     public function getActiveToken()
     {
-        return $this->tokens()
+        return $this->customerTokens()
             ->where('active', true)
             ->orderBy('created_at', 'desc')
             ->first();

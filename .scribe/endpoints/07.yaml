@@ -139,7 +139,7 @@ endpoints:
         name: 'field_values[].date_value'
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-21T00:00:01'
+        example: '2025-11-21T05:15:38'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -167,7 +167,7 @@ endpoints:
           custom_field_id: 5707ca55-f609-3528-be8b-1baeaee1567e
           string_value: architecto
           number_value: 4326.41688
-          date_value: '2025-11-21T00:00:01'
+          date_value: '2025-11-21T05:15:38'
           boolean_value: false
     fileParameters: []
     responses: []
@@ -249,14 +249,14 @@ endpoints:
         name: id
         description: 'The ID of the campaign.'
         required: true
-        example: 019a9fe0-5730-72b3-b655-a46a8b4db967
+        example: 019aa4c5-091b-72e3-a8a1-70322147afd7
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019a9fe0-5730-72b3-b655-a46a8b4db967
+      id: 019aa4c5-091b-72e3-a8a1-70322147afd7
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

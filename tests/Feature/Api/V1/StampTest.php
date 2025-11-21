@@ -39,6 +39,7 @@ class StampTest extends TestCase
             ->postJson('/api/v1/staff/apply-stamp', [
                 'customer_code' => $customer->short_code,
                 'campaign_code' => $campaign->code,
+                'type' => 'stamp',
             ]);
 
         $response->assertStatus(200)

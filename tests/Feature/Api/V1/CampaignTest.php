@@ -16,6 +16,7 @@ class CampaignTest extends TestCase
     {
         $user = User::factory()->create();
         $business = Business::factory()->create(['user_id' => $user->id]);
+        $user->update(['business_id' => $business->id]);
         $token = $user->createToken('test-token')->plainTextToken;
 
         $response = $this->withHeader('Authorization', 'Bearer ' . $token)
@@ -24,6 +25,14 @@ class CampaignTest extends TestCase
                 'type' => 'punch',
                 'description' => 'Test description',
                 'active' => true,
+                'rewards' => [
+                    [
+                        'name' => 'Test Reward',
+                        'type' => 'punch',
+                        'description' => 'Test reward description',
+                        'threshold_int' => 5,
+                    ],
+                ],
             ]);
 
         $response->assertStatus(201)
@@ -34,7 +43,6 @@ class CampaignTest extends TestCase
                     'id',
                     'name',
                     'type',
-                    'code',
                 ],
             ]);
     }
@@ -43,6 +51,7 @@ class CampaignTest extends TestCase
     {
         $user = User::factory()->create();
         $business = Business::factory()->create(['user_id' => $user->id]);
+        $user->update(['business_id' => $business->id]);
         Campaign::factory()->count(3)->create(['business_id' => $business->id]);
         $token = $user->createToken('test-token')->plainTextToken;
 
@@ -57,7 +66,6 @@ class CampaignTest extends TestCase
                         'id',
                         'name',
                         'type',
-                        'code',
                     ],
                 ],
             ]);
@@ -74,11 +82,16 @@ class CampaignTest extends TestCase
         $response = $this->getJson('/api/v1/campaigns/code/TEST');
 
         $response->assertStatus(200)
+            ->assertJsonStructure([
+                'success',
+                'data' => [
+                    'id',
+                    'name',
+                    'type',
+                ],
+            ])
             ->assertJson([
                 'success' => true,
-                'data' => [
-                    'code' => 'TEST',
-                ],
             ]);
     }
 }

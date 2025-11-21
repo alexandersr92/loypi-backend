@@ -283,7 +283,7 @@ endpoints:
         name: role
         description: ''
         required: false
-        example: owner
+        example: admin
         type: string
         enumValues:
           - admin
@@ -307,7 +307,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: inactive
+        example: suspended
         type: string
         enumValues:
           - active
@@ -343,9 +343,9 @@ endpoints:
       email: zbailey@example.net
       password: '|]|{+-'
       phone: '9425593'
-      role: owner
+      role: admin
       avatar: 'n'
-      status: inactive
+      status: suspended
       timezone: Africa/Dakar
       locale: kh
     fileParameters: []
@@ -385,14 +385,14 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 019a9fe0-0dba-737a-a2e5-b0c3594cb380
+        example: 019aa4c4-bd37-7229-8869-16dd62f2b724
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019a9fe0-0dba-737a-a2e5-b0c3594cb380
+      id: 019aa4c4-bd37-7229-8869-16dd62f2b724
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -469,7 +469,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: suspended
+        example: inactive
         type: string
         enumValues:
           - active
@@ -507,7 +507,7 @@ endpoints:
       phone: '9425593'
       role: admin
       avatar: 'n'
-      status: suspended
+      status: inactive
       timezone: Africa/Dakar
       locale: kh
     fileParameters: []
