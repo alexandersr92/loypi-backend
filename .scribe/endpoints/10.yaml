@@ -269,6 +269,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
         description: null
     responseFields: []
     auth:
@@ -327,6 +328,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
         description: null
     responseFields: []
     auth:
@@ -592,14 +594,14 @@ endpoints:
         name: id
         description: 'The ID of the business.'
         required: true
-        example: 019aa4c4-c7a9-725c-9a24-8400e94f4fe4
+        example: 019aa527-a3dd-7342-b115-95e9fcbba615
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019aa4c4-c7a9-725c-9a24-8400e94f4fe4
+      id: 019aa527-a3dd-7342-b115-95e9fcbba615
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:

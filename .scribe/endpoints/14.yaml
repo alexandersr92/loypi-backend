@@ -30,14 +30,14 @@ endpoints:
         name: id
         description: 'The ID of the campaign.'
         required: true
-        example: 019aa4c5-091b-72e3-a8a1-70322147afd7
+        example: 019aa527-e143-7132-8328-75478fde8b67
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019aa4c5-091b-72e3-a8a1-70322147afd7
+      id: 019aa527-e143-7132-8328-75478fde8b67
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -52,6 +52,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
         description: null
     responseFields: []
     auth:
@@ -110,6 +111,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
         description: null
     responseFields: []
     auth:
@@ -157,7 +159,7 @@ endpoints:
         name: campaignId
         description: ''
         required: true
-        example: 019aa4c5-091b-72e3-a8a1-70322147afd7
+        example: 019aa527-e143-7132-8328-75478fde8b67
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -165,7 +167,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       customerId: architecto
-      campaignId: 019aa4c5-091b-72e3-a8a1-70322147afd7
+      campaignId: 019aa527-e143-7132-8328-75478fde8b67
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -180,6 +182,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
         description: null
     responseFields: []
     auth:
@@ -238,6 +241,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
         description: null
     responseFields: []
     auth:

@@ -239,6 +239,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
         description: null
     responseFields: []
     auth:
@@ -437,14 +438,14 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 019aa4c4-bd37-7229-8869-16dd62f2b724
+        example: 019aa527-9931-7349-a45d-18e6bf48aa1a
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019aa4c4-bd37-7229-8869-16dd62f2b724
+      id: 019aa527-9931-7349-a45d-18e6bf48aa1a
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -521,7 +522,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: active
+        example: suspended
         type: string
         enumValues:
           - active
@@ -559,7 +560,7 @@ endpoints:
       phone: '9425593'
       role: owner
       avatar: 'n'
-      status: active
+      status: suspended
       timezone: Africa/Dakar
       locale: kh
     fileParameters: []

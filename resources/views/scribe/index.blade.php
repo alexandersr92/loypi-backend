@@ -26,7 +26,8 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://loypi-api.test";
+        // Usar la URL actual del navegador para que funcione en cualquier entorno (local, producción, etc.)
+        var tryItOutBaseUrl = window.location.origin;
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -1119,6 +1120,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -1957,6 +1959,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -2352,7 +2355,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://loypi-api.test/api/v1/users/019aa4c4-bd37-7229-8869-16dd62f2b724" \
+    "http://loypi-api.test/api/v1/users/019aa527-9931-7349-a45d-18e6bf48aa1a" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin) - excepto POST /users (registro público)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -2363,7 +2366,7 @@ Must be one of:
     \"phone\": \"9425593\",
     \"role\": \"owner\",
     \"avatar\": \"n\",
-    \"status\": \"active\",
+    \"status\": \"suspended\",
     \"timezone\": \"Africa\\/Dakar\",
     \"locale\": \"kh\"
 }"
@@ -2372,7 +2375,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/users/019aa4c4-bd37-7229-8869-16dd62f2b724"
+    "http://loypi-api.test/api/v1/users/019aa527-9931-7349-a45d-18e6bf48aa1a"
 );
 
 const headers = {
@@ -2388,7 +2391,7 @@ let body = {
     "phone": "9425593",
     "role": "owner",
     "avatar": "n",
-    "status": "active",
+    "status": "suspended",
     "timezone": "Africa\/Dakar",
     "locale": "kh"
 };
@@ -2494,10 +2497,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PATCHapi-v1-users--id-"
-               value="019aa4c4-bd37-7229-8869-16dd62f2b724"
+               value="019aa527-9931-7349-a45d-18e6bf48aa1a"
                data-component="url">
     <br>
-<p>The ID of the user. Example: <code>019aa4c4-bd37-7229-8869-16dd62f2b724</code></p>
+<p>The ID of the user. Example: <code>019aa527-9931-7349-a45d-18e6bf48aa1a</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -2581,10 +2584,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PATCHapi-v1-users--id-"
-               value="active"
+               value="suspended"
                data-component="body">
     <br>
-<p>Example: <code>active</code></p>
+<p>Example: <code>suspended</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>inactive</code></li> <li><code>suspended</code></li></ul>
         </div>
@@ -3012,6 +3015,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -3166,6 +3170,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -3643,7 +3648,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://loypi-api.test/api/v1/businesses/019aa4c4-c7a9-725c-9a24-8400e94f4fe4" \
+    "http://loypi-api.test/api/v1/businesses/019aa527-a3dd-7342-b115-95e9fcbba615" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -3670,7 +3675,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/businesses/019aa4c4-c7a9-725c-9a24-8400e94f4fe4"
+    "http://loypi-api.test/api/v1/businesses/019aa527-a3dd-7342-b115-95e9fcbba615"
 );
 
 const headers = {
@@ -3799,10 +3804,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PATCHapi-v1-businesses--id-"
-               value="019aa4c4-c7a9-725c-9a24-8400e94f4fe4"
+               value="019aa527-a3dd-7342-b115-95e9fcbba615"
                data-component="url">
     <br>
-<p>The ID of the business. Example: <code>019aa4c4-c7a9-725c-9a24-8400e94f4fe4</code></p>
+<p>The ID of the business. Example: <code>019aa527-a3dd-7342-b115-95e9fcbba615</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -4040,6 +4045,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -4154,7 +4160,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code\": \"b\",
     \"name\": \"n\",
     \"pin\": \"gzmi\",
-    \"active\": false
+    \"active\": true
 }"
 </code></pre></div>
 
@@ -4174,7 +4180,7 @@ let body = {
     "code": "b",
     "name": "n",
     "pin": "gzmi",
-    "active": false
+    "active": true
 };
 
 fetch(url, {
@@ -4327,7 +4333,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -4380,6 +4386,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -4725,7 +4732,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf" \
+    "http://loypi-api.test/api/v1/staff/019aa527-a614-7237-861e-745930c0dacd" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -4741,7 +4748,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf"
+    "http://loypi-api.test/api/v1/staff/019aa527-a614-7237-861e-745930c0dacd"
 );
 
 const headers = {
@@ -4859,10 +4866,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PATCHapi-v1-staff--id-"
-               value="019aa4c4-c9cc-7353-96f7-b29325361ebf"
+               value="019aa527-a614-7237-861e-745930c0dacd"
                data-component="url">
     <br>
-<p>The ID of the staff. Example: <code>019aa4c4-c9cc-7353-96f7-b29325361ebf</code></p>
+<p>The ID of the staff. Example: <code>019aa527-a614-7237-861e-745930c0dacd</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -4951,7 +4958,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf" \
+    "http://loypi-api.test/api/v1/staff/019aa527-a614-7237-861e-745930c0dacd" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -4959,7 +4966,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf"
+    "http://loypi-api.test/api/v1/staff/019aa527-a614-7237-861e-745930c0dacd"
 );
 
 const headers = {
@@ -5068,10 +5075,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-v1-staff--id-"
-               value="019aa4c4-c9cc-7353-96f7-b29325361ebf"
+               value="019aa527-a614-7237-861e-745930c0dacd"
                data-component="url">
     <br>
-<p>The ID of the staff. Example: <code>019aa4c4-c9cc-7353-96f7-b29325361ebf</code></p>
+<p>The ID of the staff. Example: <code>019aa527-a614-7237-861e-745930c0dacd</code></p>
             </div>
                     </form>
 
@@ -5089,7 +5096,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf/unlock" \
+    "http://loypi-api.test/api/v1/staff/019aa527-a614-7237-861e-745930c0dacd/unlock" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -5097,7 +5104,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/staff/019aa4c4-c9cc-7353-96f7-b29325361ebf/unlock"
+    "http://loypi-api.test/api/v1/staff/019aa527-a614-7237-861e-745930c0dacd/unlock"
 );
 
 const headers = {
@@ -5206,10 +5213,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-staff--id--unlock"
-               value="019aa4c4-c9cc-7353-96f7-b29325361ebf"
+               value="019aa527-a614-7237-861e-745930c0dacd"
                data-component="url">
     <br>
-<p>The ID of the staff. Example: <code>019aa4c4-c9cc-7353-96f7-b29325361ebf</code></p>
+<p>The ID of the staff. Example: <code>019aa527-a614-7237-861e-745930c0dacd</code></p>
             </div>
                     </form>
 
@@ -5565,6 +5572,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -5718,6 +5726,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -5873,6 +5882,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -5994,7 +6004,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"06:38:14\",
+    \"streak_reset_time\": \"07:55:33\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -6017,13 +6027,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"rewards\": [
         {
             \"name\": \"l\",
-            \"type\": \"streak\",
+            \"type\": \"punch\",
             \"description\": \"Eius et animi quos velit et.\",
             \"image_url\": \"http:\\/\\/www.ernser.org\\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html\",
             \"threshold_int\": 49,
             \"per_customer_limit\": 43,
             \"global_limit\": 61,
-            \"active\": false,
+            \"active\": true,
             \"sort_order\": 61
         }
     ],
@@ -6032,8 +6042,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"key\": \"p\",
             \"label\": \"w\",
             \"description\": \"Eius et animi quos velit et.\",
-            \"type\": \"select\",
-            \"required\": true,
+            \"type\": \"number\",
+            \"required\": false,
             \"options\": [
                 {
                     \"value\": \"v\",
@@ -6043,10 +6053,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
             ],
             \"validations\": [
                 {
-                    \"operator\": \"!=\",
+                    \"operator\": \"&lt;=\",
                     \"value_string\": \"architecto\",
                     \"value_number\": 4326.41688,
-                    \"value_date\": \"2025-11-21T06:38:14\",
+                    \"value_date\": \"2025-11-21T07:55:33\",
                     \"message\": \"m\"
                 }
             ]
@@ -6078,7 +6088,7 @@ let body = {
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "06:38:14",
+    "streak_reset_time": "07:55:33",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -6101,13 +6111,13 @@ let body = {
     "rewards": [
         {
             "name": "l",
-            "type": "streak",
+            "type": "punch",
             "description": "Eius et animi quos velit et.",
             "image_url": "http:\/\/www.ernser.org\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html",
             "threshold_int": 49,
             "per_customer_limit": 43,
             "global_limit": 61,
-            "active": false,
+            "active": true,
             "sort_order": 61
         }
     ],
@@ -6116,8 +6126,8 @@ let body = {
             "key": "p",
             "label": "w",
             "description": "Eius et animi quos velit et.",
-            "type": "select",
-            "required": true,
+            "type": "number",
+            "required": false,
             "options": [
                 {
                     "value": "v",
@@ -6127,10 +6137,10 @@ let body = {
             ],
             "validations": [
                 {
-                    "operator": "!=",
+                    "operator": "&lt;=",
                     "value_string": "architecto",
                     "value_number": 4326.41688,
-                    "value_date": "2025-11-21T06:38:14",
+                    "value_date": "2025-11-21T07:55:33",
                     "message": "m"
                 }
             ]
@@ -6383,10 +6393,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="POSTapi-v1-campaigns"
-               value="06:38:14"
+               value="07:55:33"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>06:38:14</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>07:55:33</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -6561,10 +6571,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="rewards.0.type"                data-endpoint="POSTapi-v1-campaigns"
-               value="streak"
+               value="punch"
                data-component="body">
     <br>
-<p>This field is required when <code>rewards</code> is present. Example: <code>streak</code></p>
+<p>This field is required when <code>rewards</code> is present. Example: <code>punch</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
                     </div>
@@ -6660,7 +6670,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>sort_order</code></b>&nbsp;&nbsp;
@@ -6743,10 +6753,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.type"                data-endpoint="POSTapi-v1-campaigns"
-               value="select"
+               value="number"
                data-component="body">
     <br>
-<p>This field is required when <code>custom_fields</code> is present. Example: <code>select</code></p>
+<p>This field is required when <code>custom_fields</code> is present. Example: <code>number</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
                     </div>
@@ -6770,7 +6780,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -6849,10 +6859,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.validations.0.operator"                data-endpoint="POSTapi-v1-campaigns"
-               value="!="
+               value="<="
                data-component="body">
     <br>
-<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>!=</code></p>
+<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>&lt;=</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -6887,10 +6897,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.validations.0.value_date"                data-endpoint="POSTapi-v1-campaigns"
-               value="2025-11-21T06:38:14"
+               value="2025-11-21T07:55:33"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:38:14</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
                     </div>
                                                                 <div style="margin-left: 28px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -6924,7 +6934,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -6932,7 +6942,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67"
 );
 
 const headers = {
@@ -6959,6 +6969,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -7057,10 +7068,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id-"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     </form>
 
@@ -7078,7 +7089,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -7093,7 +7104,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"06:38:14\",
+    \"streak_reset_time\": \"07:55:33\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -7104,7 +7115,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67"
 );
 
 const headers = {
@@ -7124,7 +7135,7 @@ let body = {
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "06:38:14",
+    "streak_reset_time": "07:55:33",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -7232,10 +7243,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PUTapi-v1-campaigns--id-"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -7389,10 +7400,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="PUTapi-v1-campaigns--id-"
-               value="06:38:14"
+               value="07:55:33"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>06:38:14</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>07:55:33</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -7458,22 +7469,22 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"type\": \"punch\",
+    \"type\": \"streak\",
     \"name\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": true,
+    \"active\": false,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"06:38:14\",
+    \"streak_reset_time\": \"07:55:33\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -7484,7 +7495,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67"
 );
 
 const headers = {
@@ -7494,17 +7505,17 @@ const headers = {
 };
 
 let body = {
-    "type": "punch",
+    "type": "streak",
     "name": "b",
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": true,
+    "active": false,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "06:38:14",
+    "streak_reset_time": "07:55:33",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -7612,10 +7623,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PATCHapi-v1-campaigns--id-"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -7625,10 +7636,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="PATCHapi-v1-campaigns--id-"
-               value="punch"
+               value="streak"
                data-component="body">
     <br>
-<p>Example: <code>punch</code></p>
+<p>Example: <code>streak</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
         </div>
@@ -7712,7 +7723,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -7769,10 +7780,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="PATCHapi-v1-campaigns--id-"
-               value="06:38:14"
+               value="07:55:33"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>06:38:14</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>07:55:33</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -7838,7 +7849,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7846,7 +7857,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67"
 );
 
 const headers = {
@@ -7955,10 +7966,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-v1-campaigns--id-"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     </form>
 
@@ -7980,7 +7991,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7988,7 +7999,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields"
 );
 
 const headers = {
@@ -8015,6 +8026,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -8113,10 +8125,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--custom-fields"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     </form>
 
@@ -8134,7 +8146,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -8154,7 +8166,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields"
 );
 
 const headers = {
@@ -8276,10 +8288,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-campaigns--id--custom-fields"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -8340,7 +8352,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields/architecto" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields/architecto" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8348,7 +8360,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/custom-fields/architecto"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields/architecto"
 );
 
 const headers = {
@@ -8457,10 +8469,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-v1-campaigns--id--custom-fields--fieldId-"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>fieldId</code></b>&nbsp;&nbsp;
@@ -8529,6 +8541,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -8643,8 +8656,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"key\": \"b\",
     \"label\": \"n\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"type\": \"text\",
-    \"required\": true,
+    \"type\": \"boolean\",
+    \"required\": false,
     \"active\": true,
     \"options\": [
         {
@@ -8655,10 +8668,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     ],
     \"validations\": [
         {
-            \"operator\": \"=\",
+            \"operator\": \"&gt;=\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T06:38:14\",
+            \"value_date\": \"2025-11-21T07:55:33\",
             \"message\": \"m\"
         }
     ]
@@ -8681,8 +8694,8 @@ let body = {
     "key": "b",
     "label": "n",
     "description": "Eius et animi quos velit et.",
-    "type": "text",
-    "required": true,
+    "type": "boolean",
+    "required": false,
     "active": true,
     "options": [
         {
@@ -8693,10 +8706,10 @@ let body = {
     ],
     "validations": [
         {
-            "operator": "=",
+            "operator": "&gt;=",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T06:38:14",
+            "value_date": "2025-11-21T07:55:33",
             "message": "m"
         }
     ]
@@ -8839,10 +8852,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-custom-fields"
-               value="text"
+               value="boolean"
                data-component="body">
     <br>
-<p>Example: <code>text</code></p>
+<p>Example: <code>boolean</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
         </div>
@@ -8866,7 +8879,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -8967,10 +8980,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="POSTapi-v1-custom-fields"
-               value="="
+               value=">="
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>=</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>&gt;=</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -9005,10 +9018,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="POSTapi-v1-custom-fields"
-               value="2025-11-21T06:38:14"
+               value="2025-11-21T07:55:33"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:38:14</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -9075,6 +9088,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9201,7 +9215,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"label\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"required\": true,
+    \"required\": false,
     \"active\": false,
     \"options\": [
         {
@@ -9217,7 +9231,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"operator\": \"in\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T06:38:14\",
+            \"value_date\": \"2025-11-21T07:55:33\",
             \"message\": \"m\"
         }
     ]
@@ -9239,7 +9253,7 @@ const headers = {
 let body = {
     "label": "b",
     "description": "Eius et animi quos velit et.",
-    "required": true,
+    "required": false,
     "active": false,
     "options": [
         {
@@ -9255,7 +9269,7 @@ let body = {
             "operator": "in",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T06:38:14",
+            "value_date": "2025-11-21T07:55:33",
             "message": "m"
         }
     ]
@@ -9412,7 +9426,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -9575,10 +9589,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="PUTapi-v1-custom-fields--id-"
-               value="2025-11-21T06:38:14"
+               value="2025-11-21T07:55:33"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:38:14</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -9618,7 +9632,7 @@ Must be one of:
     \"label\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
     \"required\": true,
-    \"active\": false,
+    \"active\": true,
     \"options\": [
         {
             \"id\": \"21c4122b-d554-3723-966c-6d723ea5293f\",
@@ -9630,10 +9644,10 @@ Must be one of:
     \"validations\": [
         {
             \"id\": \"cd1eb1ea-4697-3b9a-9dd0-988044a83af6\",
-            \"operator\": \"&lt;=\",
+            \"operator\": \"regex\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T06:38:14\",
+            \"value_date\": \"2025-11-21T07:55:33\",
             \"message\": \"m\"
         }
     ]
@@ -9656,7 +9670,7 @@ let body = {
     "label": "b",
     "description": "Eius et animi quos velit et.",
     "required": true,
-    "active": false,
+    "active": true,
     "options": [
         {
             "id": "21c4122b-d554-3723-966c-6d723ea5293f",
@@ -9668,10 +9682,10 @@ let body = {
     "validations": [
         {
             "id": "cd1eb1ea-4697-3b9a-9dd0-988044a83af6",
-            "operator": "&lt;=",
+            "operator": "regex",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T06:38:14",
+            "value_date": "2025-11-21T07:55:33",
             "message": "m"
         }
     ]
@@ -9862,7 +9876,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -9953,10 +9967,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="PATCHapi-v1-custom-fields--id-"
-               value="<="
+               value="regex"
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>&lt;=</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>regex</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -9991,10 +10005,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="PATCHapi-v1-custom-fields--id-"
-               value="2025-11-21T06:38:14"
+               value="2025-11-21T07:55:33"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:38:14</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -10341,6 +10355,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -10482,6 +10497,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11401,6 +11417,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11548,6 +11565,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11691,6 +11709,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11846,6 +11865,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12479,8 +12499,8 @@ El flujo es:</p>
             \"custom_field_id\": \"5707ca55-f609-3528-be8b-1baeaee1567e\",
             \"string_value\": \"architecto\",
             \"number_value\": 4326.41688,
-            \"date_value\": \"2025-11-21T06:38:14\",
-            \"boolean_value\": false
+            \"date_value\": \"2025-11-21T07:55:33\",
+            \"boolean_value\": true
         }
     ]
 }"
@@ -12508,8 +12528,8 @@ let body = {
             "custom_field_id": "5707ca55-f609-3528-be8b-1baeaee1567e",
             "string_value": "architecto",
             "number_value": 4326.41688,
-            "date_value": "2025-11-21T06:38:14",
-            "boolean_value": false
+            "date_value": "2025-11-21T07:55:33",
+            "boolean_value": true
         }
     ]
 };
@@ -12709,10 +12729,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="field_values.0.date_value"                data-endpoint="POSTapi-v1-campaigns-register"
-               value="2025-11-21T06:38:14"
+               value="2025-11-21T07:55:33"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:38:14</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>boolean_value</code></b>&nbsp;&nbsp;
@@ -12734,7 +12754,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
                     </div>
                                     </details>
         </div>
@@ -12789,6 +12809,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12896,7 +12917,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -12904,7 +12925,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers"
 );
 
 const headers = {
@@ -12931,6 +12952,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13029,10 +13051,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--customers"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     </form>
 
@@ -13054,7 +13076,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers/architecto/field-values" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers/architecto/field-values" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -13064,7 +13086,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"custom_field_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
             \"string_value\": \"architecto\",
             \"number_value\": 4326.41688,
-            \"date_value\": \"2025-11-21T06:38:14\",
+            \"date_value\": \"2025-11-21T07:55:33\",
             \"boolean_value\": true
         }
     ]
@@ -13074,7 +13096,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers/architecto/field-values"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers/architecto/field-values"
 );
 
 const headers = {
@@ -13089,7 +13111,7 @@ let body = {
             "custom_field_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
             "string_value": "architecto",
             "number_value": 4326.41688,
-            "date_value": "2025-11-21T06:38:14",
+            "date_value": "2025-11-21T07:55:33",
             "boolean_value": true
         }
     ]
@@ -13196,10 +13218,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-campaigns--id--customers--customerId--field-values"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>customerId</code></b>&nbsp;&nbsp;
@@ -13267,10 +13289,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="values.0.date_value"                data-endpoint="POSTapi-v1-campaigns--id--customers--customerId--field-values"
-               value="2025-11-21T06:38:14"
+               value="2025-11-21T07:55:33"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T06:38:14</code></p>
+<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>boolean_value</code></b>&nbsp;&nbsp;
@@ -13312,7 +13334,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers/architecto/field-values" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers/architecto/field-values" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -13320,7 +13342,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/customers/architecto/field-values"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers/architecto/field-values"
 );
 
 const headers = {
@@ -13347,6 +13369,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13445,10 +13468,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--customers--customerId--field-values"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>customerId</code></b>&nbsp;&nbsp;
@@ -13494,7 +13517,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"customer_code\": \"bngzmi\",
     \"campaign_code\": \"yvdl\",
-    \"type\": \"stamp\"
+    \"type\": \"streak\"
 }"
 </code></pre></div>
 
@@ -13513,7 +13536,7 @@ const headers = {
 let body = {
     "customer_code": "bngzmi",
     "campaign_code": "yvdl",
-    "type": "stamp"
+    "type": "streak"
 };
 
 fetch(url, {
@@ -13641,10 +13664,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-staff-apply-stamp"
-               value="stamp"
+               value="streak"
                data-component="body">
     <br>
-<p>Example: <code>stamp</code></p>
+<p>Example: <code>streak</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>stamp</code></li> <li><code>streak</code></li></ul>
         </div>
@@ -13664,7 +13687,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/stamps" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/stamps" \
     --header "Authorization: Bearer {staff_token} Requiere token de staff" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -13672,7 +13695,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/stamps"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/stamps"
 );
 
 const headers = {
@@ -13699,6 +13722,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13797,10 +13821,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--stamps"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     </form>
 
@@ -13818,7 +13842,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/stamps" \
+    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e143-7132-8328-75478fde8b67/stamps" \
     --header "Authorization: Bearer {staff_token} Requiere token de staff" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -13826,7 +13850,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/stamps"
+    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e143-7132-8328-75478fde8b67/stamps"
 );
 
 const headers = {
@@ -13853,6 +13877,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13963,10 +13988,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="campaignId"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId--stamps"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     </form>
 
@@ -14020,6 +14045,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -14520,6 +14546,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -14814,6 +14841,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -14955,6 +14983,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15078,7 +15107,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/unlocks" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/unlocks" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -15086,7 +15115,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/unlocks"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/unlocks"
 );
 
 const headers = {
@@ -15113,6 +15142,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15211,10 +15241,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--unlocks"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     </form>
 
@@ -15267,6 +15297,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15386,7 +15417,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/unlocks" \
+    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e143-7132-8328-75478fde8b67/unlocks" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -15394,7 +15425,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa4c5-091b-72e3-a8a1-70322147afd7/unlocks"
+    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e143-7132-8328-75478fde8b67/unlocks"
 );
 
 const headers = {
@@ -15421,6 +15452,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15531,10 +15563,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="campaignId"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
-               value="019aa4c5-091b-72e3-a8a1-70322147afd7"
+               value="019aa527-e143-7132-8328-75478fde8b67"
                data-component="url">
     <br>
-<p>Example: <code>019aa4c5-091b-72e3-a8a1-70322147afd7</code></p>
+<p>Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
             </div>
                     </form>
 
@@ -15587,6 +15619,7 @@ fetch(url, {
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
 access-control-allow-origin: *
+access-control-expose-headers: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{

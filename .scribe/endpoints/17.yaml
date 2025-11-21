@@ -42,6 +42,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
         description: null
     responseFields: []
     auth:
@@ -103,6 +104,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
         description: null
     responseFields: []
     auth:
@@ -163,6 +165,7 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
         description: null
     responseFields: []
     auth:
