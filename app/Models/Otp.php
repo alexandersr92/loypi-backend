@@ -18,6 +18,7 @@ class Otp extends Model
         'expires_at',
         'verified_at',
         'ip_address',
+        'meta',
     ];
 
     protected function casts(): array
@@ -25,6 +26,7 @@ class Otp extends Model
         return [
             'expires_at' => 'datetime',
             'verified_at' => 'datetime',
+            'meta' => 'array',
         ];
     }
 

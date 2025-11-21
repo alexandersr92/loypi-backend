@@ -33,7 +33,6 @@ Route::prefix('v1')->group(function () {
     Route::group(['middleware' => []], function () {
         // Autenticación
         Route::post('/auth/login', [AuthController::class, 'login'])->name('api.v1.auth.login');
-        Route::post('/auth/login-with-otp', [AuthController::class, 'loginWithOtp'])->name('api.v1.auth.login-with-otp');
         Route::post('/auth/forgot-password', [AuthController::class, 'forgotPassword'])->name('api.v1.auth.forgot-password');
         Route::post('/auth/reset-password', [AuthController::class, 'resetPassword'])->name('api.v1.auth.reset-password');
 

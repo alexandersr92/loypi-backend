@@ -74,18 +74,19 @@ class CustomerAuthController extends Controller
 
         $business = Business::where('slug', $businessSlug)->firstOrFail();
 
-        // Verificar OTP
+        // Verificar OTP (debe estar verificado previamente usando /api/v1/otp/verify)
+        // Con Twilio Verify, el código se verifica en el endpoint /otp/verify
+        // Aquí solo validamos que exista un OTP verificado recientemente
         $otp = Otp::where('phone', $phone)
-            ->where('code', $otpCode)
-            ->where('status', 'pending')
-            ->where('expires_at', '>', now())
+            ->where('status', 'verified')
+            ->where('verified_at', '>', now()->subMinutes(10)) // Verificado en los últimos 10 minutos
             ->latest()
             ->first();
 
         if (!$otp) {
             return response()->json([
                 'success' => false,
-                'message' => 'Código OTP inválido o expirado.',
+                'message' => 'Código OTP no verificado. Por favor verifica el código primero usando /api/v1/otp/verify.',
             ], 400);
         }
 
@@ -110,8 +111,8 @@ class CustomerAuthController extends Controller
                 'name' => $name,
             ]);
 
-            // Marcar OTP como verificado
-            $otp->markAsVerified();
+            // El OTP ya está verificado por Twilio Verify (se verificó en /api/v1/otp/verify)
+            // No necesitamos marcarlo nuevamente
 
             // Generar token
             $token = $customer->createToken('customer-token')->plainTextToken;
@@ -170,18 +171,19 @@ class CustomerAuthController extends Controller
 
         $business = Business::where('slug', $businessSlug)->firstOrFail();
 
-        // Verificar OTP
+        // Verificar OTP (debe estar verificado previamente usando /api/v1/otp/verify)
+        // Con Twilio Verify, el código se verifica en el endpoint /otp/verify
+        // Aquí solo validamos que exista un OTP verificado recientemente
         $otp = Otp::where('phone', $phone)
-            ->where('code', $otpCode)
-            ->where('status', 'pending')
-            ->where('expires_at', '>', now())
+            ->where('status', 'verified')
+            ->where('verified_at', '>', now()->subMinutes(10)) // Verificado en los últimos 10 minutos
             ->latest()
             ->first();
 
         if (!$otp) {
             return response()->json([
                 'success' => false,
-                'message' => 'Código OTP inválido o expirado.',
+                'message' => 'Código OTP no verificado. Por favor verifica el código primero usando /api/v1/otp/verify.',
             ], 400);
         }
 
@@ -199,8 +201,8 @@ class CustomerAuthController extends Controller
 
         DB::beginTransaction();
         try {
-            // Marcar OTP como verificado
-            $otp->markAsVerified();
+            // El OTP ya está verificado por Twilio Verify (se verificó en /api/v1/otp/verify)
+            // No necesitamos marcarlo nuevamente
 
             // Generar nuevo token
             $token = $customer->createToken('customer-token')->plainTextToken;
