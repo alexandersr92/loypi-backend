@@ -23,9 +23,53 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Registrar nuevo usuario (owner)
+     * 
+     * Crea un nuevo usuario con rol "owner". El email se marca como verificado automáticamente.
+     * 
+     * **Requisitos:**
+     * - `name`: Nombre del usuario (requerido)
+     * - `email`: Email único del usuario (requerido)
+     * - `password`: Contraseña (mínimo 8 caracteres, requerido)
+     * - `password_confirmation`: Confirmación de la contraseña (debe coincidir con password, requerido)
+     * - `phone`: Teléfono opcional (formato: +521234567890)
+     * - `avatar`: URL del avatar opcional
+     * - `status`: Estado opcional (active, inactive, suspended)
+     * - `timezone`: Zona horaria opcional
+     * - `locale`: Locale opcional (2 caracteres, ej: es, en)
      * 
      * @unauthenticated
+     * @bodyParam name string required Nombre del usuario. Example: John Doe
+     * @bodyParam email string required Email único del usuario. Example: john@example.com
+     * @bodyParam password string required Contraseña (mínimo 8 caracteres). Example: password123
+     * @bodyParam password_confirmation string required Confirmación de la contraseña (debe coincidir con password). Example: password123
+     * @bodyParam phone string optional Teléfono con código de país. Example: +521234567890
+     * @bodyParam avatar string optional URL del avatar. Example: https://example.com/avatar.jpg
+     * @bodyParam status string optional Estado del usuario (active, inactive, suspended). Example: active
+     * @bodyParam timezone string optional Zona horaria. Example: America/Mexico_City
+     * @bodyParam locale string optional Código de idioma (2 caracteres). Example: es
+     * 
+     * @response 201 {
+     *   "success": true,
+     *   "message": "User created successfully.",
+     *   "data": {
+     *     "id": "019aa4c4-bd37-7229-8869-16dd62f2b724",
+     *     "name": "John Doe",
+     *     "email": "john@example.com",
+     *     "role": "owner",
+     *     "status": "active",
+     *     "email_verified_at": "2024-01-01T00:00:00.000000Z",
+     *     "created_at": "2024-01-01T00:00:00.000000Z",
+     *     "updated_at": "2024-01-01T00:00:00.000000Z"
+     *   }
+     * }
+     * @response 422 {
+     *   "message": "The given data was invalid.",
+     *   "errors": {
+     *     "email": ["This email is already registered."],
+     *     "password": ["The password confirmation does not match."]
+     *   }
+     * }
      */
     public function store(StoreUserRequest $request): JsonResponse
     {

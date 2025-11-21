@@ -16,8 +16,20 @@ endpoints:
         CRUD de usuarios del sistema
       subgroup: ''
       subgroupDescription: ''
-      title: 'Store a newly created resource in storage.'
-      description: ''
+      title: 'Registrar nuevo usuario (owner)'
+      description: |-
+        Crea un nuevo usuario con rol "owner". El email se marca como verificado automáticamente.
+
+        **Requisitos:**
+        - `name`: Nombre del usuario (requerido)
+        - `email`: Email único del usuario (requerido)
+        - `password`: Contraseña (mínimo 8 caracteres, requerido)
+        - `password_confirmation`: Confirmación de la contraseña (debe coincidir con password, requerido)
+        - `phone`: Teléfono opcional (formato: +521234567890)
+        - `avatar`: URL del avatar opcional
+        - `status`: Estado opcional (active, inactive, suspended)
+        - `timezone`: Zona horaria opcional
+        - `locale`: Locale opcional (2 caracteres, ej: es, en)
       authenticated: false
       deprecated: false
     headers:
@@ -32,105 +44,147 @@ endpoints:
       name:
         custom: []
         name: name
-        description: 'Must not be greater than 255 characters.'
+        description: 'Nombre del usuario.'
         required: true
-        example: b
+        example: 'John Doe'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       email:
         custom: []
         name: email
-        description: 'Must be a valid email address. Must not be greater than 255 characters.'
+        description: 'Email único del usuario.'
         required: true
-        example: zbailey@example.net
+        example: john@example.com
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       password:
         custom: []
         name: password
-        description: ''
+        description: 'Contraseña (mínimo 8 caracteres).'
         required: true
-        example: '|]|{+-'
+        example: password123
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       phone:
         custom: []
         name: phone
-        description: 'Must match the regex /^\+?[1-9]\d{1,14}$/.'
+        description: 'optional Teléfono con código de país.'
         required: false
-        example: '9425593'
+        example: '+521234567890'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         deprecated: false
       avatar:
         custom: []
         name: avatar
-        description: 'Must be a valid URL. Must not be greater than 500 characters.'
+        description: 'optional URL del avatar.'
         required: false
-        example: 'n'
+        example: 'https://example.com/avatar.jpg'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         deprecated: false
       status:
         custom: []
         name: status
-        description: ''
+        description: 'optional Estado del usuario (active, inactive, suspended).'
         required: false
-        example: inactive
+        example: active
         type: string
-        enumValues:
-          - active
-          - inactive
-          - suspended
-        exampleWasSpecified: false
+        enumValues: []
+        exampleWasSpecified: true
         nullable: true
         deprecated: false
       timezone:
         custom: []
         name: timezone
-        description: 'Must not be greater than 50 characters.'
+        description: 'optional Zona horaria.'
         required: false
-        example: Africa/Dakar
+        example: America/Mexico_City
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         deprecated: false
       locale:
         custom: []
         name: locale
-        description: 'Must be 2 characters.'
+        description: 'optional Código de idioma (2 caracteres).'
         required: false
-        example: kh
+        example: es
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: true
         deprecated: false
+      password_confirmation:
+        custom: []
+        name: password_confirmation
+        description: 'Confirmación de la contraseña (debe coincidir con password).'
+        required: true
+        example: password123
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
     cleanBodyParameters:
-      name: b
-      email: zbailey@example.net
-      password: '|]|{+-'
-      phone: '9425593'
-      avatar: 'n'
-      status: inactive
-      timezone: Africa/Dakar
-      locale: kh
+      name: 'John Doe'
+      email: john@example.com
+      password: password123
+      phone: '+521234567890'
+      avatar: 'https://example.com/avatar.jpg'
+      status: active
+      timezone: America/Mexico_City
+      locale: es
+      password_confirmation: password123
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+            "success": true,
+            "message": "User created successfully.",
+            "data": {
+              "id": "019aa4c4-bd37-7229-8869-16dd62f2b724",
+              "name": "John Doe",
+              "email": "john@example.com",
+              "role": "owner",
+              "status": "active",
+              "email_verified_at": "2024-01-01T00:00:00.000000Z",
+              "created_at": "2024-01-01T00:00:00.000000Z",
+              "updated_at": "2024-01-01T00:00:00.000000Z"
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+              "email": ["This email is already registered."],
+              "password": ["The password confirmation does not match."]
+            }
+          }
+        headers: []
+        description: ''
     responseFields: []
     auth: []
     controller: null
@@ -305,7 +359,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: suspended
+        example: active
         type: string
         enumValues:
           - active
@@ -343,7 +397,7 @@ endpoints:
       phone: '9425593'
       role: admin
       avatar: 'n'
-      status: suspended
+      status: active
       timezone: Africa/Dakar
       locale: kh
     fileParameters: []
@@ -443,7 +497,7 @@ endpoints:
         name: role
         description: ''
         required: false
-        example: admin
+        example: owner
         type: string
         enumValues:
           - admin
@@ -467,7 +521,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: inactive
+        example: active
         type: string
         enumValues:
           - active
@@ -503,9 +557,9 @@ endpoints:
       email: zbailey@example.net
       password: '|]|{+-'
       phone: '9425593'
-      role: admin
+      role: owner
       avatar: 'n'
-      status: inactive
+      status: active
       timezone: Africa/Dakar
       locale: kh
     fileParameters: []

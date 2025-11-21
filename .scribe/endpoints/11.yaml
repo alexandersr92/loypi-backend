@@ -113,7 +113,7 @@ endpoints:
         name: active
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -123,7 +123,7 @@ endpoints:
       code: b
       name: 'n'
       pin: gzmi
-      active: true
+      active: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -279,7 +279,7 @@ endpoints:
         name: active
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -290,7 +290,7 @@ endpoints:
       code: g
       name: z
       pin: miyv
-      active: true
+      active: false
     fileParameters: []
     responses: []
     responseFields: []
