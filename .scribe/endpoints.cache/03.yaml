@@ -91,7 +91,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: suspended
+        example: inactive
         type: string
         enumValues:
           - active
@@ -128,7 +128,7 @@ endpoints:
       password: '|]|{+-'
       phone: '9425593'
       avatar: 'n'
-      status: suspended
+      status: inactive
       timezone: Africa/Dakar
       locale: kh
     fileParameters: []
@@ -445,7 +445,7 @@ endpoints:
         name: role
         description: ''
         required: false
-        example: admin
+        example: owner
         type: string
         enumValues:
           - admin
@@ -469,7 +469,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: inactive
+        example: suspended
         type: string
         enumValues:
           - active
@@ -505,9 +505,9 @@ endpoints:
       email: zbailey@example.net
       password: '|]|{+-'
       phone: '9425593'
-      role: admin
+      role: owner
       avatar: 'n'
-      status: inactive
+      status: suspended
       timezone: Africa/Dakar
       locale: kh
     fileParameters: []

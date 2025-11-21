@@ -105,7 +105,7 @@ endpoints:
         name: 'values[].date_value'
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-21T05:15:38'
+        example: '2025-11-21T06:09:22'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -116,7 +116,7 @@ endpoints:
         name: 'values[].boolean_value'
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -128,8 +128,8 @@ endpoints:
           custom_field_id: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
           string_value: architecto
           number_value: 4326.41688
-          date_value: '2025-11-21T05:15:38'
-          boolean_value: false
+          date_value: '2025-11-21T06:09:22'
+          boolean_value: true
     fileParameters: []
     responses: []
     responseFields: []

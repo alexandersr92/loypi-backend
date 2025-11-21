@@ -115,7 +115,7 @@ endpoints:
         name: active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -125,7 +125,7 @@ endpoints:
       code: b
       name: 'n'
       pin: gzmi
-      active: false
+      active: true
     fileParameters: []
     responses: []
     responseFields: []

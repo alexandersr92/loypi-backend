@@ -139,7 +139,7 @@ endpoints:
         name: 'field_values[].date_value'
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-21T05:15:38'
+        example: '2025-11-21T06:09:21'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -167,7 +167,7 @@ endpoints:
           custom_field_id: 5707ca55-f609-3528-be8b-1baeaee1567e
           string_value: architecto
           number_value: 4326.41688
-          date_value: '2025-11-21T05:15:38'
+          date_value: '2025-11-21T06:09:21'
           boolean_value: false
     fileParameters: []
     responses: []

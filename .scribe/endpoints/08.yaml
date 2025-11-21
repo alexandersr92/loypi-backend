@@ -61,7 +61,7 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: streak
+        example: stamp
         type: string
         enumValues:
           - stamp
@@ -72,7 +72,7 @@ endpoints:
     cleanBodyParameters:
       customer_code: bngzmi
       campaign_code: yvdl
-      type: streak
+      type: stamp
     fileParameters: []
     responses: []
     responseFields: []

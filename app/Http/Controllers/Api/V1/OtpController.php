@@ -13,14 +13,52 @@ use Illuminate\Support\Facades\Log;
 /**
  * @group 📱 OTP
  * 
- * Endpoints para envío y verificación de códigos OTP
+ * Endpoints para envío y verificación de códigos OTP usando Twilio Verify.
+ * 
+ * El sistema utiliza Twilio Verify para enviar y verificar códigos OTP vía SMS.
+ * Estos endpoints están disponibles únicamente para Customers (no para Owners/Users).
+ * 
+ * **Flujo de autenticación:**
+ * 1. Envía un OTP con `/api/v1/otp/send`
+ * 2. Recibe el código en tu teléfono vía SMS
+ * 3. Verifica el código con `/api/v1/otp/verify`
+ * 4. Una vez verificado, puedes registrar o hacer login del cliente
  */
 class OtpController extends Controller
 {
     /**
      * Envía un código OTP usando Twilio Verify (solo para customers)
      * 
+     * Este endpoint envía un código OTP vía SMS usando Twilio Verify al número de teléfono proporcionado.
+     * El código se enviará automáticamente al teléfono del cliente.
+     * 
+     * **Requisitos:**
+     * - El número de teléfono debe estar registrado como Customer
+     * - Se requiere tener las credenciales de Twilio configuradas
+     * 
+     * **Flujo:**
+     * 1. Llama a este endpoint para enviar el OTP
+     * 2. Recibirás el código OTP en tu teléfono vía SMS
+     * 3. Usa el código recibido en el endpoint `/api/v1/otp/verify`
+     * 
      * @unauthenticated
+     * @bodyParam phone string required El número de teléfono del cliente (formato internacional, ej: +521234567890). Example: +521234567890
+     * 
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Código OTP enviado exitosamente.",
+     *   "data": {
+     *     "expires_at": "2025-01-15T10:10:00Z"
+     *   }
+     * }
+     * @response 404 {
+     *   "success": false,
+     *   "message": "El número de teléfono no está registrado como cliente."
+     * }
+     * @response 500 {
+     *   "success": false,
+     *   "message": "Error al enviar el código OTP. Por favor intenta nuevamente."
+     * }
      */
     public function send(SendOtpRequest $request): JsonResponse
     {
@@ -105,7 +143,37 @@ class OtpController extends Controller
     /**
      * Verifica un código OTP usando Twilio Verify (solo para customers)
      * 
+     * Este endpoint verifica el código OTP recibido vía SMS.
+     * El código debe ser el que recibiste después de llamar al endpoint `/api/v1/otp/send`.
+     * 
+     * **Importante:**
+     * - El código OTP expira en 10 minutos
+     * - Solo puedes verificar un código una vez
+     * - Después de verificar el OTP, puedes proceder a registrar o hacer login del cliente
+     * 
      * @unauthenticated
+     * @bodyParam phone string required El número de teléfono del cliente (formato internacional, ej: +521234567890). Example: +521234567890
+     * @bodyParam code string required El código OTP recibido vía SMS. Example: 123456
+     * 
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Código OTP verificado exitosamente.",
+     *   "data": {
+     *     "verified_at": "2025-01-15T10:05:00Z"
+     *   }
+     * }
+     * @response 400 {
+     *   "success": false,
+     *   "message": "Código OTP inválido o expirado."
+     * }
+     * @response 403 {
+     *   "success": false,
+     *   "message": "Este endpoint solo está disponible para clientes."
+     * }
+     * @response 500 {
+     *   "success": false,
+     *   "message": "Error al verificar el código OTP. Por favor intenta nuevamente."
+     * }
      */
     public function verify(VerifyOtpRequest $request): JsonResponse
     {
