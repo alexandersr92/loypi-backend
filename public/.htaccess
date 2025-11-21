@@ -23,3 +23,22 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# CORS Headers para producción
+<IfModule mod_headers.c>
+    # Permitir peticiones desde cualquier origen
+    Header always set Access-Control-Allow-Origin "*"
+    
+    # Permitir métodos HTTP
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    
+    # Permitir headers
+    Header always set Access-Control-Allow-Headers "Origin, Content-Type, Accept, Authorization, X-Requested-With, X-CSRF-TOKEN, X-XSRF-TOKEN"
+    
+    # Exponer headers
+    Header always set Access-Control-Expose-Headers "*"
+    
+    # Manejar preflight requests
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^(.*)$ $1 [R=200,L]
+</IfModule>

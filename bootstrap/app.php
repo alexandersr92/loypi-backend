@@ -15,12 +15,18 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Habilitar CORS globalmente para todas las rutas
+        $middleware->validateCsrfTokens(except: [
+            'api/*',
+            'docs*',
+        ]);
+        
         $middleware->web(append: [
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
         
-        // Habilitar CORS para las rutas de API
+        // Habilitar CORS para las rutas de API (prepend lo coloca primero)
         $middleware->api(prepend: [
             \Illuminate\Http\Middleware\HandleCors::class,
         ]);
