@@ -1,0 +1,180 @@
+name: '📁 File Uploads'
+description: |-
+
+  Endpoint para subir y eliminar archivos. Requiere autenticación.
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/uploads
+    metadata:
+      custom: []
+      groupName: '📁 File Uploads'
+      groupDescription: |-
+
+        Endpoint para subir y eliminar archivos. Requiere autenticación.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Subir un archivo'
+      description: 'Sube un archivo y retorna la URL pública que debe guardarse en el campo correspondiente del modelo.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token}'
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      file:
+        custom: []
+        name: file
+        description: 'El archivo a subir'
+        required: true
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      model:
+        custom: []
+        name: model
+        description: 'El modelo al que pertenece el archivo (campaign, business, user, reward)'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      field:
+        custom: []
+        name: field
+        description: 'El campo del modelo (banner, logo, avatar, cover_image, logo_url, image_url)'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      model: architecto
+      field: architecto
+    fileParameters:
+      file: null
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "url": "https://app.com/storage/uploads/campaigns/banner/1703123456-a1b2c3.png",
+              "path": "uploads/campaigns/banner/1703123456-a1b2c3.png",
+              "filename": "banner-1703123456-a1b2c3.png",
+              "size": 1024000,
+              "mime_type": "image/png",
+              "dimensions": {
+                "width": 1200,
+                "height": 600
+              }
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Validation failed",
+            "errors": {
+              "file": ["El archivo es requerido."]
+            }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: api/v1/uploads
+    metadata:
+      custom: []
+      groupName: '📁 File Uploads'
+      groupDescription: |-
+
+        Endpoint para subir y eliminar archivos. Requiere autenticación.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Eliminar un archivo'
+      description: 'Elimina un archivo del storage usando su URL o path.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      url:
+        custom: []
+        name: url
+        description: 'La URL o path del archivo a eliminar'
+        required: true
+        example: 'http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      url: 'http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Archivo eliminado correctamente"
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Archivo no encontrado"
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

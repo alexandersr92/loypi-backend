@@ -21,6 +21,7 @@ endpoints:
       title: 'Listar customers del negocio'
       description: |-
         Obtiene todos los customers registrados en el negocio del usuario autenticado.
+        Permite filtrar por campaña y buscar por nombre.
         Solo disponible para owners/admins.
       authenticated: true
       deprecated: false
@@ -30,8 +31,32 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
+    queryParameters:
+      campaign_id:
+        custom: []
+        name: campaign_id
+        description: 'optional Filtrar por ID de campaña.'
+        required: false
+        example: uuid-de-campaign
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      search:
+        custom: []
+        name: search
+        description: 'optional Buscar por nombre del cliente.'
+        required: false
+        example: Juan
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      campaign_id: uuid-de-campaign
+      search: Juan
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -46,6 +71,83 @@ endpoints:
           access-control-allow-origin: '*'
           access-control-expose-headers: '*'
         description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/customers/generate-excel
+    metadata:
+      custom: []
+      groupName: '👥 Customers'
+      groupDescription: |-
+
+        CRUD de customers (clientes). Requiere token de usuario (owner/admin)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Generar Excel de clientes'
+      description: |-
+        Genera un archivo Excel con todos los clientes del negocio.
+        Aplica los mismos filtros que el endpoint index (campaign_id, search).
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      campaign_id:
+        custom: []
+        name: campaign_id
+        description: 'optional Filtrar por ID de campaña.'
+        required: false
+        example: uuid-de-campaign
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      search:
+        custom: []
+        name: search
+        description: 'optional Buscar por nombre del cliente.'
+        required: false
+        example: Juan
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      campaign_id: uuid-de-campaign
+      search: Juan
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "url": "https://app.com/storage/exports/clientes_2024-01-15_143022.xlsx",
+              "path": "exports/clientes_2024-01-15_143022.xlsx",
+              "filename": "clientes_2024-01-15_143022.xlsx"
+            }
+          }
+        headers: []
+        description: ''
     responseFields: []
     auth:
       - headers
@@ -132,6 +234,7 @@ endpoints:
       title: 'Obtener customer por ID'
       description: |-
         Obtiene la información detallada de un customer específico por su UUID.
+        Incluye las campañas en las que está inscrito, sus stamps (punch/racha) y los valores de campos personalizados.
         Solo disponible para owners/admins del mismo negocio.
       authenticated: true
       deprecated: false

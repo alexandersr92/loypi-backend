@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasFileUploads;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Reward extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, HasFileUploads;
 
     protected $fillable = [
         'business_id',
@@ -70,5 +71,13 @@ class Reward extends Model
     public function rewardUnlocks(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(RewardUnlock::class);
+    }
+
+    /**
+     * Obtiene los campos que contienen archivos para este modelo
+     */
+    protected function getFileFields(): array
+    {
+        return ['image_url'];
     }
 }

@@ -13,6 +13,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "laravel/wayfinder": "^0.1.9",
+        "maatwebsite/excel": "^3.1",
         "twilio/sdk": "^8.8"
     },
     "require-dev": {
@@ -30,7 +31,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/mail.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

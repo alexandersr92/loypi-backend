@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasFileUploads;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Business extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, HasFileUploads;
 
     protected $fillable = [
         'user_id',
@@ -96,6 +97,14 @@ class Business extends Model
                 }
             }
         });
+    }
+
+    /**
+     * Obtiene los campos que contienen archivos para este modelo
+     */
+    protected function getFileFields(): array
+    {
+        return ['logo'];
     }
 
 }

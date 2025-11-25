@@ -7,6 +7,7 @@ use App\Http\Resources\Api\V1\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -134,6 +135,51 @@ class AuthController extends Controller
     }
 
     /**
+     * Verificar token de autenticación
+     * 
+     * Verifica si el token de autenticación del cliente es válido.
+     * Retorna el user_id y business_id si el token es válido.
+     * 
+     * Esta ruta se usa para verificar si el usuario está logueado al navegar.
+     * 
+     * @authenticated
+     * @header Authorization Bearer {user_token} Requiere token de usuario (owner/admin)
+     * 
+     * @response 200 {
+     *   "success": true,
+     *   "data": {
+     *     "user_id": "019aa527-9931-7349-a45d-18e6bf48aa1a",
+     *     "business_id": "019aa527-a3dd-7342-b115-95e9fcbba615"
+     *   }
+     * }
+     * @response 401 {
+     *   "success": false,
+     *   "message": "Unauthenticated."
+     * }
+     */
+    public function verifyToken(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthenticated.',
+            ], 401);
+        }
+
+        $user->load('business');
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'user_id' => $user->id,
+                'business_id' => $user->business?->id,
+            ],
+        ], 200);
+    }
+
+    /**
      * Resetear contraseña
      * 
      * Resetea la contraseña usando el token recibido por email.
@@ -187,5 +233,100 @@ class AuthController extends Controller
             'success' => false,
             'message' => 'Invalid or expired reset token.',
         ], 400);
+    }
+
+    /**
+     * Verificar contraseña del usuario autenticado
+     * 
+     * Verifica si la contraseña proporcionada es correcta para el usuario autenticado.
+     * 
+     * @authenticated
+     * @header Authorization Bearer {user_token} Requiere token de usuario (owner/admin)
+     * @bodyParam password string required La contraseña a verificar. Example: mypassword123
+     * 
+     * @response 200 {
+     *   "success": true,
+     *   "valid": true,
+     *   "message": "Password is correct."
+     * }
+     * @response 200 {
+     *   "success": true,
+     *   "valid": false,
+     *   "message": "Password is incorrect."
+     * }
+     */
+    public function verifyPassword(Request $request): JsonResponse
+    {
+        $request->validate([
+            'password' => ['required', 'string'],
+        ]);
+
+        $user = $request->user();
+        $isValid = Hash::check($request->password, $user->password);
+
+        return response()->json([
+            'success' => true,
+            'valid' => $isValid,
+            'message' => $isValid ? 'Password is correct.' : 'Password is incorrect.',
+        ], 200);
+    }
+
+    /**
+     * Obtener settings del dashboard del usuario autenticado
+     * 
+     * @authenticated
+     * @header Authorization Bearer {user_token} Requiere token de usuario (owner/admin)
+     * 
+     * @response 200 {
+     *   "success": true,
+     *   "data": {
+     *     "dashboard_settings": {}
+     *   }
+     * }
+     */
+    public function getDashboardSettings(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'dashboard_settings' => $user->dashboard_settings ?? [],
+            ],
+        ], 200);
+    }
+
+    /**
+     * Guardar/actualizar settings del dashboard del usuario autenticado
+     * 
+     * @authenticated
+     * @header Authorization Bearer {user_token} Requiere token de usuario (owner/admin)
+     * @bodyParam dashboard_settings object required JSON con los settings del dashboard. Example: {}
+     * 
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Dashboard settings saved successfully.",
+     *   "data": {
+     *     "dashboard_settings": {}
+     *   }
+     * }
+     */
+    public function saveDashboardSettings(Request $request): JsonResponse
+    {
+        $request->validate([
+            'dashboard_settings' => ['required', 'array'],
+        ]);
+
+        $user = $request->user();
+        $user->dashboard_settings = $request->dashboard_settings;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Dashboard settings saved successfully.',
+            'data' => [
+                'dashboard_settings' => $user->dashboard_settings,
+            ],
+        ], 200);
     }
 }

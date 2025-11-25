@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasFileUploads;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Campaign extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, HasFileUploads;
 
     /**
      * Boot del modelo - genera code automáticamente si no existe
@@ -150,8 +151,15 @@ class Campaign extends Model
     public function customers(): BelongsToMany
     {
         return $this->belongsToMany(Customer::class, 'customer_campaigns')
-            ->using(CustomerCampaign::class)
             ->withPivot(['stamps', 'redeemed_at'])
             ->withTimestamps();
+    }
+
+    /**
+     * Obtiene los campos que contienen archivos para este modelo
+     */
+    protected function getFileFields(): array
+    {
+        return ['cover_image', 'logo_url'];
     }
 }

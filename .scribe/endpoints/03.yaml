@@ -498,7 +498,7 @@ endpoints:
         name: role
         description: ''
         required: false
-        example: owner
+        example: admin
         type: string
         enumValues:
           - admin
@@ -522,7 +522,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: suspended
+        example: inactive
         type: string
         enumValues:
           - active
@@ -558,9 +558,9 @@ endpoints:
       email: zbailey@example.net
       password: '|]|{+-'
       phone: '9425593'
-      role: owner
+      role: admin
       avatar: 'n'
-      status: suspended
+      status: inactive
       timezone: Africa/Dakar
       locale: kh
     fileParameters: []

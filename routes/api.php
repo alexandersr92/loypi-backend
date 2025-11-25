@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\V1\StaffAuthController;
 use App\Http\Controllers\Api\V1\StaffController;
 use App\Http\Controllers\Api\V1\StampController;
 use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\UploadController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -91,8 +92,14 @@ Route::prefix('v1')->group(function () {
     // Rutas protegidas por token de usuario (owners/admins)
     Route::middleware('auth:sanctum')->group(function () {
         // Autenticación de usuarios
+        Route::get('/auth/verify-token', [AuthController::class, 'verifyToken'])->name('api.v1.auth.verify-token');
+        Route::post('/auth/verify-password', [AuthController::class, 'verifyPassword'])->name('api.v1.auth.verify-password');
         Route::post('/auth/logout', [AuthController::class, 'logout'])->name('api.v1.auth.logout');
         Route::get('/auth/me', [AuthController::class, 'me'])->name('api.v1.auth.me');
+        
+        // Dashboard Settings
+        Route::get('/auth/dashboard-settings', [AuthController::class, 'getDashboardSettings'])->name('api.v1.auth.dashboard-settings.get');
+        Route::put('/auth/dashboard-settings', [AuthController::class, 'saveDashboardSettings'])->name('api.v1.auth.dashboard-settings.save');
 
         // Usuarios
         Route::prefix('users')->group(function () {
@@ -173,6 +180,7 @@ Route::prefix('v1')->group(function () {
         // CRUD de Customers (solo owners - requiere token de usuario)
         Route::prefix('customers')->group(function () {
             Route::get('/', [CustomerController::class, 'index'])->name('api.v1.customers.index');
+            Route::get('/generate-excel', [CustomerController::class, 'generateExcel'])->name('api.v1.customers.generate-excel');
             Route::get('/code/{code}', [CustomerController::class, 'findByCode'])->name('api.v1.customers.find-by-code');
             Route::get('/{id}', [CustomerController::class, 'show'])->name('api.v1.customers.show');
             Route::put('/{id}', [CustomerController::class, 'update'])->name('api.v1.customers.update');
@@ -198,6 +206,12 @@ Route::prefix('v1')->group(function () {
         Route::prefix('audit-logs')->group(function () {
             Route::get('/', [AuditLogController::class, 'index'])->name('api.v1.audit-logs.index');
             Route::get('/{id}', [AuditLogController::class, 'show'])->name('api.v1.audit-logs.show');
+        });
+
+        // File Uploads
+        Route::prefix('uploads')->group(function () {
+            Route::post('/', [UploadController::class, 'upload'])->name('api.v1.uploads.upload');
+            Route::delete('/', [UploadController::class, 'delete'])->name('api.v1.uploads.delete');
         });
     });
 });

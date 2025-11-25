@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\HasFileUploads;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -14,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable, HasUuids, HasApiTokens;
+    use HasFactory, Notifiable, TwoFactorAuthenticatable, HasUuids, HasApiTokens, HasFileUploads;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +34,7 @@ class User extends Authenticatable
         'timezone',
         'locale',
         'email_verified_at',
+        'dashboard_settings',
     ];
 
     /**
@@ -59,6 +61,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
             'last_login_at' => 'datetime',
+            'dashboard_settings' => 'array',
         ];
     }
 
@@ -75,5 +78,13 @@ class User extends Authenticatable
     public function isOwner(): bool
     {
         return $this->role === 'owner';
+    }
+
+    /**
+     * Obtiene los campos que contienen archivos para este modelo
+     */
+    protected function getFileFields(): array
+    {
+        return ['avatar'];
     }
 }

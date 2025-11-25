@@ -81,11 +81,23 @@
                                                                                 <li class="tocify-item level-2" data-unique="autenticacion-POSTapi-v1-auth-reset-password">
                                 <a href="#autenticacion-POSTapi-v1-auth-reset-password">Resetear contraseña</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="autenticacion-GETapi-v1-auth-verify-token">
+                                <a href="#autenticacion-GETapi-v1-auth-verify-token">Verificar token de autenticación</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="autenticacion-POSTapi-v1-auth-verify-password">
+                                <a href="#autenticacion-POSTapi-v1-auth-verify-password">Verificar contraseña del usuario autenticado</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="autenticacion-POSTapi-v1-auth-logout">
                                 <a href="#autenticacion-POSTapi-v1-auth-logout">Logout the authenticated user</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="autenticacion-GETapi-v1-auth-me">
                                 <a href="#autenticacion-GETapi-v1-auth-me">Get the authenticated user</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="autenticacion-GETapi-v1-auth-dashboard-settings">
+                                <a href="#autenticacion-GETapi-v1-auth-dashboard-settings">Obtener settings del dashboard del usuario autenticado</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="autenticacion-PUTapi-v1-auth-dashboard-settings">
+                                <a href="#autenticacion-PUTapi-v1-auth-dashboard-settings">Guardar/actualizar settings del dashboard del usuario autenticado</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -305,6 +317,9 @@
                                                     <li class="tocify-item level-2" data-unique="customers-GETapi-v1-customers">
                                 <a href="#customers-GETapi-v1-customers">Listar customers del negocio</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="customers-GETapi-v1-customers-generate-excel">
+                                <a href="#customers-GETapi-v1-customers-generate-excel">Generar Excel de clientes</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="customers-GETapi-v1-customers-code--code-">
                                 <a href="#customers-GETapi-v1-customers-code--code-">Obtener customer por short_code</a>
                             </li>
@@ -396,6 +411,19 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-file-uploads" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="file-uploads">
+                    <a href="#file-uploads">📁 File Uploads</a>
+                </li>
+                                    <ul id="tocify-subheader-file-uploads" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="file-uploads-POSTapi-v1-uploads">
+                                <a href="#file-uploads-POSTapi-v1-uploads">Subir un archivo</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="file-uploads-DELETEapi-v1-uploads">
+                                <a href="#file-uploads-DELETEapi-v1-uploads">Eliminar un archivo</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-audit-logs" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="audit-logs">
                     <a href="#audit-logs">📊 Audit Logs</a>
@@ -437,7 +465,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: November 21, 2025</li>
+        <li>Last updated: November 23, 2025</li>
     </ul>
 </div>
 
@@ -946,6 +974,325 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
+                    <h2 id="autenticacion-GETapi-v1-auth-verify-token">Verificar token de autenticación</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Verifica si el token de autenticación del cliente es válido.
+Retorna el user_id y business_id si el token es válido.</p>
+<p>Esta ruta se usa para verificar si el usuario está logueado al navegar.</p>
+
+<span id="example-requests-GETapi-v1-auth-verify-token">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/auth/verify-token" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/auth/verify-token"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-auth-verify-token">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;user_id&quot;: &quot;019aa527-9931-7349-a45d-18e6bf48aa1a&quot;,
+        &quot;business_id&quot;: &quot;019aa527-a3dd-7342-b115-95e9fcbba615&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-auth-verify-token" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-auth-verify-token"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-auth-verify-token"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-auth-verify-token" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-auth-verify-token">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-auth-verify-token" data-method="GET"
+      data-path="api/v1/auth/verify-token"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-auth-verify-token', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-auth-verify-token"
+                    onclick="tryItOut('GETapi-v1-auth-verify-token');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-auth-verify-token"
+                    onclick="cancelTryOut('GETapi-v1-auth-verify-token');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-auth-verify-token"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/auth/verify-token</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-auth-verify-token"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-auth-verify-token"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-auth-verify-token"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="autenticacion-POSTapi-v1-auth-verify-password">Verificar contraseña del usuario autenticado</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Verifica si la contraseña proporcionada es correcta para el usuario autenticado.</p>
+
+<span id="example-requests-POSTapi-v1-auth-verify-password">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://loypi-api.test/api/v1/auth/verify-password" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"password\": \"mypassword123\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/auth/verify-password"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "password": "mypassword123"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-auth-verify-password">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;valid&quot;: true,
+    &quot;message&quot;: &quot;Password is correct.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;valid&quot;: false,
+    &quot;message&quot;: &quot;Password is incorrect.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-auth-verify-password" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-auth-verify-password"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-auth-verify-password"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-auth-verify-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-auth-verify-password">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-auth-verify-password" data-method="POST"
+      data-path="api/v1/auth/verify-password"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-auth-verify-password', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-auth-verify-password"
+                    onclick="tryItOut('POSTapi-v1-auth-verify-password');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-auth-verify-password"
+                    onclick="cancelTryOut('POSTapi-v1-auth-verify-password');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-auth-verify-password"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/auth/verify-password</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-auth-verify-password"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-auth-verify-password"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-auth-verify-password"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-auth-verify-password"
+               value="mypassword123"
+               data-component="body">
+    <br>
+<p>La contraseña a verificar. Example: <code>mypassword123</code></p>
+        </div>
+        </form>
+
                     <h2 id="autenticacion-POSTapi-v1-auth-logout">Logout the authenticated user</h2>
 
 <p>
@@ -1212,6 +1559,303 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
+
+                    <h2 id="autenticacion-GETapi-v1-auth-dashboard-settings">Obtener settings del dashboard del usuario autenticado</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-auth-dashboard-settings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/auth/dashboard-settings" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/auth/dashboard-settings"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-auth-dashboard-settings">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;dashboard_settings&quot;: {}
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-auth-dashboard-settings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-auth-dashboard-settings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-auth-dashboard-settings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-auth-dashboard-settings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-auth-dashboard-settings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-auth-dashboard-settings" data-method="GET"
+      data-path="api/v1/auth/dashboard-settings"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-auth-dashboard-settings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-auth-dashboard-settings"
+                    onclick="tryItOut('GETapi-v1-auth-dashboard-settings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-auth-dashboard-settings"
+                    onclick="cancelTryOut('GETapi-v1-auth-dashboard-settings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-auth-dashboard-settings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/auth/dashboard-settings</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-auth-dashboard-settings"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-auth-dashboard-settings"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-auth-dashboard-settings"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="autenticacion-PUTapi-v1-auth-dashboard-settings">Guardar/actualizar settings del dashboard del usuario autenticado</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-v1-auth-dashboard-settings">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://loypi-api.test/api/v1/auth/dashboard-settings" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"dashboard_settings\": []
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/auth/dashboard-settings"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "dashboard_settings": []
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-v1-auth-dashboard-settings">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Dashboard settings saved successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;dashboard_settings&quot;: {}
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-v1-auth-dashboard-settings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-v1-auth-dashboard-settings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-auth-dashboard-settings"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-v1-auth-dashboard-settings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-v1-auth-dashboard-settings">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-v1-auth-dashboard-settings" data-method="PUT"
+      data-path="api/v1/auth/dashboard-settings"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-auth-dashboard-settings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-v1-auth-dashboard-settings"
+                    onclick="tryItOut('PUTapi-v1-auth-dashboard-settings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-v1-auth-dashboard-settings"
+                    onclick="cancelTryOut('PUTapi-v1-auth-dashboard-settings');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-v1-auth-dashboard-settings"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/v1/auth/dashboard-settings</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-v1-auth-dashboard-settings"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-auth-dashboard-settings"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-v1-auth-dashboard-settings"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>dashboard_settings</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="dashboard_settings"                data-endpoint="PUTapi-v1-auth-dashboard-settings"
+               value=""
+               data-component="body">
+    <br>
+<p>JSON con los settings del dashboard.</p>
+        </div>
+        </form>
 
                 <h1 id="otp">📱 OTP</h1>
 
@@ -2364,9 +3008,9 @@ Must be one of:
     \"email\": \"zbailey@example.net\",
     \"password\": \"|]|{+-\",
     \"phone\": \"9425593\",
-    \"role\": \"owner\",
+    \"role\": \"admin\",
     \"avatar\": \"n\",
-    \"status\": \"suspended\",
+    \"status\": \"inactive\",
     \"timezone\": \"Africa\\/Dakar\",
     \"locale\": \"kh\"
 }"
@@ -2389,9 +3033,9 @@ let body = {
     "email": "zbailey@example.net",
     "password": "|]|{+-",
     "phone": "9425593",
-    "role": "owner",
+    "role": "admin",
     "avatar": "n",
-    "status": "suspended",
+    "status": "inactive",
     "timezone": "Africa\/Dakar",
     "locale": "kh"
 };
@@ -2558,10 +3202,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="PATCHapi-v1-users--id-"
-               value="owner"
+               value="admin"
                data-component="body">
     <br>
-<p>Example: <code>owner</code></p>
+<p>Example: <code>admin</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>admin</code></li> <li><code>owner</code></li></ul>
         </div>
@@ -2584,10 +3228,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PATCHapi-v1-users--id-"
-               value="suspended"
+               value="inactive"
                data-component="body">
     <br>
-<p>Example: <code>suspended</code></p>
+<p>Example: <code>inactive</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>inactive</code></li> <li><code>suspended</code></li></ul>
         </div>
@@ -4515,7 +5159,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code\": \"g\",
     \"name\": \"z\",
     \"pin\": \"miyv\",
-    \"active\": false
+    \"active\": true
 }"
 </code></pre></div>
 
@@ -4536,7 +5180,7 @@ let body = {
     "code": "g",
     "name": "z",
     "pin": "miyv",
-    "active": false
+    "active": true
 };
 
 fetch(url, {
@@ -4714,7 +5358,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -4741,7 +5385,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code\": \"g\",
     \"name\": \"z\",
     \"pin\": \"miyv\",
-    \"active\": true
+    \"active\": false
 }"
 </code></pre></div>
 
@@ -4762,7 +5406,7 @@ let body = {
     "code": "g",
     "name": "z",
     "pin": "miyv",
-    "active": true
+    "active": false
 };
 
 fetch(url, {
@@ -4940,7 +5584,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -5999,12 +6643,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": false,
+    \"active\": true,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"07:55:33\",
+    \"streak_reset_time\": \"08:54:56\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -6027,7 +6671,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"rewards\": [
         {
             \"name\": \"l\",
-            \"type\": \"punch\",
+            \"type\": \"streak\",
             \"description\": \"Eius et animi quos velit et.\",
             \"image_url\": \"http:\\/\\/www.ernser.org\\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html\",
             \"threshold_int\": 49,
@@ -6042,7 +6686,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"key\": \"p\",
             \"label\": \"w\",
             \"description\": \"Eius et animi quos velit et.\",
-            \"type\": \"number\",
+            \"type\": \"date\",
             \"required\": false,
             \"options\": [
                 {
@@ -6053,10 +6697,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
             ],
             \"validations\": [
                 {
-                    \"operator\": \"&lt;=\",
+                    \"operator\": \"regex\",
                     \"value_string\": \"architecto\",
                     \"value_number\": 4326.41688,
-                    \"value_date\": \"2025-11-21T07:55:33\",
+                    \"value_date\": \"2025-11-23T08:54:56\",
                     \"message\": \"m\"
                 }
             ]
@@ -6083,12 +6727,12 @@ let body = {
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": false,
+    "active": true,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "07:55:33",
+    "streak_reset_time": "08:54:56",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -6111,7 +6755,7 @@ let body = {
     "rewards": [
         {
             "name": "l",
-            "type": "punch",
+            "type": "streak",
             "description": "Eius et animi quos velit et.",
             "image_url": "http:\/\/www.ernser.org\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html",
             "threshold_int": 49,
@@ -6126,7 +6770,7 @@ let body = {
             "key": "p",
             "label": "w",
             "description": "Eius et animi quos velit et.",
-            "type": "number",
+            "type": "date",
             "required": false,
             "options": [
                 {
@@ -6137,10 +6781,10 @@ let body = {
             ],
             "validations": [
                 {
-                    "operator": "&lt;=",
+                    "operator": "regex",
                     "value_string": "architecto",
                     "value_number": 4326.41688,
-                    "value_date": "2025-11-21T07:55:33",
+                    "value_date": "2025-11-23T08:54:56",
                     "message": "m"
                 }
             ]
@@ -6336,7 +6980,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -6393,10 +7037,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="POSTapi-v1-campaigns"
-               value="07:55:33"
+               value="08:54:56"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>07:55:33</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>08:54:56</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -6571,10 +7215,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="rewards.0.type"                data-endpoint="POSTapi-v1-campaigns"
-               value="punch"
+               value="streak"
                data-component="body">
     <br>
-<p>This field is required when <code>rewards</code> is present. Example: <code>punch</code></p>
+<p>This field is required when <code>rewards</code> is present. Example: <code>streak</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
                     </div>
@@ -6753,10 +7397,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.type"                data-endpoint="POSTapi-v1-campaigns"
-               value="number"
+               value="date"
                data-component="body">
     <br>
-<p>This field is required when <code>custom_fields</code> is present. Example: <code>number</code></p>
+<p>This field is required when <code>custom_fields</code> is present. Example: <code>date</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
                     </div>
@@ -6859,10 +7503,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.validations.0.operator"                data-endpoint="POSTapi-v1-campaigns"
-               value="<="
+               value="regex"
                data-component="body">
     <br>
-<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>&lt;=</code></p>
+<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>regex</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -6897,10 +7541,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.validations.0.value_date"                data-endpoint="POSTapi-v1-campaigns"
-               value="2025-11-21T07:55:33"
+               value="2025-11-23T08:54:56"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
+<p>Must be a valid date. Example: <code>2025-11-23T08:54:56</code></p>
                     </div>
                                                                 <div style="margin-left: 28px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -7094,17 +7738,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"type\": \"streak\",
+    \"type\": \"punch\",
     \"name\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": false,
+    \"active\": true,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"07:55:33\",
+    \"streak_reset_time\": \"08:54:56\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -7125,17 +7769,17 @@ const headers = {
 };
 
 let body = {
-    "type": "streak",
+    "type": "punch",
     "name": "b",
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": false,
+    "active": true,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "07:55:33",
+    "streak_reset_time": "08:54:56",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -7256,10 +7900,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="PUTapi-v1-campaigns--id-"
-               value="streak"
+               value="punch"
                data-component="body">
     <br>
-<p>Example: <code>streak</code></p>
+<p>Example: <code>punch</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
         </div>
@@ -7343,7 +7987,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -7400,10 +8044,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="PUTapi-v1-campaigns--id-"
-               value="07:55:33"
+               value="08:54:56"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>07:55:33</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>08:54:56</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -7479,12 +8123,12 @@ Must be one of:
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": false,
+    \"active\": true,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"07:55:33\",
+    \"streak_reset_time\": \"08:54:56\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -7510,12 +8154,12 @@ let body = {
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": false,
+    "active": true,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "07:55:33",
+    "streak_reset_time": "08:54:56",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -7723,7 +8367,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -7780,10 +8424,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="PATCHapi-v1-campaigns--id-"
-               value="07:55:33"
+               value="08:54:56"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>07:55:33</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>08:54:56</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -8656,9 +9300,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"key\": \"b\",
     \"label\": \"n\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"type\": \"boolean\",
+    \"type\": \"select\",
     \"required\": false,
-    \"active\": true,
+    \"active\": false,
     \"options\": [
         {
             \"value\": \"v\",
@@ -8668,10 +9312,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     ],
     \"validations\": [
         {
-            \"operator\": \"&gt;=\",
+            \"operator\": \"&gt;\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T07:55:33\",
+            \"value_date\": \"2025-11-23T08:54:57\",
             \"message\": \"m\"
         }
     ]
@@ -8694,9 +9338,9 @@ let body = {
     "key": "b",
     "label": "n",
     "description": "Eius et animi quos velit et.",
-    "type": "boolean",
+    "type": "select",
     "required": false,
-    "active": true,
+    "active": false,
     "options": [
         {
             "value": "v",
@@ -8706,10 +9350,10 @@ let body = {
     ],
     "validations": [
         {
-            "operator": "&gt;=",
+            "operator": "&gt;",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T07:55:33",
+            "value_date": "2025-11-23T08:54:57",
             "message": "m"
         }
     ]
@@ -8852,10 +9496,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-custom-fields"
-               value="boolean"
+               value="select"
                data-component="body">
     <br>
-<p>Example: <code>boolean</code></p>
+<p>Example: <code>select</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
         </div>
@@ -8913,7 +9557,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -8980,10 +9624,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="POSTapi-v1-custom-fields"
-               value=">="
+               value=">"
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>&gt;=</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>&gt;</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -9018,10 +9662,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="POSTapi-v1-custom-fields"
-               value="2025-11-21T07:55:33"
+               value="2025-11-23T08:54:57"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
+<p>Must be a valid date. Example: <code>2025-11-23T08:54:57</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -9216,7 +9860,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"label\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
     \"required\": false,
-    \"active\": false,
+    \"active\": true,
     \"options\": [
         {
             \"id\": \"21c4122b-d554-3723-966c-6d723ea5293f\",
@@ -9231,7 +9875,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"operator\": \"in\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T07:55:33\",
+            \"value_date\": \"2025-11-23T08:54:57\",
             \"message\": \"m\"
         }
     ]
@@ -9254,7 +9898,7 @@ let body = {
     "label": "b",
     "description": "Eius et animi quos velit et.",
     "required": false,
-    "active": false,
+    "active": true,
     "options": [
         {
             "id": "21c4122b-d554-3723-966c-6d723ea5293f",
@@ -9269,7 +9913,7 @@ let body = {
             "operator": "in",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T07:55:33",
+            "value_date": "2025-11-23T08:54:57",
             "message": "m"
         }
     ]
@@ -9460,7 +10104,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -9589,10 +10233,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="PUTapi-v1-custom-fields--id-"
-               value="2025-11-21T07:55:33"
+               value="2025-11-23T08:54:57"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
+<p>Must be a valid date. Example: <code>2025-11-23T08:54:57</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -9631,8 +10275,8 @@ Must be one of:
     --data "{
     \"label\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"required\": true,
-    \"active\": true,
+    \"required\": false,
+    \"active\": false,
     \"options\": [
         {
             \"id\": \"21c4122b-d554-3723-966c-6d723ea5293f\",
@@ -9644,10 +10288,10 @@ Must be one of:
     \"validations\": [
         {
             \"id\": \"cd1eb1ea-4697-3b9a-9dd0-988044a83af6\",
-            \"operator\": \"regex\",
+            \"operator\": \"not_in\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-21T07:55:33\",
+            \"value_date\": \"2025-11-23T08:54:57\",
             \"message\": \"m\"
         }
     ]
@@ -9669,8 +10313,8 @@ const headers = {
 let body = {
     "label": "b",
     "description": "Eius et animi quos velit et.",
-    "required": true,
-    "active": true,
+    "required": false,
+    "active": false,
     "options": [
         {
             "id": "21c4122b-d554-3723-966c-6d723ea5293f",
@@ -9682,10 +10326,10 @@ let body = {
     "validations": [
         {
             "id": "cd1eb1ea-4697-3b9a-9dd0-988044a83af6",
-            "operator": "regex",
+            "operator": "not_in",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-21T07:55:33",
+            "value_date": "2025-11-23T08:54:57",
             "message": "m"
         }
     ]
@@ -9842,7 +10486,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -9876,7 +10520,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -9967,10 +10611,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="PATCHapi-v1-custom-fields--id-"
-               value="regex"
+               value="not_in"
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>regex</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>not_in</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -10005,10 +10649,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="PATCHapi-v1-custom-fields--id-"
-               value="2025-11-21T07:55:33"
+               value="2025-11-23T08:54:57"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
+<p>Must be a valid date. Example: <code>2025-11-23T08:54:57</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -11522,6 +12166,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <p>Obtiene todos los customers registrados en el negocio del usuario autenticado.
+Permite filtrar por campaña y buscar por nombre.
 Solo disponible para owners/admins.</p>
 
 <span id="example-requests-GETapi-v1-customers">
@@ -11530,7 +12175,7 @@ Solo disponible para owners/admins.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/customers" \
+    --get "http://loypi-api.test/api/v1/customers?campaign_id=uuid-de-campaign&amp;search=Juan" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -11540,6 +12185,13 @@ Solo disponible para owners/admins.</p>
     <pre><code class="language-javascript">const url = new URL(
     "http://loypi-api.test/api/v1/customers"
 );
+
+const params = {
+    "campaign_id": "uuid-de-campaign",
+    "search": "Juan",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
 
 const headers = {
     "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
@@ -11656,7 +12308,204 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>campaign_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="campaign_id"                data-endpoint="GETapi-v1-customers"
+               value="uuid-de-campaign"
+               data-component="query">
+    <br>
+<p>optional Filtrar por ID de campaña. Example: <code>uuid-de-campaign</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="search"                data-endpoint="GETapi-v1-customers"
+               value="Juan"
+               data-component="query">
+    <br>
+<p>optional Buscar por nombre del cliente. Example: <code>Juan</code></p>
+            </div>
+                </form>
+
+                    <h2 id="customers-GETapi-v1-customers-generate-excel">Generar Excel de clientes</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Genera un archivo Excel con todos los clientes del negocio.
+Aplica los mismos filtros que el endpoint index (campaign_id, search).</p>
+
+<span id="example-requests-GETapi-v1-customers-generate-excel">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/customers/generate-excel?campaign_id=uuid-de-campaign&amp;search=Juan" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/customers/generate-excel"
+);
+
+const params = {
+    "campaign_id": "uuid-de-campaign",
+    "search": "Juan",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-customers-generate-excel">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;url&quot;: &quot;https://app.com/storage/exports/clientes_2024-01-15_143022.xlsx&quot;,
+        &quot;path&quot;: &quot;exports/clientes_2024-01-15_143022.xlsx&quot;,
+        &quot;filename&quot;: &quot;clientes_2024-01-15_143022.xlsx&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-customers-generate-excel" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-customers-generate-excel"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-customers-generate-excel"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-customers-generate-excel" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-customers-generate-excel">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-customers-generate-excel" data-method="GET"
+      data-path="api/v1/customers/generate-excel"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-customers-generate-excel', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-customers-generate-excel"
+                    onclick="tryItOut('GETapi-v1-customers-generate-excel');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-customers-generate-excel"
+                    onclick="cancelTryOut('GETapi-v1-customers-generate-excel');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-customers-generate-excel"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/customers/generate-excel</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-customers-generate-excel"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-customers-generate-excel"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-customers-generate-excel"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>campaign_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="campaign_id"                data-endpoint="GETapi-v1-customers-generate-excel"
+               value="uuid-de-campaign"
+               data-component="query">
+    <br>
+<p>optional Filtrar por ID de campaña. Example: <code>uuid-de-campaign</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="search"                data-endpoint="GETapi-v1-customers-generate-excel"
+               value="Juan"
+               data-component="query">
+    <br>
+<p>optional Buscar por nombre del cliente. Example: <code>Juan</code></p>
+            </div>
+                </form>
 
                     <h2 id="customers-GETapi-v1-customers-code--code-">Obtener customer por short_code</h2>
 
@@ -11822,6 +12671,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 </p>
 
 <p>Obtiene la información detallada de un customer específico por su UUID.
+Incluye las campañas en las que está inscrito, sus stamps (punch/racha) y los valores de campos personalizados.
 Solo disponible para owners/admins del mismo negocio.</p>
 
 <span id="example-requests-GETapi-v1-customers--id-">
@@ -12499,7 +13349,7 @@ El flujo es:</p>
             \"custom_field_id\": \"5707ca55-f609-3528-be8b-1baeaee1567e\",
             \"string_value\": \"architecto\",
             \"number_value\": 4326.41688,
-            \"date_value\": \"2025-11-21T07:55:33\",
+            \"date_value\": \"2025-11-23T08:54:56\",
             \"boolean_value\": true
         }
     ]
@@ -12528,7 +13378,7 @@ let body = {
             "custom_field_id": "5707ca55-f609-3528-be8b-1baeaee1567e",
             "string_value": "architecto",
             "number_value": 4326.41688,
-            "date_value": "2025-11-21T07:55:33",
+            "date_value": "2025-11-23T08:54:56",
             "boolean_value": true
         }
     ]
@@ -12729,10 +13579,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="field_values.0.date_value"                data-endpoint="POSTapi-v1-campaigns-register"
-               value="2025-11-21T07:55:33"
+               value="2025-11-23T08:54:56"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
+<p>Must be a valid date. Example: <code>2025-11-23T08:54:56</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>boolean_value</code></b>&nbsp;&nbsp;
@@ -13086,8 +13936,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"custom_field_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
             \"string_value\": \"architecto\",
             \"number_value\": 4326.41688,
-            \"date_value\": \"2025-11-21T07:55:33\",
-            \"boolean_value\": true
+            \"date_value\": \"2025-11-23T08:54:57\",
+            \"boolean_value\": false
         }
     ]
 }"
@@ -13111,8 +13961,8 @@ let body = {
             "custom_field_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
             "string_value": "architecto",
             "number_value": 4326.41688,
-            "date_value": "2025-11-21T07:55:33",
-            "boolean_value": true
+            "date_value": "2025-11-23T08:54:57",
+            "boolean_value": false
         }
     ]
 };
@@ -13289,10 +14139,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="values.0.date_value"                data-endpoint="POSTapi-v1-campaigns--id--customers--customerId--field-values"
-               value="2025-11-21T07:55:33"
+               value="2025-11-23T08:54:57"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-21T07:55:33</code></p>
+<p>Must be a valid date. Example: <code>2025-11-23T08:54:57</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>boolean_value</code></b>&nbsp;&nbsp;
@@ -13314,7 +14164,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
                     </div>
                                     </details>
         </div>
@@ -13517,7 +14367,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"customer_code\": \"bngzmi\",
     \"campaign_code\": \"yvdl\",
-    \"type\": \"streak\"
+    \"type\": \"stamp\"
 }"
 </code></pre></div>
 
@@ -13536,7 +14386,7 @@ const headers = {
 let body = {
     "customer_code": "bngzmi",
     "campaign_code": "yvdl",
-    "type": "streak"
+    "type": "stamp"
 };
 
 fetch(url, {
@@ -13664,10 +14514,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-staff-apply-stamp"
-               value="streak"
+               value="stamp"
                data-component="body">
     <br>
-<p>Example: <code>streak</code></p>
+<p>Example: <code>stamp</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>stamp</code></li> <li><code>streak</code></li></ul>
         </div>
@@ -14785,6 +15635,383 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>Must be a valid UUID. The <code>id</code> of an existing record in the reward_unlocks table. Example: <code>6ff8f7f6-1eb3-3525-be4a-3932c805afed</code></p>
+        </div>
+        </form>
+
+                <h1 id="file-uploads">📁 File Uploads</h1>
+
+    <p>Endpoint para subir y eliminar archivos. Requiere autenticación.</p>
+
+                                <h2 id="file-uploads-POSTapi-v1-uploads">Subir un archivo</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Sube un archivo y retorna la URL pública que debe guardarse en el campo correspondiente del modelo.</p>
+
+<span id="example-requests-POSTapi-v1-uploads">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://loypi-api.test/api/v1/uploads" \
+    --header "Authorization: Bearer {user_token}" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "model=architecto"\
+    --form "field=architecto"\
+    --form "file=@/private/var/folders/bm/ljg1j4q560g8g4_f6mmp_sdc0000gn/T/phpn4gf692541bl3Gn1YrS" </code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/uploads"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token}",
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('model', 'architecto');
+body.append('field', 'architecto');
+body.append('file', document.querySelector('input[name="file"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-uploads">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;url&quot;: &quot;https://app.com/storage/uploads/campaigns/banner/1703123456-a1b2c3.png&quot;,
+        &quot;path&quot;: &quot;uploads/campaigns/banner/1703123456-a1b2c3.png&quot;,
+        &quot;filename&quot;: &quot;banner-1703123456-a1b2c3.png&quot;,
+        &quot;size&quot;: 1024000,
+        &quot;mime_type&quot;: &quot;image/png&quot;,
+        &quot;dimensions&quot;: {
+            &quot;width&quot;: 1200,
+            &quot;height&quot;: 600
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Validation failed&quot;,
+    &quot;errors&quot;: {
+        &quot;file&quot;: [
+            &quot;El archivo es requerido.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-uploads" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-uploads"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-uploads"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-uploads" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-uploads">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-uploads" data-method="POST"
+      data-path="api/v1/uploads"
+      data-authed="1"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-uploads', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-uploads"
+                    onclick="tryItOut('POSTapi-v1-uploads');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-uploads"
+                    onclick="cancelTryOut('POSTapi-v1-uploads');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-uploads"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/uploads</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-v1-uploads"
+               value="Bearer {user_token}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-uploads"
+               value="multipart/form-data"
+               data-component="header">
+    <br>
+<p>Example: <code>multipart/form-data</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-uploads"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>file</code></b>&nbsp;&nbsp;
+<small>file</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="file" style="display: none"
+                              name="file"                data-endpoint="POSTapi-v1-uploads"
+               value=""
+               data-component="body">
+    <br>
+<p>El archivo a subir Example: <code>/private/var/folders/bm/ljg1j4q560g8g4_f6mmp_sdc0000gn/T/phpn4gf692541bl3Gn1YrS</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>model</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="model"                data-endpoint="POSTapi-v1-uploads"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>El modelo al que pertenece el archivo (campaign, business, user, reward) Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>field</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="field"                data-endpoint="POSTapi-v1-uploads"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>El campo del modelo (banner, logo, avatar, cover_image, logo_url, image_url) Example: <code>architecto</code></p>
+        </div>
+        </form>
+
+                    <h2 id="file-uploads-DELETEapi-v1-uploads">Eliminar un archivo</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Elimina un archivo del storage usando su URL o path.</p>
+
+<span id="example-requests-DELETEapi-v1-uploads">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://loypi-api.test/api/v1/uploads" \
+    --header "Authorization: Bearer {user_token}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"url\": \"http:\\/\\/www.bailey.biz\\/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/uploads"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "url": "http:\/\/www.bailey.biz\/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html"
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-v1-uploads">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Archivo eliminado correctamente&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Archivo no encontrado&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-v1-uploads" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-uploads"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-uploads"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-uploads" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-uploads">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-v1-uploads" data-method="DELETE"
+      data-path="api/v1/uploads"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-uploads', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-uploads"
+                    onclick="tryItOut('DELETEapi-v1-uploads');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-uploads"
+                    onclick="cancelTryOut('DELETEapi-v1-uploads');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-uploads"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/uploads</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-v1-uploads"
+               value="Bearer {user_token}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-v1-uploads"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-v1-uploads"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>url</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="url"                data-endpoint="DELETEapi-v1-uploads"
+               value="http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html"
+               data-component="body">
+    <br>
+<p>La URL o path del archivo a eliminar Example: <code>http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html</code></p>
         </div>
         </form>
 

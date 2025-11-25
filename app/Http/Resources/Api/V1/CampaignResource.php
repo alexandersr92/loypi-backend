@@ -64,6 +64,18 @@ class CampaignResource extends JsonResource
                     ];
                 });
             }),
+            'customers' => $this->whenLoaded('customers', function () {
+                return $this->customers->map(function ($customer) {
+                    return [
+                        'id' => $customer->id,
+                        'name' => $customer->name,
+                        'phone' => $customer->phone,
+                        'stamps' => $customer->pivot->stamps ?? 0,
+                        'redeemed_at' => $customer->pivot->redeemed_at?->toIso8601String(),
+                        'registered_at' => $customer->pivot->created_at?->toIso8601String(),
+                    ];
+                });
+            }),
         ];
     }
 }

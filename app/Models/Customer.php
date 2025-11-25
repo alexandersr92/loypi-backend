@@ -95,7 +95,6 @@ class Customer extends Model implements Authenticatable
     public function campaigns(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Campaign::class, 'customer_campaigns')
-            ->using(CustomerCampaign::class)
             ->withPivot(['stamps', 'redeemed_at'])
             ->withTimestamps();
     }

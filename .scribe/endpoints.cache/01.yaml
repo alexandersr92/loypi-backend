@@ -218,6 +218,141 @@ endpoints:
   -
     custom: []
     httpMethods:
+      - GET
+    uri: api/v1/auth/verify-token
+    metadata:
+      custom: []
+      groupName: '🔐 Autenticación'
+      groupDescription: |-
+
+        Endpoints para autenticación de usuarios (owners/admins)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Verificar token de autenticación'
+      description: |-
+        Verifica si el token de autenticación del cliente es válido.
+        Retorna el user_id y business_id si el token es válido.
+
+        Esta ruta se usa para verificar si el usuario está logueado al navegar.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "user_id": "019aa527-9931-7349-a45d-18e6bf48aa1a",
+              "business_id": "019aa527-a3dd-7342-b115-95e9fcbba615"
+            }
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "success": false,
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/auth/verify-password
+    metadata:
+      custom: []
+      groupName: '🔐 Autenticación'
+      groupDescription: |-
+
+        Endpoints para autenticación de usuarios (owners/admins)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Verificar contraseña del usuario autenticado'
+      description: 'Verifica si la contraseña proporcionada es correcta para el usuario autenticado.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      password:
+        custom: []
+        name: password
+        description: 'La contraseña a verificar.'
+        required: true
+        example: mypassword123
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      password: mypassword123
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "valid": true,
+            "message": "Password is correct."
+          }
+        headers: []
+        description: ''
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "valid": false,
+            "message": "Password is incorrect."
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
       - POST
     uri: api/v1/auth/logout
     metadata:
@@ -291,6 +426,117 @@ endpoints:
           access-control-allow-origin: '*'
           access-control-expose-headers: '*'
         description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/auth/dashboard-settings
+    metadata:
+      custom: []
+      groupName: '🔐 Autenticación'
+      groupDescription: |-
+
+        Endpoints para autenticación de usuarios (owners/admins)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Obtener settings del dashboard del usuario autenticado'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "dashboard_settings": {}
+            }
+          }
+        headers: []
+        description: ''
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: api/v1/auth/dashboard-settings
+    metadata:
+      custom: []
+      groupName: '🔐 Autenticación'
+      groupDescription: |-
+
+        Endpoints para autenticación de usuarios (owners/admins)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Guardar/actualizar settings del dashboard del usuario autenticado'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      dashboard_settings:
+        custom: []
+        name: dashboard_settings
+        description: 'JSON con los settings del dashboard.'
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      dashboard_settings: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Dashboard settings saved successfully.",
+            "data": {
+              "dashboard_settings": {}
+            }
+          }
+        headers: []
+        description: ''
     responseFields: []
     auth:
       - headers

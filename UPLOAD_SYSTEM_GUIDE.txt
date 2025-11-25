@@ -1,0 +1,345 @@
+================================================================================
+GUÍA DE USO: SISTEMA DE SUBIDA DE ARCHIVOS (UPLOADS)
+================================================================================
+
+ENDPOINT PARA SUBIR ARCHIVO
+--------------------------------------------------------------------------------
+
+URL: POST /api/v1/uploads
+
+Headers requeridos:
+- Authorization: Bearer {tu_token}
+- Content-Type: multipart/form-data
+
+Body (form-data):
+- file (file): El archivo a subir
+- model (string): El modelo al que pertenece el archivo
+  Opciones: 'campaign', 'business', 'user', 'reward'
+- field (string): El campo del modelo donde se guardará
+  Opciones según modelo:
+    - campaign: 'banner', 'cover_image', 'logo_url'
+    - business: 'logo'
+    - user: 'avatar'
+    - reward: 'image_url'
+
+Ejemplo de respuesta exitosa:
+{
+  "success": true,
+  "data": {
+    "url": "https://app.com/storage/uploads/campaigns/banner/1703123456-a1b2c3.png",
+    "path": "uploads/campaigns/banner/1703123456-a1b2c3.png",
+    "filename": "banner-1703123456-a1b2c3.png",
+    "size": 1024000,
+    "mime_type": "image/png",
+    "dimensions": {
+      "width": 1200,
+      "height": 600
+    }
+  }
+}
+
+
+ENDPOINT PARA ELIMINAR ARCHIVO
+--------------------------------------------------------------------------------
+
+URL: DELETE /api/v1/uploads
+
+Headers requeridos:
+- Authorization: Bearer {tu_token}
+- Content-Type: application/json
+
+Body (JSON):
+{
+  "url": "https://app.com/storage/uploads/campaigns/banner/1703123456-a1b2c3.png"
+}
+
+Respuesta exitosa:
+{
+  "success": true,
+  "message": "Archivo eliminado correctamente"
+}
+
+
+MODELOS Y CAMPOS DISPONIBLES
+--------------------------------------------------------------------------------
+
+1. CAMPAIGN
+   - banner: Imagen, máx 2MB, ancho mínimo 800px
+   - cover_image: Imagen, máx 2MB
+   - logo_url: Imagen, máx 512KB, máx 200x200px
+
+2. BUSINESS
+   - logo: Imagen, máx 1MB, máx 500x500px
+
+3. USER
+   - avatar: Imagen, máx 512KB, máx 200x200px
+
+4. REWARD
+   - image_url: Imagen, máx 1MB
+
+
+EJEMPLOS DE USO
+--------------------------------------------------------------------------------
+
+EJEMPLO 1: JavaScript/Fetch (Frontend)
+----------------------------------------
+
+// 1. Subir imagen
+const formData = new FormData();
+formData.append('file', fileInput.files[0]);
+formData.append('model', 'campaign');
+formData.append('field', 'banner');
+
+const uploadResponse = await fetch('https://api.com/api/v1/uploads', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer ' + token
+  },
+  body: formData
+});
+
+const uploadData = await uploadResponse.json();
+
+if (uploadData.success) {
+  const imageUrl = uploadData.data.url;
+  
+  // 2. Crear/actualizar campaña con la URL
+  const campaignResponse = await fetch('https://api.com/api/v1/campaigns', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: 'Mi Campaña',
+      banner: imageUrl  // ← URL obtenida del upload
+    })
+  });
+  
+  const campaignData = await campaignResponse.json();
+  console.log('Campaña creada:', campaignData);
+}
+
+
+EJEMPLO 2: Axios (Frontend)
+----------------------------
+
+import axios from 'axios';
+
+// 1. Subir imagen
+const formData = new FormData();
+formData.append('file', fileInput.files[0]);
+formData.append('model', 'campaign');
+formData.append('field', 'banner');
+
+const uploadResponse = await axios.post(
+  'https://api.com/api/v1/uploads',
+  formData,
+  {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    }
+  }
+);
+
+if (uploadResponse.data.success) {
+  const imageUrl = uploadResponse.data.data.url;
+  
+  // 2. Crear campaña con la URL
+  const campaignResponse = await axios.post(
+    'https://api.com/api/v1/campaigns',
+    {
+      name: 'Mi Campaña',
+      banner: imageUrl
+    },
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+  
+  console.log('Campaña creada:', campaignResponse.data);
+}
+
+
+EJEMPLO 3: cURL (Terminal)
+---------------------------
+
+# 1. Subir imagen
+curl -X POST https://api.com/api/v1/uploads \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -F "file=@/path/to/image.png" \
+  -F "model=campaign" \
+  -F "field=banner"
+
+# Respuesta esperada:
+# {
+#   "success": true,
+#   "data": {
+#     "url": "https://app.com/storage/uploads/campaigns/banner/1703123456-a1b2c3.png",
+#     ...
+#   }
+# }
+
+# 2. Crear campaña con la URL obtenida
+curl -X POST https://api.com/api/v1/campaigns \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Mi Campaña",
+    "banner": "https://app.com/storage/uploads/campaigns/banner/1703123456-a1b2c3.png"
+  }'
+
+
+EJEMPLO 4: React con useState
+-------------------------------
+
+import { useState } from 'react';
+
+function CampaignForm() {
+  const [file, setFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!file) return;
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('model', 'campaign');
+    formData.append('field', 'banner');
+
+    try {
+      const response = await fetch('/api/v1/uploads', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        setImageUrl(data.data.url);
+        console.log('Imagen subida:', data.data.url);
+      }
+    } catch (error) {
+      console.error('Error al subir:', error);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleSubmit = async () => {
+    // Usar imageUrl al crear la campaña
+    const response = await fetch('/api/v1/campaigns', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'Mi Campaña',
+        banner: imageUrl
+      })
+    });
+  };
+
+  return (
+    <div>
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleUpload} disabled={uploading}>
+        {uploading ? 'Subiendo...' : 'Subir Imagen'}
+      </button>
+      {imageUrl && <img src={imageUrl} alt="Preview" />}
+      <button onClick={handleSubmit}>Crear Campaña</button>
+    </div>
+  );
+}
+
+
+FLUJO RECOMENDADO
+--------------------------------------------------------------------------------
+
+1. El usuario selecciona un archivo en el frontend
+2. Se sube el archivo usando POST /api/v1/uploads
+   - Se envía: file, model, field
+3. Se recibe la URL del archivo subido
+4. Se guarda esa URL en el campo correspondiente del modelo
+   - Al crear: POST /api/v1/campaigns (con banner: url)
+   - Al actualizar: PUT /api/v1/campaigns/{id} (con banner: url)
+
+NOTA IMPORTANTE:
+- La subida del archivo es INDEPENDIENTE de la creación/actualización del modelo
+- Primero se sube el archivo, luego se usa la URL en el modelo
+- Si el usuario cancela después de subir, puedes eliminar el archivo con DELETE /api/v1/uploads
+
+
+VALIDACIONES AUTOMÁTICAS
+--------------------------------------------------------------------------------
+
+El sistema valida automáticamente según el modelo y campo:
+
+- Tipo de archivo: Solo imágenes (jpeg, png, webp, svg según el campo)
+- Tamaño máximo: Según el campo (512KB a 2MB)
+- Dimensiones: Según el campo (ancho/alto mínimos o máximos)
+
+Si la validación falla, recibirás un error 422 con los detalles.
+
+
+ELIMINACIÓN AUTOMÁTICA
+--------------------------------------------------------------------------------
+
+Cuando actualizas o eliminas un modelo que tiene archivos, el sistema
+automáticamente elimina los archivos antiguos del storage.
+
+Esto funciona gracias al trait HasFileUploads que está en los modelos:
+- Campaign
+- Business
+- User
+- Reward
+
+No necesitas eliminar manualmente los archivos al actualizar un modelo.
+
+
+ERRORES COMUNES
+--------------------------------------------------------------------------------
+
+1. Error 422: Validación fallida
+   - Verifica que el archivo sea una imagen válida
+   - Verifica que el tamaño no exceda el límite
+   - Verifica que las dimensiones cumplan los requisitos
+
+2. Error 401: No autenticado
+   - Verifica que el token sea válido
+   - Verifica que el header Authorization esté presente
+
+3. Error 500: Error del servidor
+   - Verifica que el storage esté configurado correctamente
+   - Verifica los permisos del directorio storage/app/public
+
+
+CONFIGURACIÓN
+--------------------------------------------------------------------------------
+
+Los archivos se guardan en:
+- Disco: public (configurable en .env con FILESYSTEM_DISK)
+- Ruta base: storage/app/public/uploads
+- Acceso público: public/storage (symlink)
+
+Las validaciones están configuradas en:
+- config/uploads.php
+
+================================================================================
+FIN DE LA GUÍA
+================================================================================
+

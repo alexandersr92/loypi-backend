@@ -242,9 +242,44 @@ class CampaignController extends Controller
 
         $this->authorize('view', $campaign);
 
+        // Paginar customers si se solicita
+        $perPage = $request->get('per_page', 15);
+        $page = $request->get('page', 1);
+        
+        $customersPaginated = $campaign->customers()
+            ->orderBy('customer_campaigns.created_at', 'desc')
+            ->paginate($perPage, ['*'], 'page', $page);
+
         return response()->json([
             'success' => true,
             'data' => new CampaignResource($campaign),
+            'customers' => [
+                'data' => collect($customersPaginated->items())->map(function ($customer) {
+                    return [
+                        'id' => $customer->id,
+                        'short_code' => $customer->short_code,
+                        'name' => $customer->name,
+                        'phone' => $customer->phone,
+                        'stamps' => $customer->pivot->stamps ?? 0,
+                        'redeemed_at' => $customer->pivot->redeemed_at?->toIso8601String(),
+                        'registered_at' => $customer->pivot->created_at?->toIso8601String(),
+                    ];
+                })->values()->all(),
+                'meta' => [
+                    'current_page' => $customersPaginated->currentPage(),
+                    'last_page' => $customersPaginated->lastPage(),
+                    'per_page' => $customersPaginated->perPage(),
+                    'total' => $customersPaginated->total(),
+                    'from' => $customersPaginated->firstItem(),
+                    'to' => $customersPaginated->lastItem(),
+                ],
+                'links' => [
+                    'first' => $customersPaginated->url(1),
+                    'last' => $customersPaginated->url($customersPaginated->lastPage()),
+                    'prev' => $customersPaginated->previousPageUrl(),
+                    'next' => $customersPaginated->nextPageUrl(),
+                ],
+            ],
         ], 200);
     }
 
@@ -284,18 +319,196 @@ class CampaignController extends Controller
     public function update(UpdateCampaignRequest $request, string $id): JsonResponse
     {
         $campaign = Campaign::findOrFail($id);
+        $user = $request->user()->load('business');
 
         $this->authorize('update', $campaign);
 
+        if (! $user->business) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You must have a business to update campaigns.',
+            ], 403);
+        }
+
         $validated = $request->validated();
+        $rewardIds = $validated['reward_ids'] ?? null;
+        $rewards = $validated['rewards'] ?? null;
+        $customFieldIds = $validated['custom_field_ids'] ?? null;
+        $customFields = $validated['custom_fields'] ?? null;
+        unset($validated['rewards'], $validated['reward_ids'], $validated['custom_field_ids'], $validated['custom_fields'], $validated['reward_pivot_data']);
 
-        $campaign->update($validated);
+        DB::beginTransaction();
+        try {
+            // Actualizar campos básicos de la campaña
+            $campaign->update($validated);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Campaign updated successfully.',
-            'data' => new CampaignResource($campaign->fresh()->load(['business', 'rewards'])),
-        ], 200);
+            // Manejar rewards si se proporcionaron
+            if ($rewardIds !== null || $rewards !== null) {
+                // Si se proporcionaron reward_ids, sincronizar rewards existentes
+                if ($rewardIds !== null) {
+                    $pivotDataArray = $request->input('reward_pivot_data', []);
+                    $syncData = [];
+                    
+                    foreach ($rewardIds as $index => $rewardId) {
+                        $reward = Reward::findOrFail($rewardId);
+                        
+                        // Validar que el tipo coincida
+                        if ($reward->type !== $campaign->type) {
+                            throw new \Exception("Reward type ({$reward->type}) does not match campaign type ({$campaign->type}).");
+                        }
+                        
+                        // Validar que el reward pertenezca al business
+                        if ($reward->business_id !== $user->business->id) {
+                            throw new \Exception("Reward does not belong to your business.");
+                        }
+                        
+                        // Datos del pivot
+                        $pivot = $pivotDataArray[$index] ?? [];
+                        
+                        // Si es punch, validar que solo haya uno
+                        if ($campaign->type === 'punch' && $index > 0) {
+                            throw new \Exception("Campaigns of type 'punch' can only have one reward.");
+                        }
+                        
+                        $syncData[$rewardId] = [
+                            'threshold_int' => $pivot['threshold_int'] ?? 1,
+                            'per_customer_limit' => $pivot['per_customer_limit'] ?? null,
+                            'global_limit' => $pivot['global_limit'] ?? null,
+                            'active' => $pivot['active'] ?? true,
+                            'sort_order' => $pivot['sort_order'] ?? $index,
+                        ];
+                    }
+                    
+                    $campaign->rewards()->sync($syncData);
+                } else {
+                    // Crear nuevos rewards y asociarlos
+                    $syncData = [];
+                    
+                    foreach ($rewards as $index => $rewardData) {
+                        // Validar que el tipo coincida con la campaign
+                        if (isset($rewardData['type']) && $rewardData['type'] !== $campaign->type) {
+                            throw new \Exception("Reward type ({$rewardData['type']}) does not match campaign type ({$campaign->type}).");
+                        }
+                        
+                        // Si es punch, validar que solo haya uno
+                        if ($campaign->type === 'punch' && $index > 0) {
+                            throw new \Exception("Campaigns of type 'punch' can only have one reward.");
+                        }
+                        
+                        // Extraer datos del pivot
+                        $pivotData = [
+                            'threshold_int' => $rewardData['threshold_int'] ?? 1,
+                            'per_customer_limit' => $rewardData['per_customer_limit'] ?? null,
+                            'global_limit' => $rewardData['global_limit'] ?? null,
+                            'active' => $rewardData['active'] ?? true,
+                            'sort_order' => $rewardData['sort_order'] ?? $index,
+                        ];
+                        
+                        // Remover datos del pivot del reward
+                        unset($rewardData['threshold_int'], $rewardData['per_customer_limit'], 
+                              $rewardData['global_limit'], $rewardData['active'], $rewardData['sort_order']);
+                        
+                        // Crear el reward
+                        $rewardData['business_id'] = $user->business->id;
+                        $rewardData['type'] = $campaign->type; // Asegurar que el tipo coincida
+                        $reward = Reward::create($rewardData);
+                        
+                        // Preparar datos para sync
+                        $syncData[$reward->id] = $pivotData;
+                    }
+                    
+                    $campaign->rewards()->sync($syncData);
+                }
+            }
+
+            // Manejar custom fields si se proporcionaron
+            if ($customFieldIds !== null || $customFields !== null) {
+                if ($customFieldIds !== null) {
+                    // Sincronizar custom fields existentes
+                    $syncData = [];
+                    foreach ($customFieldIds as $index => $fieldId) {
+                        $field = CustomField::findOrFail($fieldId);
+                        
+                        // Validar que el field pertenezca al business
+                        if ($field->business_id !== $user->business->id) {
+                            throw new \Exception("Custom field does not belong to your business.");
+                        }
+                        
+                        $syncData[$fieldId] = [
+                            'sort_order' => $index,
+                            'required_override' => null,
+                        ];
+                    }
+                    
+                    $campaign->customFields()->sync($syncData);
+                } else {
+                    // Crear nuevos custom fields y asociarlos
+                    $syncData = [];
+                    
+                    foreach ($customFields as $index => $fieldData) {
+                        $options = $fieldData['options'] ?? [];
+                        $validations = $fieldData['validations'] ?? [];
+                        unset($fieldData['options'], $fieldData['validations']);
+                        
+                        // Crear el custom field
+                        $fieldData['business_id'] = $user->business->id;
+                        $fieldData['required'] = $fieldData['required'] ?? false;
+                        $fieldData['active'] = $fieldData['active'] ?? true;
+                        $field = CustomField::create($fieldData);
+                        
+                        // Crear opciones si es tipo select
+                        if ($field->type === 'select' && !empty($options)) {
+                            foreach ($options as $optIndex => $option) {
+                                CustomFieldOption::create([
+                                    'custom_field_id' => $field->id,
+                                    'value' => $option['value'],
+                                    'label' => $option['label'],
+                                    'sort_order' => $option['sort_order'] ?? $optIndex,
+                                ]);
+                            }
+                        }
+                        
+                        // Crear validaciones si se proporcionaron
+                        if (!empty($validations)) {
+                            foreach ($validations as $validation) {
+                                CustomFieldValidation::create([
+                                    'custom_field_id' => $field->id,
+                                    'operator' => $validation['operator'],
+                                    'value_string' => $validation['value_string'] ?? null,
+                                    'value_number' => $validation['value_number'] ?? null,
+                                    'value_date' => $validation['value_date'] ?? null,
+                                    'message' => $validation['message'] ?? null,
+                                ]);
+                            }
+                        }
+                        
+                        // Preparar datos para sync
+                        $syncData[$field->id] = [
+                            'sort_order' => $index,
+                            'required_override' => null,
+                        ];
+                    }
+                    
+                    $campaign->customFields()->sync($syncData);
+                }
+            }
+
+            DB::commit();
+
+            $campaign->load(['business', 'rewards', 'customFields.options', 'customFields.validations']);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Campaign updated successfully.',
+                'data' => new CampaignResource($campaign),
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update campaign: ' . $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
