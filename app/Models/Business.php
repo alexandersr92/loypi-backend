@@ -20,6 +20,7 @@ class Business extends Model
         'name',
         'description',
         'logo',
+        'cover',
         'branding_json',
         'address',
         'phone',
@@ -104,7 +105,7 @@ class Business extends Model
      */
     protected function getFileFields(): array
     {
-        return ['logo'];
+        return ['logo', 'cover'];
     }
 
 }

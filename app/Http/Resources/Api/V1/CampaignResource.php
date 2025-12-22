@@ -16,6 +16,7 @@ class CampaignResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'code' => $this->code,
             'business_id' => $this->business_id,
             'type' => $this->type,
             'name' => $this->name,
@@ -75,6 +76,53 @@ class CampaignResource extends JsonResource
                         'registered_at' => $customer->pivot->created_at?->toIso8601String(),
                     ];
                 });
+            }),
+            'custom_fields' => $this->whenLoaded('customFields', function () {
+                return $this->customFields->map(function ($field) {
+                    $fieldData = [
+                        'id' => $field->id,
+                        'key' => $field->key,
+                        'label' => $field->label,
+                        'description' => $field->description,
+                        'type' => $field->type,
+                        'required' => $field->pivot->required_override ?? $field->required,
+                        'extra' => $field->extra,
+                        'active' => $field->active,
+                        // Datos del pivot
+                        'pivot' => [
+                            'sort_order' => $field->pivot->sort_order,
+                            'required_override' => $field->pivot->required_override,
+                        ],
+                    ];
+                    
+                    // Opciones (si es tipo select y están cargadas)
+                    if ($field->relationLoaded('options')) {
+                        $fieldData['options'] = $field->options->map(function ($option) {
+                            return [
+                                'id' => $option->id,
+                                'value' => $option->value,
+                                'label' => $option->label,
+                                'sort_order' => $option->sort_order,
+                            ];
+                        })->values()->all();
+                    }
+                    
+                    // Validaciones (si están cargadas)
+                    if ($field->relationLoaded('validations')) {
+                        $fieldData['validations'] = $field->validations->map(function ($validation) {
+                            return [
+                                'id' => $validation->id,
+                                'operator' => $validation->operator,
+                                'value_string' => $validation->value_string,
+                                'value_number' => $validation->value_number,
+                                'value_date' => $validation->value_date?->toIso8601String(),
+                                'message' => $validation->message,
+                            ];
+                        })->values()->all();
+                    }
+                    
+                    return $fieldData;
+                })->values()->all();
             }),
         ];
     }

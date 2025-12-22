@@ -138,14 +138,14 @@
                     <a href="#negocios">🏢 Negocios</a>
                 </li>
                                     <ul id="tocify-subheader-negocios" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="negocios-POSTapi-v1-businesses">
+                                                    <li class="tocify-item level-2" data-unique="negocios-GETapi-v1-businesses-slug--slug-">
+                                <a href="#negocios-GETapi-v1-businesses-slug--slug-">Display the specified resource by slug.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="negocios-POSTapi-v1-businesses">
                                 <a href="#negocios-POSTapi-v1-businesses">Store a newly created resource in storage.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="negocios-GETapi-v1-businesses--id-">
                                 <a href="#negocios-GETapi-v1-businesses--id-">Display the specified resource.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="negocios-GETapi-v1-businesses-slug--slug-">
-                                <a href="#negocios-GETapi-v1-businesses-slug--slug-">Display the specified resource by slug.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="negocios-PUTapi-v1-businesses--id-">
                                 <a href="#negocios-PUTapi-v1-businesses--id-">Update the specified resource in storage.</a>
@@ -301,6 +301,9 @@
                                                                                 <li class="tocify-item level-2" data-unique="autenticacion-customer-POSTapi-v1-customers-login">
                                 <a href="#autenticacion-customer-POSTapi-v1-customers-login">Login de customer (después de verificar OTP)</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="autenticacion-customer-GETapi-v1-customers-validate-token">
+                                <a href="#autenticacion-customer-GETapi-v1-customers-validate-token">Validar token de customer y obtener businesses y campaigns</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="autenticacion-customer-POSTapi-v1-customers-logout">
                                 <a href="#autenticacion-customer-POSTapi-v1-customers-logout">Logout de customer</a>
                             </li>
@@ -348,8 +351,14 @@
                                                                                 <li class="tocify-item level-2" data-unique="customers-campaigns-GETapi-v1-customers-me-campaigns">
                                 <a href="#customers-campaigns-GETapi-v1-customers-me-campaigns">Listar campaigns del customer autenticado</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="customers-campaigns-GETapi-v1-customers-me-campaigns--campaignId-">
+                                <a href="#customers-campaigns-GETapi-v1-customers-me-campaigns--campaignId-">Obtener relación del customer autenticado con una campaign específica</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="customers-campaigns-GETapi-v1-campaigns--id--customers">
                                 <a href="#customers-campaigns-GETapi-v1-campaigns--id--customers">Listar customers de una campaign (Owner)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="customers-campaigns-GETapi-v1-customers--customerId--campaigns--campaignId-">
+                                <a href="#customers-campaigns-GETapi-v1-customers--customerId--campaigns--campaignId-">Obtener relación completa entre customer y campaign</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -465,7 +474,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: November 23, 2025</li>
+        <li>Last updated: November 28, 2025</li>
     </ul>
 </div>
 
@@ -1862,10 +1871,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <p>Endpoints para envío y verificación de códigos OTP usando Twilio Verify.</p>
 <p>El sistema utiliza Twilio Verify para enviar y verificar códigos OTP vía SMS.
 Estos endpoints están disponibles únicamente para Customers (no para Owners/Users).</p>
+<p><strong>Modo Desarrollo:</strong>
+En modo desarrollo (APP_ENV=local o APP_DEBUG=true), el sistema OTP está desactivado:</p>
+<ul>
+<li>No se envían SMS reales</li>
+<li>El código OTP siempre es: <strong>123456</strong></li>
+<li>Usa este código para todas las verificaciones en desarrollo</li>
+</ul>
 <p><strong>Flujo de autenticación:</strong></p>
 <ol>
 <li>Envía un OTP con <code>/api/v1/otp/send</code></li>
-<li>Recibe el código en tu teléfono vía SMS</li>
+<li>Recibe el código en tu teléfono vía SMS (o usa 123456 en desarrollo)</li>
 <li>Verifica el código con <code>/api/v1/otp/verify</code></li>
 <li>Una vez verificado, puedes registrar o hacer login del cliente</li>
 </ol>
@@ -1885,9 +1901,10 @@ El código se enviará automáticamente al teléfono del cliente.</p>
 <p><strong>Flujo:</strong></p>
 <ol>
 <li>Llama a este endpoint para enviar el OTP</li>
-<li>Recibirás el código OTP en tu teléfono vía SMS</li>
+<li>Recibirás el código OTP en tu teléfono vía SMS (o usa 123456 en desarrollo)</li>
 <li>Usa el código recibido en el endpoint <code>/api/v1/otp/verify</code></li>
 </ol>
+<p><strong>Nota:</strong> En modo desarrollo, el código siempre es <strong>123456</strong> y no se envía SMS.</p>
 
 <span id="example-requests-POSTapi-v1-otp-send">
 <blockquote>Example request:</blockquote>
@@ -2732,9 +2749,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"email\": \"zbailey@example.net\",
     \"password\": \"|]|{+-\",
     \"phone\": \"9425593\",
-    \"role\": \"admin\",
+    \"role\": \"owner\",
     \"avatar\": \"n\",
-    \"status\": \"active\",
+    \"status\": \"suspended\",
     \"timezone\": \"Africa\\/Dakar\",
     \"locale\": \"kh\"
 }"
@@ -2757,9 +2774,9 @@ let body = {
     "email": "zbailey@example.net",
     "password": "|]|{+-",
     "phone": "9425593",
-    "role": "admin",
+    "role": "owner",
     "avatar": "n",
-    "status": "active",
+    "status": "suspended",
     "timezone": "Africa\/Dakar",
     "locale": "kh"
 };
@@ -2926,10 +2943,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="role"                data-endpoint="PUTapi-v1-users--id-"
-               value="admin"
+               value="owner"
                data-component="body">
     <br>
-<p>Example: <code>admin</code></p>
+<p>Example: <code>owner</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>admin</code></li> <li><code>owner</code></li></ul>
         </div>
@@ -2952,10 +2969,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-v1-users--id-"
-               value="active"
+               value="suspended"
                data-component="body">
     <br>
-<p>Example: <code>active</code></p>
+<p>Example: <code>suspended</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>active</code></li> <li><code>inactive</code></li> <li><code>suspended</code></li></ul>
         </div>
@@ -3265,7 +3282,162 @@ Must be one of:
 
     <p>CRUD de negocios (businesses)</p>
 
-                                <h2 id="negocios-POSTapi-v1-businesses">Store a newly created resource in storage.</h2>
+                                <h2 id="negocios-GETapi-v1-businesses-slug--slug-">Display the specified resource by slug.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-businesses-slug--slug-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/businesses/slug/architecto" \
+    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/businesses/slug/architecto"
+);
+
+const headers = {
+    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-businesses-slug--slug-">
+            <blockquote>
+            <p>Example response (404):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+access-control-expose-headers: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Business].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-businesses-slug--slug-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-businesses-slug--slug-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-businesses-slug--slug-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-businesses-slug--slug-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-businesses-slug--slug-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-businesses-slug--slug-" data-method="GET"
+      data-path="api/v1/businesses/slug/{slug}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-businesses-slug--slug-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-businesses-slug--slug-"
+                    onclick="tryItOut('GETapi-v1-businesses-slug--slug-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-businesses-slug--slug-"
+                    onclick="cancelTryOut('GETapi-v1-businesses-slug--slug-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-businesses-slug--slug-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/businesses/slug/{slug}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-businesses-slug--slug-"
+               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-businesses-slug--slug-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-businesses-slug--slug-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="slug"                data-endpoint="GETapi-v1-businesses-slug--slug-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>The slug of the slug. Example: <code>architecto</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="negocios-POSTapi-v1-businesses">Store a newly created resource in storage.</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>
@@ -3624,7 +3796,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/businesses/architecto" \
+    --get "http://loypi-api.test/api/v1/businesses/019aa527-a3dd-7342-b115-95e9fcbba615" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -3632,7 +3804,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/businesses/architecto"
+    "http://loypi-api.test/api/v1/businesses/019aa527-a3dd-7342-b115-95e9fcbba615"
 );
 
 const headers = {
@@ -3758,165 +3930,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-businesses--id-"
-               value="architecto"
+               value="019aa527-a3dd-7342-b115-95e9fcbba615"
                data-component="url">
     <br>
-<p>The ID of the business. Example: <code>architecto</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="negocios-GETapi-v1-businesses-slug--slug-">Display the specified resource by slug.</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-businesses-slug--slug-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/businesses/slug/architecto" \
-    --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/businesses/slug/architecto"
-);
-
-const headers = {
-    "Authorization": "Bearer {user_token} Requiere token de usuario (owner/admin)",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-v1-businesses-slug--slug-">
-            <blockquote>
-            <p>Example response (401):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
-access-control-expose-headers: *
- </code></pre></details>         <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-v1-businesses-slug--slug-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-businesses-slug--slug-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-businesses-slug--slug-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-businesses-slug--slug-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-businesses-slug--slug-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-v1-businesses-slug--slug-" data-method="GET"
-      data-path="api/v1/businesses/slug/{slug}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-businesses-slug--slug-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-businesses-slug--slug-"
-                    onclick="tryItOut('GETapi-v1-businesses-slug--slug-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-businesses-slug--slug-"
-                    onclick="cancelTryOut('GETapi-v1-businesses-slug--slug-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-businesses-slug--slug-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/businesses/slug/{slug}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-businesses-slug--slug-"
-               value="Bearer {user_token} Requiere token de usuario (owner/admin)"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {user_token} Requiere token de usuario (owner/admin)</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-v1-businesses-slug--slug-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-v1-businesses-slug--slug-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>slug</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="slug"                data-endpoint="GETapi-v1-businesses-slug--slug-"
-               value="architecto"
-               data-component="url">
-    <br>
-<p>The slug of the slug. Example: <code>architecto</code></p>
+<p>The ID of the business. Example: <code>019aa527-a3dd-7342-b115-95e9fcbba615</code></p>
             </div>
                     </form>
 
@@ -3934,7 +3951,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://loypi-api.test/api/v1/businesses/architecto" \
+    "http://loypi-api.test/api/v1/businesses/019aa527-a3dd-7342-b115-95e9fcbba615" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -3961,7 +3978,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/businesses/architecto"
+    "http://loypi-api.test/api/v1/businesses/019aa527-a3dd-7342-b115-95e9fcbba615"
 );
 
 const headers = {
@@ -4090,10 +4107,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PUTapi-v1-businesses--id-"
-               value="architecto"
+               value="019aa527-a3dd-7342-b115-95e9fcbba615"
                data-component="url">
     <br>
-<p>The ID of the business. Example: <code>architecto</code></p>
+<p>The ID of the business. Example: <code>019aa527-a3dd-7342-b115-95e9fcbba615</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -5385,7 +5402,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"code\": \"g\",
     \"name\": \"z\",
     \"pin\": \"miyv\",
-    \"active\": false
+    \"active\": true
 }"
 </code></pre></div>
 
@@ -5406,7 +5423,7 @@ let body = {
     "code": "g",
     "name": "z",
     "pin": "miyv",
-    "active": false
+    "active": true
 };
 
 fetch(url, {
@@ -5584,7 +5601,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -6638,17 +6655,17 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"type\": \"streak\",
+    \"type\": \"punch\",
     \"name\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": true,
+    \"active\": false,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"08:54:56\",
+    \"streak_reset_time\": \"08:45:48\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
@@ -6671,7 +6688,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"rewards\": [
         {
             \"name\": \"l\",
-            \"type\": \"streak\",
+            \"type\": \"punch\",
             \"description\": \"Eius et animi quos velit et.\",
             \"image_url\": \"http:\\/\\/www.ernser.org\\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html\",
             \"threshold_int\": 49,
@@ -6686,8 +6703,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"key\": \"p\",
             \"label\": \"w\",
             \"description\": \"Eius et animi quos velit et.\",
-            \"type\": \"date\",
-            \"required\": false,
+            \"type\": \"boolean\",
+            \"required\": true,
             \"options\": [
                 {
                     \"value\": \"v\",
@@ -6697,10 +6714,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
             ],
             \"validations\": [
                 {
-                    \"operator\": \"regex\",
+                    \"operator\": \"&lt;=\",
                     \"value_string\": \"architecto\",
                     \"value_number\": 4326.41688,
-                    \"value_date\": \"2025-11-23T08:54:56\",
+                    \"value_date\": \"2025-11-28T08:45:48\",
                     \"message\": \"m\"
                 }
             ]
@@ -6722,17 +6739,17 @@ const headers = {
 };
 
 let body = {
-    "type": "streak",
+    "type": "punch",
     "name": "b",
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": true,
+    "active": false,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "08:54:56",
+    "streak_reset_time": "08:45:48",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
@@ -6755,7 +6772,7 @@ let body = {
     "rewards": [
         {
             "name": "l",
-            "type": "streak",
+            "type": "punch",
             "description": "Eius et animi quos velit et.",
             "image_url": "http:\/\/www.ernser.org\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html",
             "threshold_int": 49,
@@ -6770,8 +6787,8 @@ let body = {
             "key": "p",
             "label": "w",
             "description": "Eius et animi quos velit et.",
-            "type": "date",
-            "required": false,
+            "type": "boolean",
+            "required": true,
             "options": [
                 {
                     "value": "v",
@@ -6781,10 +6798,10 @@ let body = {
             ],
             "validations": [
                 {
-                    "operator": "regex",
+                    "operator": "&lt;=",
                     "value_string": "architecto",
                     "value_number": 4326.41688,
-                    "value_date": "2025-11-23T08:54:56",
+                    "value_date": "2025-11-28T08:45:48",
                     "message": "m"
                 }
             ]
@@ -6893,10 +6910,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-campaigns"
-               value="streak"
+               value="punch"
                data-component="body">
     <br>
-<p>Example: <code>streak</code></p>
+<p>Example: <code>punch</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
         </div>
@@ -6980,7 +6997,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -7037,10 +7054,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="POSTapi-v1-campaigns"
-               value="08:54:56"
+               value="08:45:48"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>08:54:56</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>08:45:48</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -7215,10 +7232,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="rewards.0.type"                data-endpoint="POSTapi-v1-campaigns"
-               value="streak"
+               value="punch"
                data-component="body">
     <br>
-<p>This field is required when <code>rewards</code> is present. Example: <code>streak</code></p>
+<p>This field is required when <code>rewards</code> is present. Example: <code>punch</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
                     </div>
@@ -7397,10 +7414,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.type"                data-endpoint="POSTapi-v1-campaigns"
-               value="date"
+               value="boolean"
                data-component="body">
     <br>
-<p>This field is required when <code>custom_fields</code> is present. Example: <code>date</code></p>
+<p>This field is required when <code>custom_fields</code> is present. Example: <code>boolean</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
                     </div>
@@ -7424,7 +7441,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -7446,7 +7463,7 @@ Must be one of:
 <i>optional</i> &nbsp;
  &nbsp;
 <br>
-<p>This field is required when <code>custom_fields.*.type</code> is <code>select</code>. Must have at least 1 items.</p>
+
             </summary>
                                                 <div style="margin-left: 28px; clear: unset;">
                         <b style="line-height: 2;"><code>value</code></b>&nbsp;&nbsp;
@@ -7503,10 +7520,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.validations.0.operator"                data-endpoint="POSTapi-v1-campaigns"
-               value="regex"
+               value="<="
                data-component="body">
     <br>
-<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>regex</code></p>
+<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>&lt;=</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -7541,10 +7558,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="custom_fields.0.validations.0.value_date"                data-endpoint="POSTapi-v1-campaigns"
-               value="2025-11-23T08:54:56"
+               value="2025-11-28T08:45:48"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-23T08:54:56</code></p>
+<p>Must be a valid date. Example: <code>2025-11-28T08:45:48</code></p>
                     </div>
                                                                 <div style="margin-left: 28px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -7578,7 +7595,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7586,7 +7603,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2"
 );
 
 const headers = {
@@ -7712,10 +7729,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id-"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     </form>
 
@@ -7733,7 +7750,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -7743,23 +7760,76 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": true,
+    \"active\": false,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"08:54:56\",
+    \"streak_reset_time\": \"08:45:48\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
-    \"max_redemptions_per_day\": 30
+    \"max_redemptions_per_day\": 30,
+    \"reward_ids\": [
+        \"fa253524-dd6a-3fdb-a788-0cabcf134db7\"
+    ],
+    \"custom_field_ids\": [
+        \"665a39c0-48af-31f1-a546-aa4f41372488\"
+    ],
+    \"reward_pivot_data\": [
+        {
+            \"threshold_int\": 46,
+            \"per_customer_limit\": 79,
+            \"global_limit\": 67,
+            \"active\": true,
+            \"sort_order\": 29
+        }
+    ],
+    \"rewards\": [
+        {
+            \"name\": \"l\",
+            \"type\": \"streak\",
+            \"description\": \"Eius et animi quos velit et.\",
+            \"image_url\": \"http:\\/\\/www.ernser.org\\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html\",
+            \"threshold_int\": 49,
+            \"per_customer_limit\": 43,
+            \"global_limit\": 61,
+            \"active\": true,
+            \"sort_order\": 61
+        }
+    ],
+    \"custom_fields\": [
+        {
+            \"key\": \"p\",
+            \"label\": \"w\",
+            \"description\": \"Eius et animi quos velit et.\",
+            \"type\": \"boolean\",
+            \"required\": true,
+            \"options\": [
+                {
+                    \"value\": \"v\",
+                    \"label\": \"d\",
+                    \"sort_order\": 37
+                }
+            ],
+            \"validations\": [
+                {
+                    \"operator\": \"&gt;=\",
+                    \"value_string\": \"architecto\",
+                    \"value_number\": 4326.41688,
+                    \"value_date\": \"2025-11-28T08:45:48\",
+                    \"message\": \"m\"
+                }
+            ]
+        }
+    ]
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2"
 );
 
 const headers = {
@@ -7774,16 +7844,69 @@ let body = {
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": true,
+    "active": false,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "08:54:56",
+    "streak_reset_time": "08:45:48",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
-    "max_redemptions_per_day": 30
+    "max_redemptions_per_day": 30,
+    "reward_ids": [
+        "fa253524-dd6a-3fdb-a788-0cabcf134db7"
+    ],
+    "custom_field_ids": [
+        "665a39c0-48af-31f1-a546-aa4f41372488"
+    ],
+    "reward_pivot_data": [
+        {
+            "threshold_int": 46,
+            "per_customer_limit": 79,
+            "global_limit": 67,
+            "active": true,
+            "sort_order": 29
+        }
+    ],
+    "rewards": [
+        {
+            "name": "l",
+            "type": "streak",
+            "description": "Eius et animi quos velit et.",
+            "image_url": "http:\/\/www.ernser.org\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html",
+            "threshold_int": 49,
+            "per_customer_limit": 43,
+            "global_limit": 61,
+            "active": true,
+            "sort_order": 61
+        }
+    ],
+    "custom_fields": [
+        {
+            "key": "p",
+            "label": "w",
+            "description": "Eius et animi quos velit et.",
+            "type": "boolean",
+            "required": true,
+            "options": [
+                {
+                    "value": "v",
+                    "label": "d",
+                    "sort_order": 37
+                }
+            ],
+            "validations": [
+                {
+                    "operator": "&gt;=",
+                    "value_string": "architecto",
+                    "value_number": 4326.41688,
+                    "value_date": "2025-11-28T08:45:48",
+                    "message": "m"
+                }
+            ]
+        }
+    ]
 };
 
 fetch(url, {
@@ -7887,10 +8010,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PUTapi-v1-campaigns--id-"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -7987,7 +8110,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -8044,10 +8167,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="PUTapi-v1-campaigns--id-"
-               value="08:54:56"
+               value="08:45:48"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>08:54:56</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>08:45:48</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -8097,6 +8220,478 @@ Must be one of:
     <br>
 <p>Must be at least 1. Example: <code>30</code></p>
         </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>reward_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="reward_ids[0]"                data-endpoint="PUTapi-v1-campaigns--id-"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="reward_ids[1]"                data-endpoint="PUTapi-v1-campaigns--id-"
+               data-component="body">
+    <br>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the rewards table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>reward_pivot_data</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>threshold_int</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="reward_pivot_data.0.threshold_int"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="46"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>46</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="reward_pivot_data.0.per_customer_limit"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="79"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>79</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>global_limit</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="reward_pivot_data.0.global_limit"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="67"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>67</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PUTapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="reward_pivot_data.0.active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="reward_pivot_data.0.active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>true</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>sort_order</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="reward_pivot_data.0.sort_order"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="29"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Example: <code>29</code></p>
+                    </div>
+                                    </details>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>rewards</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+<p>Must have at least 1 items.</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rewards.0.name"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="l"
+               data-component="body">
+    <br>
+<p>This field is required when <code>rewards</code> is present. Must not be greater than 255 characters. Example: <code>l</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rewards.0.type"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="streak"
+               data-component="body">
+    <br>
+<p>This field is required when <code>rewards</code> is present. Example: <code>streak</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rewards.0.description"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="Eius et animi quos velit et."
+               data-component="body">
+    <br>
+<p>Example: <code>Eius et animi quos velit et.</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>image_url</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rewards.0.image_url"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="http://www.ernser.org/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html"
+               data-component="body">
+    <br>
+<p>Must be a valid URL. Must not be greater than 500 characters. Example: <code>http://www.ernser.org/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>reward_json</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rewards.0.reward_json"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value=""
+               data-component="body">
+    <br>
+
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>threshold_int</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="rewards.0.threshold_int"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="49"
+               data-component="body">
+    <br>
+<p>This field is required when <code>rewards</code> is present. Must be at least 1. Example: <code>49</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="rewards.0.per_customer_limit"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="43"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>43</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>global_limit</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="rewards.0.global_limit"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="61"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>61</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PUTapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="rewards.0.active"
+                   value="true"
+                   data-endpoint="PUTapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="rewards.0.active"
+                   value="false"
+                   data-endpoint="PUTapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>true</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>sort_order</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="rewards.0.sort_order"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="61"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Example: <code>61</code></p>
+                    </div>
+                                    </details>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>custom_field_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_field_ids[0]"                data-endpoint="PUTapi-v1-campaigns--id-"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="custom_field_ids[1]"                data-endpoint="PUTapi-v1-campaigns--id-"
+               data-component="body">
+    <br>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the custom_fields table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>custom_fields</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>key</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.key"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="p"
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom<em>fields</code> is present. Must match the regex /^[a-z0-9</em>]+$/. Must not be greater than 255 characters. Example: <code>p</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>label</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.label"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="w"
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom_fields</code> is present. Must not be greater than 255 characters. Example: <code>w</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.description"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="Eius et animi quos velit et."
+               data-component="body">
+    <br>
+<p>Example: <code>Eius et animi quos velit et.</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.type"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="boolean"
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom_fields</code> is present. Example: <code>boolean</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>required</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PUTapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="custom_fields.0.required"
+                   value="true"
+                   data-endpoint="PUTapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="custom_fields.0.required"
+                   value="false"
+                   data-endpoint="PUTapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>true</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.extra"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value=""
+               data-component="body">
+    <br>
+
+                    </div>
+                                                                <div style=" margin-left: 14px; clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>options</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>value</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.options.0.value"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="v"
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom_fields.*.options</code> is present. Must not be greater than 255 characters. Example: <code>v</code></p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>label</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.options.0.label"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="d"
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom_fields.*.options</code> is present. Must not be greater than 255 characters. Example: <code>d</code></p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>sort_order</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="custom_fields.0.options.0.sort_order"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="37"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Example: <code>37</code></p>
+                    </div>
+                                    </details>
+        </div>
+                                                                    <div style=" margin-left: 14px; clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>validations</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>operator</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.validations.0.operator"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value=">="
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>&gt;=</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>value_string</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.validations.0.value_string"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>value_number</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="custom_fields.0.validations.0.value_number"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="4326.41688"
+               data-component="body">
+    <br>
+<p>Example: <code>4326.41688</code></p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>value_date</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.validations.0.value_date"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="2025-11-28T08:45:48"
+               data-component="body">
+    <br>
+<p>Must be a valid date. Example: <code>2025-11-28T08:45:48</code></p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.validations.0.message"                data-endpoint="PUTapi-v1-campaigns--id-"
+               value="m"
+               data-component="body">
+    <br>
+<p>Must not be greater than 500 characters. Example: <code>m</code></p>
+                    </div>
+                                    </details>
+        </div>
+                                        </details>
+        </div>
         </form>
 
                     <h2 id="campaigns-PATCHapi-v1-campaigns--id-">Update the specified resource in storage.</h2>
@@ -8113,7 +8708,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -8123,23 +8718,76 @@ Must be one of:
     \"description\": \"Eius et animi quos velit et.\",
     \"limit\": 16,
     \"required_stamps\": 26,
-    \"active\": true,
+    \"active\": false,
     \"cover_image\": \"l\",
     \"cover_color\": \"jnikhwa\",
     \"logo_url\": \"http:\\/\\/breitenberg.com\\/nostrum-aut-adipisci-quidem-nostrum.html\",
     \"streak_time_limit_hours\": 32,
-    \"streak_reset_time\": \"08:54:56\",
+    \"streak_reset_time\": \"08:45:49\",
     \"per_customer_limit\": 40,
     \"per_week_limit\": 43,
     \"per_month_limit\": 13,
-    \"max_redemptions_per_day\": 30
+    \"max_redemptions_per_day\": 30,
+    \"reward_ids\": [
+        \"fa253524-dd6a-3fdb-a788-0cabcf134db7\"
+    ],
+    \"custom_field_ids\": [
+        \"665a39c0-48af-31f1-a546-aa4f41372488\"
+    ],
+    \"reward_pivot_data\": [
+        {
+            \"threshold_int\": 46,
+            \"per_customer_limit\": 79,
+            \"global_limit\": 67,
+            \"active\": false,
+            \"sort_order\": 29
+        }
+    ],
+    \"rewards\": [
+        {
+            \"name\": \"l\",
+            \"type\": \"streak\",
+            \"description\": \"Eius et animi quos velit et.\",
+            \"image_url\": \"http:\\/\\/www.ernser.org\\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html\",
+            \"threshold_int\": 49,
+            \"per_customer_limit\": 43,
+            \"global_limit\": 61,
+            \"active\": false,
+            \"sort_order\": 61
+        }
+    ],
+    \"custom_fields\": [
+        {
+            \"key\": \"p\",
+            \"label\": \"w\",
+            \"description\": \"Eius et animi quos velit et.\",
+            \"type\": \"date\",
+            \"required\": true,
+            \"options\": [
+                {
+                    \"value\": \"v\",
+                    \"label\": \"d\",
+                    \"sort_order\": 37
+                }
+            ],
+            \"validations\": [
+                {
+                    \"operator\": \"=\",
+                    \"value_string\": \"architecto\",
+                    \"value_number\": 4326.41688,
+                    \"value_date\": \"2025-11-28T08:45:49\",
+                    \"message\": \"m\"
+                }
+            ]
+        }
+    ]
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2"
 );
 
 const headers = {
@@ -8154,16 +8802,69 @@ let body = {
     "description": "Eius et animi quos velit et.",
     "limit": 16,
     "required_stamps": 26,
-    "active": true,
+    "active": false,
     "cover_image": "l",
     "cover_color": "jnikhwa",
     "logo_url": "http:\/\/breitenberg.com\/nostrum-aut-adipisci-quidem-nostrum.html",
     "streak_time_limit_hours": 32,
-    "streak_reset_time": "08:54:56",
+    "streak_reset_time": "08:45:49",
     "per_customer_limit": 40,
     "per_week_limit": 43,
     "per_month_limit": 13,
-    "max_redemptions_per_day": 30
+    "max_redemptions_per_day": 30,
+    "reward_ids": [
+        "fa253524-dd6a-3fdb-a788-0cabcf134db7"
+    ],
+    "custom_field_ids": [
+        "665a39c0-48af-31f1-a546-aa4f41372488"
+    ],
+    "reward_pivot_data": [
+        {
+            "threshold_int": 46,
+            "per_customer_limit": 79,
+            "global_limit": 67,
+            "active": false,
+            "sort_order": 29
+        }
+    ],
+    "rewards": [
+        {
+            "name": "l",
+            "type": "streak",
+            "description": "Eius et animi quos velit et.",
+            "image_url": "http:\/\/www.ernser.org\/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html",
+            "threshold_int": 49,
+            "per_customer_limit": 43,
+            "global_limit": 61,
+            "active": false,
+            "sort_order": 61
+        }
+    ],
+    "custom_fields": [
+        {
+            "key": "p",
+            "label": "w",
+            "description": "Eius et animi quos velit et.",
+            "type": "date",
+            "required": true,
+            "options": [
+                {
+                    "value": "v",
+                    "label": "d",
+                    "sort_order": 37
+                }
+            ],
+            "validations": [
+                {
+                    "operator": "=",
+                    "value_string": "architecto",
+                    "value_number": 4326.41688,
+                    "value_date": "2025-11-28T08:45:49",
+                    "message": "m"
+                }
+            ]
+        }
+    ]
 };
 
 fetch(url, {
@@ -8267,10 +8968,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="PATCHapi-v1-campaigns--id-"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -8367,7 +9068,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>cover_image</code></b>&nbsp;&nbsp;
@@ -8424,10 +9125,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="streak_reset_time"                data-endpoint="PATCHapi-v1-campaigns--id-"
-               value="08:54:56"
+               value="08:45:49"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>08:54:56</code></p>
+<p>Must be a valid date in the format <code>H:i:s</code>. Example: <code>08:45:49</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
@@ -8477,6 +9178,478 @@ Must be one of:
     <br>
 <p>Must be at least 1. Example: <code>30</code></p>
         </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>reward_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="reward_ids[0]"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="reward_ids[1]"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               data-component="body">
+    <br>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the rewards table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>reward_pivot_data</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>threshold_int</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="reward_pivot_data.0.threshold_int"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="46"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>46</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="reward_pivot_data.0.per_customer_limit"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="79"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>79</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>global_limit</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="reward_pivot_data.0.global_limit"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="67"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>67</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PATCHapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="reward_pivot_data.0.active"
+                   value="true"
+                   data-endpoint="PATCHapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PATCHapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="reward_pivot_data.0.active"
+                   value="false"
+                   data-endpoint="PATCHapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>false</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>sort_order</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="reward_pivot_data.0.sort_order"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="29"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Example: <code>29</code></p>
+                    </div>
+                                    </details>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>rewards</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+<p>Must have at least 1 items.</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rewards.0.name"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="l"
+               data-component="body">
+    <br>
+<p>This field is required when <code>rewards</code> is present. Must not be greater than 255 characters. Example: <code>l</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rewards.0.type"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="streak"
+               data-component="body">
+    <br>
+<p>This field is required when <code>rewards</code> is present. Example: <code>streak</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>punch</code></li> <li><code>streak</code></li></ul>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rewards.0.description"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="Eius et animi quos velit et."
+               data-component="body">
+    <br>
+<p>Example: <code>Eius et animi quos velit et.</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>image_url</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rewards.0.image_url"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="http://www.ernser.org/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html"
+               data-component="body">
+    <br>
+<p>Must be a valid URL. Must not be greater than 500 characters. Example: <code>http://www.ernser.org/harum-mollitia-modi-deserunt-aut-ab-provident-perspiciatis-quo.html</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>reward_json</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="rewards.0.reward_json"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value=""
+               data-component="body">
+    <br>
+
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>threshold_int</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="rewards.0.threshold_int"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="49"
+               data-component="body">
+    <br>
+<p>This field is required when <code>rewards</code> is present. Must be at least 1. Example: <code>49</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>per_customer_limit</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="rewards.0.per_customer_limit"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="43"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>43</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>global_limit</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="rewards.0.global_limit"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="61"
+               data-component="body">
+    <br>
+<p>Must be at least 1. Example: <code>61</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PATCHapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="rewards.0.active"
+                   value="true"
+                   data-endpoint="PATCHapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PATCHapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="rewards.0.active"
+                   value="false"
+                   data-endpoint="PATCHapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>false</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>sort_order</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="rewards.0.sort_order"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="61"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Example: <code>61</code></p>
+                    </div>
+                                    </details>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>custom_field_ids</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_field_ids[0]"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="custom_field_ids[1]"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               data-component="body">
+    <br>
+<p>Must be a valid UUID. The <code>id</code> of an existing record in the custom_fields table.</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>custom_fields</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>key</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.key"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="p"
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom<em>fields</code> is present. Must match the regex /^[a-z0-9</em>]+$/. Must not be greater than 255 characters. Example: <code>p</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>label</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.label"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="w"
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom_fields</code> is present. Must not be greater than 255 characters. Example: <code>w</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.description"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="Eius et animi quos velit et."
+               data-component="body">
+    <br>
+<p>Example: <code>Eius et animi quos velit et.</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.type"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="date"
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom_fields</code> is present. Example: <code>date</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>required</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PATCHapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="custom_fields.0.required"
+                   value="true"
+                   data-endpoint="PATCHapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PATCHapi-v1-campaigns--id-" style="display: none">
+            <input type="radio" name="custom_fields.0.required"
+                   value="false"
+                   data-endpoint="PATCHapi-v1-campaigns--id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Example: <code>true</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.extra"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value=""
+               data-component="body">
+    <br>
+
+                    </div>
+                                                                <div style=" margin-left: 14px; clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>options</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>value</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.options.0.value"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="v"
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom_fields.*.options</code> is present. Must not be greater than 255 characters. Example: <code>v</code></p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>label</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.options.0.label"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="d"
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom_fields.*.options</code> is present. Must not be greater than 255 characters. Example: <code>d</code></p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>sort_order</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="custom_fields.0.options.0.sort_order"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="37"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Example: <code>37</code></p>
+                    </div>
+                                    </details>
+        </div>
+                                                                    <div style=" margin-left: 14px; clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>validations</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>operator</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.validations.0.operator"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="="
+               data-component="body">
+    <br>
+<p>This field is required when <code>custom_fields.*.validations</code> is present. Example: <code>=</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>value_string</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.validations.0.value_string"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>value_number</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="custom_fields.0.validations.0.value_number"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="4326.41688"
+               data-component="body">
+    <br>
+<p>Example: <code>4326.41688</code></p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>value_date</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.validations.0.value_date"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="2025-11-28T08:45:49"
+               data-component="body">
+    <br>
+<p>Must be a valid date. Example: <code>2025-11-28T08:45:49</code></p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="custom_fields.0.validations.0.message"                data-endpoint="PATCHapi-v1-campaigns--id-"
+               value="m"
+               data-component="body">
+    <br>
+<p>Must not be greater than 500 characters. Example: <code>m</code></p>
+                    </div>
+                                    </details>
+        </div>
+                                        </details>
+        </div>
         </form>
 
                     <h2 id="campaigns-DELETEapi-v1-campaigns--id-">Remove the specified resource from storage.</h2>
@@ -8493,7 +9666,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8501,7 +9674,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2"
 );
 
 const headers = {
@@ -8610,10 +9783,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-v1-campaigns--id-"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     </form>
 
@@ -8635,7 +9808,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/custom-fields" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8643,7 +9816,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/custom-fields"
 );
 
 const headers = {
@@ -8769,10 +9942,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--custom-fields"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     </form>
 
@@ -8790,7 +9963,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/custom-fields" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -8802,7 +9975,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
         84
     ],
     \"required_overrides\": [
-        false
+        true
     ]
 }"
 </code></pre></div>
@@ -8810,7 +9983,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/custom-fields"
 );
 
 const headers = {
@@ -8827,7 +10000,7 @@ let body = {
         84
     ],
     "required_overrides": [
-        false
+        true
     ]
 };
 
@@ -8932,10 +10105,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-campaigns--id--custom-fields"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -8996,7 +10169,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields/architecto" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/custom-fields/architecto" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -9004,7 +10177,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/custom-fields/architecto"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/custom-fields/architecto"
 );
 
 const headers = {
@@ -9113,10 +10286,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="DELETEapi-v1-campaigns--id--custom-fields--fieldId-"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>fieldId</code></b>&nbsp;&nbsp;
@@ -9300,8 +10473,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"key\": \"b\",
     \"label\": \"n\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"type\": \"select\",
-    \"required\": false,
+    \"type\": \"date\",
+    \"required\": true,
     \"active\": false,
     \"options\": [
         {
@@ -9312,10 +10485,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     ],
     \"validations\": [
         {
-            \"operator\": \"&gt;\",
+            \"operator\": \"&lt;\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-23T08:54:57\",
+            \"value_date\": \"2025-11-28T08:45:49\",
             \"message\": \"m\"
         }
     ]
@@ -9338,8 +10511,8 @@ let body = {
     "key": "b",
     "label": "n",
     "description": "Eius et animi quos velit et.",
-    "type": "select",
-    "required": false,
+    "type": "date",
+    "required": true,
     "active": false,
     "options": [
         {
@@ -9350,10 +10523,10 @@ let body = {
     ],
     "validations": [
         {
-            "operator": "&gt;",
+            "operator": "&lt;",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-23T08:54:57",
+            "value_date": "2025-11-28T08:45:49",
             "message": "m"
         }
     ]
@@ -9496,10 +10669,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-custom-fields"
-               value="select"
+               value="date"
                data-component="body">
     <br>
-<p>Example: <code>select</code></p>
+<p>Example: <code>date</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>text</code></li> <li><code>number</code></li> <li><code>date</code></li> <li><code>boolean</code></li> <li><code>select</code></li></ul>
         </div>
@@ -9523,7 +10696,7 @@ Must be one of:
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -9624,10 +10797,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="POSTapi-v1-custom-fields"
-               value=">"
+               value="<"
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>&gt;</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>&lt;</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -9662,10 +10835,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="POSTapi-v1-custom-fields"
-               value="2025-11-23T08:54:57"
+               value="2025-11-28T08:45:49"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-23T08:54:57</code></p>
+<p>Must be a valid date. Example: <code>2025-11-28T08:45:49</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -9860,7 +11033,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"label\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
     \"required\": false,
-    \"active\": true,
+    \"active\": false,
     \"options\": [
         {
             \"id\": \"21c4122b-d554-3723-966c-6d723ea5293f\",
@@ -9872,10 +11045,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"validations\": [
         {
             \"id\": \"cd1eb1ea-4697-3b9a-9dd0-988044a83af6\",
-            \"operator\": \"in\",
+            \"operator\": \"regex\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-23T08:54:57\",
+            \"value_date\": \"2025-11-28T08:45:49\",
             \"message\": \"m\"
         }
     ]
@@ -9898,7 +11071,7 @@ let body = {
     "label": "b",
     "description": "Eius et animi quos velit et.",
     "required": false,
-    "active": true,
+    "active": false,
     "options": [
         {
             "id": "21c4122b-d554-3723-966c-6d723ea5293f",
@@ -9910,10 +11083,10 @@ let body = {
     "validations": [
         {
             "id": "cd1eb1ea-4697-3b9a-9dd0-988044a83af6",
-            "operator": "in",
+            "operator": "regex",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-23T08:54:57",
+            "value_date": "2025-11-28T08:45:49",
             "message": "m"
         }
     ]
@@ -10104,7 +11277,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -10195,10 +11368,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="PUTapi-v1-custom-fields--id-"
-               value="in"
+               value="regex"
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>in</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>regex</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -10233,10 +11406,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="PUTapi-v1-custom-fields--id-"
-               value="2025-11-23T08:54:57"
+               value="2025-11-28T08:45:49"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-23T08:54:57</code></p>
+<p>Must be a valid date. Example: <code>2025-11-28T08:45:49</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -10275,8 +11448,8 @@ Must be one of:
     --data "{
     \"label\": \"b\",
     \"description\": \"Eius et animi quos velit et.\",
-    \"required\": false,
-    \"active\": false,
+    \"required\": true,
+    \"active\": true,
     \"options\": [
         {
             \"id\": \"21c4122b-d554-3723-966c-6d723ea5293f\",
@@ -10288,10 +11461,10 @@ Must be one of:
     \"validations\": [
         {
             \"id\": \"cd1eb1ea-4697-3b9a-9dd0-988044a83af6\",
-            \"operator\": \"not_in\",
+            \"operator\": \"&lt;=\",
             \"value_string\": \"architecto\",
             \"value_number\": 4326.41688,
-            \"value_date\": \"2025-11-23T08:54:57\",
+            \"value_date\": \"2025-11-28T08:45:49\",
             \"message\": \"m\"
         }
     ]
@@ -10313,8 +11486,8 @@ const headers = {
 let body = {
     "label": "b",
     "description": "Eius et animi quos velit et.",
-    "required": false,
-    "active": false,
+    "required": true,
+    "active": true,
     "options": [
         {
             "id": "21c4122b-d554-3723-966c-6d723ea5293f",
@@ -10326,10 +11499,10 @@ let body = {
     "validations": [
         {
             "id": "cd1eb1ea-4697-3b9a-9dd0-988044a83af6",
-            "operator": "not_in",
+            "operator": "&lt;=",
             "value_string": "architecto",
             "value_number": 4326.41688,
-            "value_date": "2025-11-23T08:54:57",
+            "value_date": "2025-11-28T08:45:49",
             "message": "m"
         }
     ]
@@ -10486,7 +11659,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>extra</code></b>&nbsp;&nbsp;
@@ -10520,7 +11693,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -10611,10 +11784,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.operator"                data-endpoint="PATCHapi-v1-custom-fields--id-"
-               value="not_in"
+               value="<="
                data-component="body">
     <br>
-<p>This field is required when <code>validations</code> is present. Example: <code>not_in</code></p>
+<p>This field is required when <code>validations</code> is present. Example: <code>&lt;=</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>=</code></li> <li><code>!=</code></li> <li><code>></code></li> <li><code>>=</code></li> <li><code><</code></li> <li><code><=</code></li> <li><code>in</code></li> <li><code>not_in</code></li> <li><code>regex</code></li></ul>
                     </div>
@@ -10649,10 +11822,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="validations.0.value_date"                data-endpoint="PATCHapi-v1-custom-fields--id-"
-               value="2025-11-23T08:54:57"
+               value="2025-11-28T08:45:49"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-23T08:54:57</code></p>
+<p>Must be a valid date. Example: <code>2025-11-28T08:45:49</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
@@ -11881,6 +13054,153 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Must be 6 characters. Example: <code>ngzmiy</code></p>
         </div>
         </form>
+
+                    <h2 id="autenticacion-customer-GETapi-v1-customers-validate-token">Validar token de customer y obtener businesses y campaigns</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Valida el token del customer autenticado y retorna:</p>
+<ul>
+<li>Array de IDs de businesses donde el customer tiene campaigns</li>
+<li>Array de IDs de campaigns del customer</li>
+</ul>
+
+<span id="example-requests-GETapi-v1-customers-validate-token">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/customers/validate-token" \
+    --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/customers/validate-token"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-customers-validate-token">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+access-control-expose-headers: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Invalid token. Token not found in database.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-customers-validate-token" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-customers-validate-token"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-customers-validate-token"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-customers-validate-token" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-customers-validate-token">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-customers-validate-token" data-method="GET"
+      data-path="api/v1/customers/validate-token"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-customers-validate-token', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-customers-validate-token"
+                    onclick="tryItOut('GETapi-v1-customers-validate-token');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-customers-validate-token"
+                    onclick="cancelTryOut('GETapi-v1-customers-validate-token');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-customers-validate-token"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/customers/validate-token</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-customers-validate-token"
+               value="Bearer {YOUR_AUTH_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-customers-validate-token"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-customers-validate-token"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
 
                     <h2 id="autenticacion-customer-POSTapi-v1-customers-logout">Logout de customer</h2>
 
@@ -13319,15 +14639,28 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>
 </p>
 
-<p>Este endpoint se usa cuando un customer escanea un QR de una campaign.
-El flujo es:</p>
+<p>Este endpoint se usa cuando un customer escanea un QR de una campaign.</p>
+<p><strong>Flujo completo:</strong></p>
 <ol>
 <li>Customer escanea QR → obtiene campaign_code</li>
-<li>Si el customer es nuevo: requiere phone, name, business_slug, otp_code</li>
-<li>Si el customer ya existe: solo requiere phone, business_slug</li>
-<li>Se registra automáticamente en la campaign</li>
-<li>Se guardan los valores de custom fields si se proporcionan</li>
+<li>Frontend muestra formulario con campos (name, phone, + custom fields)</li>
+<li>Se envía todo en field_values (name y phone deben venir aquí)</li>
+<li>Se crea/actualiza customer, se crea customer_campaign con status='pending'</li>
+<li>Se guardan todos los field_values</li>
+<li>Se genera y envía OTP (expira en 3 minutos)</li>
+<li>Se crea token de customer</li>
+<li>Se retorna token, mensaje OTP, customer_id, campaign_id, status</li>
+<li>Frontend muestra ventana OTP</li>
+<li>Frontend envía OTP a /api/v1/otp/verify</li>
+<li>Al verificar OTP, se actualiza customer_campaign status='validated'</li>
 </ol>
+<p><strong>Importante:</strong></p>
+<ul>
+<li>name y phone deben venir en field_values (identificados por el key del custom field)</li>
+<li>El customer se crea/actualiza automáticamente</li>
+<li>El customer_campaign se crea con status='pending'</li>
+<li>Después de verificar el OTP, el status cambia a 'validated'</li>
+</ul>
 
 <span id="example-requests-POSTapi-v1-campaigns-register">
 <blockquote>Example request:</blockquote>
@@ -13340,16 +14673,13 @@ El flujo es:</p>
     --header "Accept: application/json" \
     --data "{
     \"campaign_code\": \"bngz\",
-    \"phone\": \"9425593\",
     \"business_slug\": \"architecto\",
-    \"name\": \"n\",
-    \"otp_code\": \"gzmiyv\",
     \"field_values\": [
         {
-            \"custom_field_id\": \"5707ca55-f609-3528-be8b-1baeaee1567e\",
+            \"custom_field_id\": \"architecto\",
             \"string_value\": \"architecto\",
             \"number_value\": 4326.41688,
-            \"date_value\": \"2025-11-23T08:54:56\",
+            \"date_value\": \"2025-11-28T08:45:48\",
             \"boolean_value\": true
         }
     ]
@@ -13369,16 +14699,13 @@ const headers = {
 
 let body = {
     "campaign_code": "bngz",
-    "phone": "9425593",
     "business_slug": "architecto",
-    "name": "n",
-    "otp_code": "gzmiyv",
     "field_values": [
         {
-            "custom_field_id": "5707ca55-f609-3528-be8b-1baeaee1567e",
+            "custom_field_id": "architecto",
             "string_value": "architecto",
             "number_value": 4326.41688,
-            "date_value": "2025-11-23T08:54:56",
+            "date_value": "2025-11-28T08:45:48",
             "boolean_value": true
         }
     ]
@@ -13479,18 +14806,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>The <code>code</code> of an existing record in the campaigns table. Must be 4 characters. Example: <code>bngz</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="phone"                data-endpoint="POSTapi-v1-campaigns-register"
-               value="9425593"
-               data-component="body">
-    <br>
-<p>Must match the regex /^+?[1-9]\d{1,14}$/. Example: <code>9425593</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>business_slug</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
  &nbsp;
@@ -13503,35 +14818,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>The <code>slug</code> of an existing record in the businesses table. Example: <code>architecto</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="name"                data-endpoint="POSTapi-v1-campaigns-register"
-               value="n"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>n</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>otp_code</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="otp_code"                data-endpoint="POSTapi-v1-campaigns-register"
-               value="gzmiyv"
-               data-component="body">
-    <br>
-<p>Must be 6 characters. Example: <code>gzmiyv</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
         <details>
             <summary style="padding-bottom: 10px;">
                 <b style="line-height: 2;"><code>field_values</code></b>&nbsp;&nbsp;
 <small>object[]</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
  &nbsp;
 <br>
 
@@ -13539,14 +14830,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>custom_field_id</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="field_values.0.custom_field_id"                data-endpoint="POSTapi-v1-campaigns-register"
-               value="5707ca55-f609-3528-be8b-1baeaee1567e"
+               value="architecto"
                data-component="body">
     <br>
-<p>This field is required when <code>field_values</code> is present. Must be a valid UUID. The <code>id</code> of an existing record in the custom_fields table. Example: <code>5707ca55-f609-3528-be8b-1baeaee1567e</code></p>
+<p>Example: <code>architecto</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>string_value</code></b>&nbsp;&nbsp;
@@ -13579,10 +14870,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="field_values.0.date_value"                data-endpoint="POSTapi-v1-campaigns-register"
-               value="2025-11-23T08:54:56"
+               value="2025-11-28T08:45:48"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-23T08:54:56</code></p>
+<p>Must be a valid date. Example: <code>2025-11-28T08:45:48</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>boolean_value</code></b>&nbsp;&nbsp;
@@ -13753,6 +15044,163 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                    <h2 id="customers-campaigns-GETapi-v1-customers-me-campaigns--campaignId-">Obtener relación del customer autenticado con una campaign específica</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retorna toda la información de la relación entre el customer autenticado y una campaign,
+incluyendo stamps, status, validated_at, y demás datos relevantes.</p>
+
+<span id="example-requests-GETapi-v1-customers-me-campaigns--campaignId-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/customers/me/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2" \
+    --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/customers/me/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-customers-me-campaigns--campaignId-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+access-control-expose-headers: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Invalid token. Token not found in database.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-customers-me-campaigns--campaignId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-customers-me-campaigns--campaignId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-customers-me-campaigns--campaignId-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-customers-me-campaigns--campaignId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-customers-me-campaigns--campaignId-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-customers-me-campaigns--campaignId-" data-method="GET"
+      data-path="api/v1/customers/me/campaigns/{campaignId}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-customers-me-campaigns--campaignId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-customers-me-campaigns--campaignId-"
+                    onclick="tryItOut('GETapi-v1-customers-me-campaigns--campaignId-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-customers-me-campaigns--campaignId-"
+                    onclick="cancelTryOut('GETapi-v1-customers-me-campaigns--campaignId-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-customers-me-campaigns--campaignId-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/customers/me/campaigns/{campaignId}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-customers-me-campaigns--campaignId-"
+               value="Bearer {YOUR_AUTH_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-customers-me-campaigns--campaignId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-customers-me-campaigns--campaignId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>campaignId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="campaignId"                data-endpoint="GETapi-v1-customers-me-campaigns--campaignId-"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
+               data-component="url">
+    <br>
+<p>Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
+            </div>
+                    </form>
+
                     <h2 id="customers-campaigns-GETapi-v1-campaigns--id--customers">Listar customers de una campaign (Owner)</h2>
 
 <p>
@@ -13767,7 +15215,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/customers" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -13775,7 +15223,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/customers"
 );
 
 const headers = {
@@ -13901,10 +15349,178 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--customers"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="customers-campaigns-GETapi-v1-customers--customerId--campaigns--campaignId-">Obtener relación completa entre customer y campaign</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retorna toda la información de la relación entre un customer específico y una campaign,
+incluyendo stamps, status, validated_at, y demás datos relevantes.</p>
+
+<span id="example-requests-GETapi-v1-customers--customerId--campaigns--campaignId-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2" \
+    --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-customers--customerId--campaigns--campaignId-">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+access-control-expose-headers: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-customers--customerId--campaigns--campaignId-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-customers--customerId--campaigns--campaignId-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-customers--customerId--campaigns--campaignId-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-customers--customerId--campaigns--campaignId-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-customers--customerId--campaigns--campaignId-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-customers--customerId--campaigns--campaignId-" data-method="GET"
+      data-path="api/v1/customers/{customerId}/campaigns/{campaignId}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-customers--customerId--campaigns--campaignId-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-customers--customerId--campaigns--campaignId-"
+                    onclick="tryItOut('GETapi-v1-customers--customerId--campaigns--campaignId-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-customers--customerId--campaigns--campaignId-"
+                    onclick="cancelTryOut('GETapi-v1-customers--customerId--campaigns--campaignId-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-customers--customerId--campaigns--campaignId-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/customers/{customerId}/campaigns/{campaignId}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId-"
+               value="Bearer {YOUR_AUTH_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_AUTH_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>customerId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="customerId"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId-"
+               value="architecto"
+               data-component="url">
+    <br>
+<p>Example: <code>architecto</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>campaignId</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="campaignId"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId-"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
+               data-component="url">
+    <br>
+<p>Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     </form>
 
@@ -13926,7 +15542,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers/architecto/field-values" \
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/customers/architecto/field-values" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -13936,8 +15552,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
             \"custom_field_id\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
             \"string_value\": \"architecto\",
             \"number_value\": 4326.41688,
-            \"date_value\": \"2025-11-23T08:54:57\",
-            \"boolean_value\": false
+            \"date_value\": \"2025-11-28T08:45:49\",
+            \"boolean_value\": true
         }
     ]
 }"
@@ -13946,7 +15562,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers/architecto/field-values"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/customers/architecto/field-values"
 );
 
 const headers = {
@@ -13961,8 +15577,8 @@ let body = {
             "custom_field_id": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
             "string_value": "architecto",
             "number_value": 4326.41688,
-            "date_value": "2025-11-23T08:54:57",
-            "boolean_value": false
+            "date_value": "2025-11-28T08:45:49",
+            "boolean_value": true
         }
     ]
 };
@@ -14068,10 +15684,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="POSTapi-v1-campaigns--id--customers--customerId--field-values"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>customerId</code></b>&nbsp;&nbsp;
@@ -14139,10 +15755,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="values.0.date_value"                data-endpoint="POSTapi-v1-campaigns--id--customers--customerId--field-values"
-               value="2025-11-23T08:54:57"
+               value="2025-11-28T08:45:49"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-11-23T08:54:57</code></p>
+<p>Must be a valid date. Example: <code>2025-11-28T08:45:49</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>boolean_value</code></b>&nbsp;&nbsp;
@@ -14164,7 +15780,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
                     </div>
                                     </details>
         </div>
@@ -14184,7 +15800,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers/architecto/field-values" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/customers/architecto/field-values" \
     --header "Authorization: Bearer {YOUR_AUTH_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -14192,7 +15808,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/customers/architecto/field-values"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/customers/architecto/field-values"
 );
 
 const headers = {
@@ -14318,10 +15934,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--customers--customerId--field-values"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>customerId</code></b>&nbsp;&nbsp;
@@ -14367,7 +15983,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"customer_code\": \"bngzmi\",
     \"campaign_code\": \"yvdl\",
-    \"type\": \"stamp\"
+    \"type\": \"streak\"
 }"
 </code></pre></div>
 
@@ -14386,7 +16002,7 @@ const headers = {
 let body = {
     "customer_code": "bngzmi",
     "campaign_code": "yvdl",
-    "type": "stamp"
+    "type": "streak"
 };
 
 fetch(url, {
@@ -14514,10 +16130,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-staff-apply-stamp"
-               value="stamp"
+               value="streak"
                data-component="body">
     <br>
-<p>Example: <code>stamp</code></p>
+<p>Example: <code>streak</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>stamp</code></li> <li><code>streak</code></li></ul>
         </div>
@@ -14537,7 +16153,7 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/stamps" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/stamps" \
     --header "Authorization: Bearer {staff_token} Requiere token de staff" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -14545,7 +16161,7 @@ Must be one of:
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/stamps"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/stamps"
 );
 
 const headers = {
@@ -14671,10 +16287,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--stamps"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     </form>
 
@@ -14692,7 +16308,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e143-7132-8328-75478fde8b67/stamps" \
+    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/stamps" \
     --header "Authorization: Bearer {staff_token} Requiere token de staff" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -14700,7 +16316,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e143-7132-8328-75478fde8b67/stamps"
+    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/stamps"
 );
 
 const headers = {
@@ -14838,10 +16454,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="campaignId"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId--stamps"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     </form>
 
@@ -15662,7 +17278,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --form "model=architecto"\
     --form "field=architecto"\
-    --form "file=@/private/var/folders/bm/ljg1j4q560g8g4_f6mmp_sdc0000gn/T/phpn4gf692541bl3Gn1YrS" </code></pre></div>
+    --form "file=@/private/var/folders/bm/ljg1j4q560g8g4_f6mmp_sdc0000gn/T/php1ce1pom6o4o0ebFUGnB" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -15820,7 +17436,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>El archivo a subir Example: <code>/private/var/folders/bm/ljg1j4q560g8g4_f6mmp_sdc0000gn/T/phpn4gf692541bl3Gn1YrS</code></p>
+<p>El archivo a subir Example: <code>/private/var/folders/bm/ljg1j4q560g8g4_f6mmp_sdc0000gn/T/php1ce1pom6o4o0ebFUGnB</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>model</code></b>&nbsp;&nbsp;
@@ -16334,7 +17950,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/unlocks" \
+    --get "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/unlocks" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -16342,7 +17958,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/campaigns/019aa527-e143-7132-8328-75478fde8b67/unlocks"
+    "http://loypi-api.test/api/v1/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/unlocks"
 );
 
 const headers = {
@@ -16468,10 +18084,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="id"                data-endpoint="GETapi-v1-campaigns--id--unlocks"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>The ID of the campaign. Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>The ID of the campaign. Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     </form>
 
@@ -16644,7 +18260,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e143-7132-8328-75478fde8b67/unlocks" \
+    --get "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/unlocks" \
     --header "Authorization: Bearer {user_token} Requiere token de usuario (owner/admin)" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -16652,7 +18268,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e143-7132-8328-75478fde8b67/unlocks"
+    "http://loypi-api.test/api/v1/customers/architecto/campaigns/019aa527-e159-72f0-a2e6-2dd89132fdf2/unlocks"
 );
 
 const headers = {
@@ -16790,10 +18406,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="campaignId"                data-endpoint="GETapi-v1-customers--customerId--campaigns--campaignId--unlocks"
-               value="019aa527-e143-7132-8328-75478fde8b67"
+               value="019aa527-e159-72f0-a2e6-2dd89132fdf2"
                data-component="url">
     <br>
-<p>Example: <code>019aa527-e143-7132-8328-75478fde8b67</code></p>
+<p>Example: <code>019aa527-e159-72f0-a2e6-2dd89132fdf2</code></p>
             </div>
                     </form>
 

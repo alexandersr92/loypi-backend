@@ -29,6 +29,7 @@ class StoreBusinessRequest extends FormRequest
             'slug' => ['nullable', 'string', 'max:255', 'unique:businesses,slug', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
             'description' => ['nullable', 'string', 'max:1000'],
             'logo' => ['nullable', 'string', 'url', 'max:500'],
+            'cover' => ['nullable', 'string', 'url', 'max:500'],
             'branding_json' => ['nullable', 'array'],
             'branding_json.primary_color' => ['nullable', 'string', 'regex:/^#[0-9A-Fa-f]{6}$/'],
             'branding_json.secondary_color' => ['nullable', 'string', 'regex:/^#[0-9A-Fa-f]{6}$/'],

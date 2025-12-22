@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\SendOtpRequest;
 use App\Http\Requests\Api\VerifyOtpRequest;
 use App\Models\Customer;
+use App\Models\CustomerCampaign;
 use App\Models\Otp;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
@@ -18,9 +19,15 @@ use Illuminate\Support\Facades\Log;
  * El sistema utiliza Twilio Verify para enviar y verificar códigos OTP vía SMS.
  * Estos endpoints están disponibles únicamente para Customers (no para Owners/Users).
  * 
+ * **Modo Desarrollo:**
+ * En modo desarrollo (APP_ENV=local o APP_DEBUG=true), el sistema OTP está desactivado:
+ * - No se envían SMS reales
+ * - El código OTP siempre es: **123456**
+ * - Usa este código para todas las verificaciones en desarrollo
+ * 
  * **Flujo de autenticación:**
  * 1. Envía un OTP con `/api/v1/otp/send`
- * 2. Recibe el código en tu teléfono vía SMS
+ * 2. Recibe el código en tu teléfono vía SMS (o usa 123456 en desarrollo)
  * 3. Verifica el código con `/api/v1/otp/verify`
  * 4. Una vez verificado, puedes registrar o hacer login del cliente
  */
@@ -38,8 +45,10 @@ class OtpController extends Controller
      * 
      * **Flujo:**
      * 1. Llama a este endpoint para enviar el OTP
-     * 2. Recibirás el código OTP en tu teléfono vía SMS
+     * 2. Recibirás el código OTP en tu teléfono vía SMS (o usa 123456 en desarrollo)
      * 3. Usa el código recibido en el endpoint `/api/v1/otp/verify`
+     * 
+     * **Nota:** En modo desarrollo, el código siempre es **123456** y no se envía SMS.
      * 
      * @unauthenticated
      * @bodyParam phone string required El número de teléfono del cliente (formato internacional, ej: +521234567890). Example: +521234567890
@@ -79,8 +88,38 @@ class OtpController extends Controller
             ->where('status', 'pending')
             ->update(['status' => 'expired']);
 
+        // Modo desarrollo: usar código fijo 123456
+        if (app()->environment('local') || config('app.debug')) {
+            $otp = Otp::create([
+                'phone' => $phone,
+                'code' => '123456', // Código fijo en desarrollo
+                'type' => 'sms',
+                'status' => 'pending',
+                'expires_at' => now()->addMinutes(3),
+                'ip_address' => $request->ip(),
+                'meta' => [
+                    'development_mode' => true,
+                    'note' => 'OTP desactivado en modo desarrollo. Usar código: 123456',
+                ],
+            ]);
+
+            Log::info("OTP generado en modo desarrollo", [
+                'phone' => $phone,
+                'otp_id' => $otp->id,
+                'code' => '123456',
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Código OTP enviado exitosamente. (Modo desarrollo: usar código 123456)',
+                'data' => [
+                    'expires_at' => $otp->expires_at->toIso8601String(),
+                ],
+            ], 200);
+        }
+
         try {
-            // Usar Twilio Verify para enviar OTP
+            // Usar Twilio Verify para enviar OTP (solo en producción)
             $twilioSid = config('services.twilio.account_sid');
             $twilioAuthToken = config('services.twilio.auth_token');
             $twilioServiceSid = config('services.twilio.verify_service_sid');
@@ -105,7 +144,7 @@ class OtpController extends Controller
                 'code' => null, // Twilio maneja el código
                 'type' => 'sms', // Usando SMS vía Twilio Verify
                 'status' => 'pending',
-                'expires_at' => now()->addMinutes(10), // Expira en 10 minutos
+                'expires_at' => now()->addMinutes(3), // Expira en 10 minutos
                 'ip_address' => $request->ip(),
                 'meta' => [
                     'twilio_sid' => $verification->sid,
@@ -179,7 +218,7 @@ class OtpController extends Controller
     {
         $validated = $request->validated();
         $phone = $validated['phone'];
-        $code = $validated['code'];
+        $code = $validated['otp'];
 
         // Buscar OTP pendiente y no expirado
         $otp = Otp::where('phone', $phone)
@@ -204,8 +243,47 @@ class OtpController extends Controller
             ], 403);
         }
 
+        // Modo desarrollo: aceptar siempre 123456
+        if (app()->environment('local') || config('app.debug')) {
+            // Verificar que el código sea 123456
+            if ($code !== '123456') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Código OTP inválido. En modo desarrollo, usar código: 123456',
+                ], 400);
+            }
+
+            // Marcar como verificado
+            $otp->update([
+                'code' => $code,
+                'status' => 'verified',
+                'verified_at' => now(),
+                'meta' => array_merge($otp->meta ?? [], [
+                    'development_mode' => true,
+                    'verified_in_dev' => true,
+                ]),
+            ]);
+
+            Log::info("OTP verificado en modo desarrollo", [
+                'phone' => $phone,
+                'otp_id' => $otp->id,
+                'code' => $code,
+            ]);
+
+            // Actualizar customer_campaign si existe uno pendiente
+            $this->updateCustomerCampaignStatus($phone);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Código OTP verificado exitosamente.',
+                'data' => [
+                    'verified_at' => $otp->verified_at->toIso8601String(),
+                ],
+            ], 200);
+        }
+
         try {
-            // Verificar código usando Twilio Verify
+            // Verificar código usando Twilio Verify (solo en producción)
             $twilioSid = config('services.twilio.account_sid');
             $twilioAuthToken = config('services.twilio.auth_token');
             $twilioServiceSid = config('services.twilio.verify_service_sid');
@@ -255,6 +333,9 @@ class OtpController extends Controller
                 'twilio_check_sid' => $verificationCheck->sid,
             ]);
 
+            // Actualizar customer_campaign si existe uno pendiente
+            $this->updateCustomerCampaignStatus($phone);
+
             return response()->json([
                 'success' => true,
                 'message' => 'Código OTP verificado exitosamente.',
@@ -273,6 +354,37 @@ class OtpController extends Controller
                 'success' => false,
                 'message' => 'Error al verificar el código OTP. Por favor intenta nuevamente.',
             ], 500);
+        }
+    }
+
+    /**
+     * Actualiza el status del customer_campaign más reciente con status='pending' para el customer
+     */
+    private function updateCustomerCampaignStatus(string $phone): void
+    {
+        $customer = Customer::where('phone', $phone)->first();
+        
+        if (!$customer) {
+            return;
+        }
+
+        // Buscar el customer_campaign más reciente con status='pending' para este customer
+        $customerCampaign = CustomerCampaign::where('customer_id', $customer->id)
+            ->where('status', 'pending')
+            ->latest()
+            ->first();
+
+        if ($customerCampaign) {
+            $customerCampaign->update([
+                'status' => 'validated',
+                'validated_at' => now(),
+            ]);
+
+            Log::info("Customer campaign validado después de verificar OTP", [
+                'customer_id' => $customer->id,
+                'customer_campaign_id' => $customerCampaign->id,
+                'campaign_id' => $customerCampaign->campaign_id,
+            ]);
         }
     }
 }

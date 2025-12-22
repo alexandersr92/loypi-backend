@@ -21,12 +21,25 @@ endpoints:
       title: 'Registrar customer a campaign (con QR)'
       description: |-
         Este endpoint se usa cuando un customer escanea un QR de una campaign.
-        El flujo es:
+
+        **Flujo completo:**
         1. Customer escanea QR → obtiene campaign_code
-        2. Si el customer es nuevo: requiere phone, name, business_slug, otp_code
-        3. Si el customer ya existe: solo requiere phone, business_slug
-        4. Se registra automáticamente en la campaign
-        5. Se guardan los valores de custom fields si se proporcionan
+        2. Frontend muestra formulario con campos (name, phone, + custom fields)
+        3. Se envía todo en field_values (name y phone deben venir aquí)
+        4. Se crea/actualiza customer, se crea customer_campaign con status='pending'
+        5. Se guardan todos los field_values
+        6. Se genera y envía OTP (expira en 3 minutos)
+        7. Se crea token de customer
+        8. Se retorna token, mensaje OTP, customer_id, campaign_id, status
+        9. Frontend muestra ventana OTP
+        10. Frontend envía OTP a /api/v1/otp/verify
+        11. Al verificar OTP, se actualiza customer_campaign status='validated'
+
+        **Importante:**
+        - name y phone deben venir en field_values (identificados por el key del custom field)
+        - El customer se crea/actualiza automáticamente
+        - El customer_campaign se crea con status='pending'
+        - Después de verificar el OTP, el status cambia a 'validated'
       authenticated: false
       deprecated: false
     headers:
@@ -48,17 +61,6 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'Must match the regex /^\+?[1-9]\d{1,14}$/.'
-        required: true
-        example: '9425593'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
       business_slug:
         custom: []
         name: business_slug
@@ -70,34 +72,13 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      name:
-        custom: []
-        name: name
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: 'n'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      otp_code:
-        custom: []
-        name: otp_code
-        description: 'Must be 6 characters.'
-        required: false
-        example: gzmiyv
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
       field_values:
         custom: []
         name: field_values
         description: ''
-        required: false
-        example: null
+        required: true
+        example:
+          - []
         type: 'object[]'
         enumValues: []
         exampleWasSpecified: false
@@ -106,9 +87,9 @@ endpoints:
       'field_values[].custom_field_id':
         custom: []
         name: 'field_values[].custom_field_id'
-        description: 'This field is required when <code>field_values</code> is present. Must be a valid UUID. The <code>id</code> of an existing record in the custom_fields table.'
-        required: false
-        example: 5707ca55-f609-3528-be8b-1baeaee1567e
+        description: ''
+        required: true
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -141,7 +122,7 @@ endpoints:
         name: 'field_values[].date_value'
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-23T08:54:56'
+        example: '2025-11-28T08:45:48'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -160,16 +141,13 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       campaign_code: bngz
-      phone: '9425593'
       business_slug: architecto
-      name: 'n'
-      otp_code: gzmiyv
       field_values:
         -
-          custom_field_id: 5707ca55-f609-3528-be8b-1baeaee1567e
+          custom_field_id: architecto
           string_value: architecto
           number_value: 4326.41688
-          date_value: '2025-11-23T08:54:56'
+          date_value: '2025-11-28T08:45:48'
           boolean_value: true
     fileParameters: []
     responses: []
@@ -229,6 +207,67 @@ endpoints:
     custom: []
     httpMethods:
       - GET
+    uri: 'api/v1/customers/me/campaigns/{campaignId}'
+    metadata:
+      custom: []
+      groupName: '👥 Customers - Campaigns'
+      groupDescription: |-
+
+        Endpoints para gestionar la relación entre customers y campaigns
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Obtener relación del customer autenticado con una campaign específica'
+      description: |-
+        Retorna toda la información de la relación entre el customer autenticado y una campaign,
+        incluyendo stamps, status, validated_at, y demás datos relevantes.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      campaignId:
+        custom: []
+        name: campaignId
+        description: ''
+        required: true
+        example: 019aa527-e159-72f0-a2e6-2dd89132fdf2
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      campaignId: 019aa527-e159-72f0-a2e6-2dd89132fdf2
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Invalid token. Token not found in database."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
+        description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
     uri: 'api/v1/campaigns/{id}/customers'
     metadata:
       custom: []
@@ -252,14 +291,87 @@ endpoints:
         name: id
         description: 'The ID of the campaign.'
         required: true
-        example: 019aa527-e143-7132-8328-75478fde8b67
+        example: 019aa527-e159-72f0-a2e6-2dd89132fdf2
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019aa527-e143-7132-8328-75478fde8b67
+      id: 019aa527-e159-72f0-a2e6-2dd89132fdf2
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+          access-control-expose-headers: '*'
+        description: null
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/customers/{customerId}/campaigns/{campaignId}'
+    metadata:
+      custom: []
+      groupName: '👥 Customers - Campaigns'
+      groupDescription: |-
+
+        Endpoints para gestionar la relación entre customers y campaigns
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Obtener relación completa entre customer y campaign'
+      description: |-
+        Retorna toda la información de la relación entre un customer específico y una campaign,
+        incluyendo stamps, status, validated_at, y demás datos relevantes.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      customerId:
+        custom: []
+        name: customerId
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      campaignId:
+        custom: []
+        name: campaignId
+        description: ''
+        required: true
+        example: 019aa527-e159-72f0-a2e6-2dd89132fdf2
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      customerId: architecto
+      campaignId: 019aa527-e159-72f0-a2e6-2dd89132fdf2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

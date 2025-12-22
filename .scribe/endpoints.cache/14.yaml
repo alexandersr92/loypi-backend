@@ -32,14 +32,14 @@ endpoints:
         name: id
         description: 'The ID of the campaign.'
         required: true
-        example: 019aa527-e143-7132-8328-75478fde8b67
+        example: 019aa527-e159-72f0-a2e6-2dd89132fdf2
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019aa527-e143-7132-8328-75478fde8b67
+      id: 019aa527-e159-72f0-a2e6-2dd89132fdf2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -161,7 +161,7 @@ endpoints:
         name: campaignId
         description: ''
         required: true
-        example: 019aa527-e143-7132-8328-75478fde8b67
+        example: 019aa527-e159-72f0-a2e6-2dd89132fdf2
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -169,7 +169,7 @@ endpoints:
         deprecated: false
     cleanUrlParameters:
       customerId: architecto
-      campaignId: 019aa527-e143-7132-8328-75478fde8b67
+      campaignId: 019aa527-e159-72f0-a2e6-2dd89132fdf2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

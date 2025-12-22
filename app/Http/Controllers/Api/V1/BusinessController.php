@@ -63,8 +63,8 @@ class BusinessController extends Controller
     {
         $business = Business::where('slug', $slug)->firstOrFail();
 
-        // Verificar autorización
-        $this->authorize('view', $business);
+        // Ruta pública - no requiere autenticación
+        // Si el usuario está autenticado, se puede usar para personalización adicional
 
         return response()->json([
             'success' => true,

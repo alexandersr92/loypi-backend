@@ -59,6 +59,13 @@ Route::prefix('v1')->group(function () {
         
         // Customer Campaigns - registro con QR (público)
         Route::post('/campaigns/register', [CustomerCampaignController::class, 'register'])->name('api.v1.campaigns.register');
+
+        Route::prefix('businesses')->group(function () {
+          
+         
+            Route::get('/slug/{slug}', [BusinessController::class, 'showBySlug'])->name('api.v1.businesses.show-by-slug');
+           
+        });
     });
 
     // Rutas protegidas por token de staff (DEBEN IR ANTES de las rutas de usuario)
@@ -78,11 +85,13 @@ Route::prefix('v1')->group(function () {
     // Rutas protegidas por token de customer
     Route::middleware(\App\Http\Middleware\EnsureCustomerIsAuthenticated::class)->group(function () {
         // Autenticación de customer
+        Route::get('/customers/validate-token', [CustomerAuthController::class, 'validateToken'])->name('api.v1.customers.validate-token');
         Route::post('/customers/logout', [CustomerAuthController::class, 'logout'])->name('api.v1.customers.logout');
         Route::get('/customers/me', [CustomerAuthController::class, 'me'])->name('api.v1.customers.me');
         
         // Customer Campaigns
         Route::get('/customers/me/campaigns', [CustomerCampaignController::class, 'myCampaigns'])->name('api.v1.customers.me.campaigns');
+        Route::get('/customers/me/campaigns/{campaignId}', [CustomerCampaignController::class, 'myCampaign'])->name('api.v1.customers.me.campaigns.show');
         
         // Redemptions - generar PIN y listar unlocks
         Route::get('/customers/me/unlocks', [RedemptionController::class, 'myUnlocks'])->name('api.v1.customers.me.unlocks');
@@ -112,7 +121,7 @@ Route::prefix('v1')->group(function () {
         Route::prefix('businesses')->group(function () {
             Route::post('/', [BusinessController::class, 'store'])->name('api.v1.businesses.store');
             Route::get('/{id}', [BusinessController::class, 'show'])->name('api.v1.businesses.show');
-            Route::get('/slug/{slug}', [BusinessController::class, 'showBySlug'])->name('api.v1.businesses.show-by-slug');
+            //Route::get('/slug/{slug}', [BusinessController::class, 'showBySlug'])->name('api.v1.businesses.show-by-slug');
             Route::put('/{id}', [BusinessController::class, 'update'])->name('api.v1.businesses.update');
             Route::patch('/{id}', [BusinessController::class, 'update'])->name('api.v1.businesses.update.patch');
         });
@@ -186,6 +195,9 @@ Route::prefix('v1')->group(function () {
             Route::put('/{id}', [CustomerController::class, 'update'])->name('api.v1.customers.update');
             Route::patch('/{id}', [CustomerController::class, 'update'])->name('api.v1.customers.update.patch');
             Route::delete('/{id}', [CustomerController::class, 'destroy'])->name('api.v1.customers.destroy');
+            
+            // Relación Customer-Campaign (Owner)
+            Route::get('/{customerId}/campaigns/{campaignId}', [CustomerCampaignController::class, 'show'])->name('api.v1.customers.campaigns.show');
             
             // Stamps de Customer en Campaign (Owner)
             Route::get('/{customerId}/campaigns/{campaignId}/stamps', [StampController::class, 'customerCampaignStamps'])->name('api.v1.customers.campaigns.stamps.index');

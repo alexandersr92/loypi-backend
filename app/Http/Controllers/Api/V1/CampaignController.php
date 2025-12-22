@@ -238,7 +238,7 @@ class CampaignController extends Controller
      */
     public function show(Request $request, string $id): JsonResponse
     {
-        $campaign = Campaign::with(['business', 'rewards'])->findOrFail($id);
+        $campaign = Campaign::with(['business', 'rewards', 'customFields.options', 'customFields.validations'])->findOrFail($id);
 
         $this->authorize('view', $campaign);
 
@@ -335,6 +335,9 @@ class CampaignController extends Controller
         $rewards = $validated['rewards'] ?? null;
         $customFieldIds = $validated['custom_field_ids'] ?? null;
         $customFields = $validated['custom_fields'] ?? null;
+        // Verificar directamente en el request si los campos fueron enviados
+        $hasCustomFieldIds = $request->has('custom_field_ids');
+        $hasCustomFields = $request->has('custom_fields');
         unset($validated['rewards'], $validated['reward_ids'], $validated['custom_field_ids'], $validated['custom_fields'], $validated['reward_pivot_data']);
 
         DB::beginTransaction();
@@ -422,27 +425,13 @@ class CampaignController extends Controller
             }
 
             // Manejar custom fields si se proporcionaron
-            if ($customFieldIds !== null || $customFields !== null) {
-                if ($customFieldIds !== null) {
-                    // Sincronizar custom fields existentes
-                    $syncData = [];
-                    foreach ($customFieldIds as $index => $fieldId) {
-                        $field = CustomField::findOrFail($fieldId);
-                        
-                        // Validar que el field pertenezca al business
-                        if ($field->business_id !== $user->business->id) {
-                            throw new \Exception("Custom field does not belong to your business.");
-                        }
-                        
-                        $syncData[$fieldId] = [
-                            'sort_order' => $index,
-                            'required_override' => null,
-                        ];
-                    }
-                    
-                    $campaign->customFields()->sync($syncData);
-                } else {
-                    // Crear nuevos custom fields y asociarlos
+            // Prioridad: Si se envía custom_fields, crear nuevos (incluso si también se envía custom_field_ids vacío)
+            // Si solo se envía custom_field_ids con valores, sincronizar con esos IDs
+            // Si solo se envía custom_field_ids vacío, eliminar todos
+            // Si no se envía ninguno, mantener los existentes (no hacer nada)
+            if ($hasCustomFieldIds || $hasCustomFields) {
+                // Si se envía custom_fields, crear nuevos (tiene prioridad)
+                if ($hasCustomFields && !empty($customFields)) {
                     $syncData = [];
                     
                     foreach ($customFields as $index => $fieldData) {
@@ -484,6 +473,48 @@ class CampaignController extends Controller
                         
                         // Preparar datos para sync
                         $syncData[$field->id] = [
+                            'sort_order' => $index,
+                            'required_override' => null,
+                        ];
+                    }
+                    
+                    // Si también se enviaron custom_field_ids, combinarlos
+                    if ($hasCustomFieldIds && !empty($customFieldIds)) {
+                        $existingIndex = count($syncData);
+                        foreach ($customFieldIds as $fieldId) {
+                            $field = CustomField::findOrFail($fieldId);
+                            
+                            // Validar que el field pertenezca al business
+                            if ($field->business_id !== $user->business->id) {
+                                throw new \Exception("Custom field does not belong to your business.");
+                            }
+                            
+                            $syncData[$fieldId] = [
+                                'sort_order' => $existingIndex++,
+                                'required_override' => null,
+                            ];
+                        }
+                    }
+                    
+                    $campaign->customFields()->sync($syncData);
+                } elseif ($hasCustomFieldIds) {
+                    // Solo se envió custom_field_ids (puede ser array vacío para eliminar todos)
+                    $syncData = [];
+                    
+                    // Asegurar que customFieldIds sea un array (puede ser null si viene vacío)
+                    if ($customFieldIds === null) {
+                        $customFieldIds = [];
+                    }
+                    
+                    foreach ($customFieldIds as $index => $fieldId) {
+                        $field = CustomField::findOrFail($fieldId);
+                        
+                        // Validar que el field pertenezca al business
+                        if ($field->business_id !== $user->business->id) {
+                            throw new \Exception("Custom field does not belong to your business.");
+                        }
+                        
+                        $syncData[$fieldId] = [
                             'sort_order' => $index,
                             'required_override' => null,
                         ];

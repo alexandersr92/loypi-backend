@@ -28,8 +28,12 @@ return [
         ],
         'business' => [
             'logo' => [
-                'rules' => ['image', 'max:1024', 'dimensions:max_width=500,max_height=500'],
+                'rules' => ['image', 'max:1024'],
                 'mime_types' => ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'],
+            ],
+            'cover' => [
+                'rules' => ['image', 'max:2048'],
+                'mime_types' => ['image/jpeg', 'image/png', 'image/webp'],
             ],
         ],
         'user' => [

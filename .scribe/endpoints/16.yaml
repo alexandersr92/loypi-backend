@@ -114,7 +114,7 @@ endpoints:
         name: type
         description: ''
         required: true
-        example: select
+        example: date
         type: string
         enumValues:
           - text
@@ -130,7 +130,7 @@ endpoints:
         name: required
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -218,7 +218,7 @@ endpoints:
         name: 'validations[].operator'
         description: 'This field is required when <code>validations</code> is present.'
         required: false
-        example: '>'
+        example: '<'
         type: string
         enumValues:
           - '='
@@ -260,7 +260,7 @@ endpoints:
         name: 'validations[].value_date'
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-23T08:54:57'
+        example: '2025-11-28T08:45:49'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -281,8 +281,8 @@ endpoints:
       key: b
       label: 'n'
       description: 'Eius et animi quos velit et.'
-      type: select
-      required: false
+      type: date
+      required: true
       active: false
       options:
         -
@@ -291,10 +291,10 @@ endpoints:
           sort_order: 37
       validations:
         -
-          operator: '>'
+          operator: '<'
           value_string: architecto
           value_number: 4326.41688
-          value_date: '2025-11-23T08:54:57'
+          value_date: '2025-11-28T08:45:49'
           message: m
     fileParameters: []
     responses: []
@@ -452,6 +452,269 @@ endpoints:
         name: active
         description: ''
         required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      options:
+        custom: []
+        name: options
+        description: ''
+        required: false
+        example: null
+        type: 'object[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      validations:
+        custom: []
+        name: validations
+        description: ''
+        required: false
+        example: null
+        type: 'object[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      'options[].id':
+        custom: []
+        name: 'options[].id'
+        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the custom_field_options table.'
+        required: false
+        example: 21c4122b-d554-3723-966c-6d723ea5293f
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      'options[].value':
+        custom: []
+        name: 'options[].value'
+        description: 'This field is required when <code>options</code> is present. Must not be greater than 255 characters.'
+        required: false
+        example: l
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'options[].label':
+        custom: []
+        name: 'options[].label'
+        description: 'This field is required when <code>options</code> is present. Must not be greater than 255 characters.'
+        required: false
+        example: j
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'options[].sort_order':
+        custom: []
+        name: 'options[].sort_order'
+        description: 'Must be at least 0.'
+        required: false
+        example: 52
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      'validations[].id':
+        custom: []
+        name: 'validations[].id'
+        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the custom_field_validations table.'
+        required: false
+        example: cd1eb1ea-4697-3b9a-9dd0-988044a83af6
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      'validations[].operator':
+        custom: []
+        name: 'validations[].operator'
+        description: 'This field is required when <code>validations</code> is present.'
+        required: false
+        example: regex
+        type: string
+        enumValues:
+          - '='
+          - '!='
+          - '>'
+          - '>='
+          - '<'
+          - '<='
+          - in
+          - not_in
+          - regex
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'validations[].value_string':
+        custom: []
+        name: 'validations[].value_string'
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      'validations[].value_number':
+        custom: []
+        name: 'validations[].value_number'
+        description: ''
+        required: false
+        example: 4326.41688
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      'validations[].value_date':
+        custom: []
+        name: 'validations[].value_date'
+        description: 'Must be a valid date.'
+        required: false
+        example: '2025-11-28T08:45:49'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      'validations[].message':
+        custom: []
+        name: 'validations[].message'
+        description: 'Must not be greater than 500 characters.'
+        required: false
+        example: m
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      label: b
+      description: 'Eius et animi quos velit et.'
+      required: false
+      active: false
+      options:
+        -
+          id: 21c4122b-d554-3723-966c-6d723ea5293f
+          value: l
+          label: j
+          sort_order: 52
+      validations:
+        -
+          id: cd1eb1ea-4697-3b9a-9dd0-988044a83af6
+          operator: regex
+          value_string: architecto
+          value_number: 4326.41688
+          value_date: '2025-11-28T08:45:49'
+          message: m
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/v1/custom-fields/{id}'
+    metadata:
+      custom: []
+      groupName: '📋 Custom Fields'
+      groupDescription: |-
+
+        CRUD de custom fields (campos personalizados). Requiere token de usuario (owner/admin)
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified resource in storage.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the custom field.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      label:
+        custom: []
+        name: label
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: ''
+        required: false
+        example: 'Eius et animi quos velit et.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      required:
+        custom: []
+        name: required
+        description: ''
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      extra:
+        custom: []
+        name: extra
+        description: ''
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      active:
+        custom: []
+        name: active
+        description: ''
+        required: false
         example: true
         type: boolean
         enumValues: []
@@ -540,7 +803,7 @@ endpoints:
         name: 'validations[].operator'
         description: 'This field is required when <code>validations</code> is present.'
         required: false
-        example: in
+        example: '<='
         type: string
         enumValues:
           - '='
@@ -582,7 +845,7 @@ endpoints:
         name: 'validations[].value_date'
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-23T08:54:57'
+        example: '2025-11-28T08:45:49'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -602,7 +865,7 @@ endpoints:
     cleanBodyParameters:
       label: b
       description: 'Eius et animi quos velit et.'
-      required: false
+      required: true
       active: true
       options:
         -
@@ -613,273 +876,10 @@ endpoints:
       validations:
         -
           id: cd1eb1ea-4697-3b9a-9dd0-988044a83af6
-          operator: in
+          operator: '<='
           value_string: architecto
           value_number: 4326.41688
-          value_date: '2025-11-23T08:54:57'
-          message: m
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PATCH
-    uri: 'api/v1/custom-fields/{id}'
-    metadata:
-      custom: []
-      groupName: '📋 Custom Fields'
-      groupDescription: |-
-
-        CRUD de custom fields (campos personalizados). Requiere token de usuario (owner/admin)
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update the specified resource in storage.'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the custom field.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: architecto
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      label:
-        custom: []
-        name: label
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: b
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      description:
-        custom: []
-        name: description
-        description: ''
-        required: false
-        example: 'Eius et animi quos velit et.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      required:
-        custom: []
-        name: required
-        description: ''
-        required: false
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      extra:
-        custom: []
-        name: extra
-        description: ''
-        required: false
-        example: null
-        type: object
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      active:
-        custom: []
-        name: active
-        description: ''
-        required: false
-        example: false
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      options:
-        custom: []
-        name: options
-        description: ''
-        required: false
-        example: null
-        type: 'object[]'
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      validations:
-        custom: []
-        name: validations
-        description: ''
-        required: false
-        example: null
-        type: 'object[]'
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      'options[].id':
-        custom: []
-        name: 'options[].id'
-        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the custom_field_options table.'
-        required: false
-        example: 21c4122b-d554-3723-966c-6d723ea5293f
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      'options[].value':
-        custom: []
-        name: 'options[].value'
-        description: 'This field is required when <code>options</code> is present. Must not be greater than 255 characters.'
-        required: false
-        example: l
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      'options[].label':
-        custom: []
-        name: 'options[].label'
-        description: 'This field is required when <code>options</code> is present. Must not be greater than 255 characters.'
-        required: false
-        example: j
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      'options[].sort_order':
-        custom: []
-        name: 'options[].sort_order'
-        description: 'Must be at least 0.'
-        required: false
-        example: 52
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      'validations[].id':
-        custom: []
-        name: 'validations[].id'
-        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the custom_field_validations table.'
-        required: false
-        example: cd1eb1ea-4697-3b9a-9dd0-988044a83af6
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      'validations[].operator':
-        custom: []
-        name: 'validations[].operator'
-        description: 'This field is required when <code>validations</code> is present.'
-        required: false
-        example: not_in
-        type: string
-        enumValues:
-          - '='
-          - '!='
-          - '>'
-          - '>='
-          - '<'
-          - '<='
-          - in
-          - not_in
-          - regex
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      'validations[].value_string':
-        custom: []
-        name: 'validations[].value_string'
-        description: ''
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      'validations[].value_number':
-        custom: []
-        name: 'validations[].value_number'
-        description: ''
-        required: false
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      'validations[].value_date':
-        custom: []
-        name: 'validations[].value_date'
-        description: 'Must be a valid date.'
-        required: false
-        example: '2025-11-23T08:54:57'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      'validations[].message':
-        custom: []
-        name: 'validations[].message'
-        description: 'Must not be greater than 500 characters.'
-        required: false
-        example: m
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-    cleanBodyParameters:
-      label: b
-      description: 'Eius et animi quos velit et.'
-      required: false
-      active: false
-      options:
-        -
-          id: 21c4122b-d554-3723-966c-6d723ea5293f
-          value: l
-          label: j
-          sort_order: 52
-      validations:
-        -
-          id: cd1eb1ea-4697-3b9a-9dd0-988044a83af6
-          operator: not_in
-          value_string: architecto
-          value_number: 4326.41688
-          value_date: '2025-11-23T08:54:57'
+          value_date: '2025-11-28T08:45:49'
           message: m
     fileParameters: []
     responses: []

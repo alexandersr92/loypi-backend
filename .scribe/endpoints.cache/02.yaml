@@ -8,9 +8,15 @@ description: |-
   El sistema utiliza Twilio Verify para enviar y verificar códigos OTP vía SMS.
   Estos endpoints están disponibles únicamente para Customers (no para Owners/Users).
 
+  **Modo Desarrollo:**
+  En modo desarrollo (APP_ENV=local o APP_DEBUG=true), el sistema OTP está desactivado:
+  - No se envían SMS reales
+  - El código OTP siempre es: **123456**
+  - Usa este código para todas las verificaciones en desarrollo
+
   **Flujo de autenticación:**
   1. Envía un OTP con `/api/v1/otp/send`
-  2. Recibe el código en tu teléfono vía SMS
+  2. Recibe el código en tu teléfono vía SMS (o usa 123456 en desarrollo)
   3. Verifica el código con `/api/v1/otp/verify`
   4. Una vez verificado, puedes registrar o hacer login del cliente
 endpoints:
@@ -29,9 +35,15 @@ endpoints:
         El sistema utiliza Twilio Verify para enviar y verificar códigos OTP vía SMS.
         Estos endpoints están disponibles únicamente para Customers (no para Owners/Users).
 
+        **Modo Desarrollo:**
+        En modo desarrollo (APP_ENV=local o APP_DEBUG=true), el sistema OTP está desactivado:
+        - No se envían SMS reales
+        - El código OTP siempre es: **123456**
+        - Usa este código para todas las verificaciones en desarrollo
+
         **Flujo de autenticación:**
         1. Envía un OTP con `/api/v1/otp/send`
-        2. Recibe el código en tu teléfono vía SMS
+        2. Recibe el código en tu teléfono vía SMS (o usa 123456 en desarrollo)
         3. Verifica el código con `/api/v1/otp/verify`
         4. Una vez verificado, puedes registrar o hacer login del cliente
       subgroup: ''
@@ -47,8 +59,10 @@ endpoints:
 
         **Flujo:**
         1. Llama a este endpoint para enviar el OTP
-        2. Recibirás el código OTP en tu teléfono vía SMS
+        2. Recibirás el código OTP en tu teléfono vía SMS (o usa 123456 en desarrollo)
         3. Usa el código recibido en el endpoint `/api/v1/otp/verify`
+
+        **Nota:** En modo desarrollo, el código siempre es **123456** y no se envía SMS.
       authenticated: false
       deprecated: false
     headers:
@@ -127,9 +141,15 @@ endpoints:
         El sistema utiliza Twilio Verify para enviar y verificar códigos OTP vía SMS.
         Estos endpoints están disponibles únicamente para Customers (no para Owners/Users).
 
+        **Modo Desarrollo:**
+        En modo desarrollo (APP_ENV=local o APP_DEBUG=true), el sistema OTP está desactivado:
+        - No se envían SMS reales
+        - El código OTP siempre es: **123456**
+        - Usa este código para todas las verificaciones en desarrollo
+
         **Flujo de autenticación:**
         1. Envía un OTP con `/api/v1/otp/send`
-        2. Recibe el código en tu teléfono vía SMS
+        2. Recibe el código en tu teléfono vía SMS (o usa 123456 en desarrollo)
         3. Verifica el código con `/api/v1/otp/verify`
         4. Una vez verificado, puedes registrar o hacer login del cliente
       subgroup: ''

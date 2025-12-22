@@ -69,7 +69,7 @@ class UpdateCampaignRequest extends FormRequest
             'custom_fields.*.type' => ['required_with:custom_fields', 'string', 'in:text,number,date,boolean,select'],
             'custom_fields.*.required' => ['nullable', 'boolean'],
             'custom_fields.*.extra' => ['nullable', 'array'],
-            'custom_fields.*.options' => ['required_if:custom_fields.*.type,select', 'array', 'min:1'],
+            'custom_fields.*.options' => ['nullable', 'array'],
             'custom_fields.*.options.*.value' => ['required_with:custom_fields.*.options', 'string', 'max:255'],
             'custom_fields.*.options.*.label' => ['required_with:custom_fields.*.options', 'string', 'max:255'],
             'custom_fields.*.options.*.sort_order' => ['nullable', 'integer', 'min:0'],
@@ -167,6 +167,25 @@ class UpdateCampaignRequest extends FormRequest
                             'rewards',
                             'Campaigns of type "punch" can only have one reward.'
                         );
+                    }
+                }
+            }
+
+            // Validar custom fields
+            $customFields = $this->input('custom_fields', []);
+            if (!empty($customFields)) {
+                foreach ($customFields as $index => $field) {
+                    $fieldType = $field['type'] ?? null;
+                    $fieldOptions = $field['options'] ?? [];
+                    
+                    // Si el tipo es "select", options debe tener al menos 1 elemento
+                    if ($fieldType === 'select') {
+                        if (empty($fieldOptions) || count($fieldOptions) < 1) {
+                            $validator->errors()->add(
+                                "custom_fields.{$index}.options",
+                                'The options field must have at least 1 item when the type is "select".'
+                            );
+                        }
                     }
                 }
             }

@@ -30,7 +30,7 @@ endpoints:
         name: id
         description: 'The ID of the campaign.'
         required: true
-        example: 019aa527-e143-7132-8328-75478fde8b67
+        example: 019aa527-e159-72f0-a2e6-2dd89132fdf2
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -48,7 +48,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019aa527-e143-7132-8328-75478fde8b67
+      id: 019aa527-e159-72f0-a2e6-2dd89132fdf2
       customerId: architecto
     queryParameters: []
     cleanQueryParameters: []
@@ -103,7 +103,7 @@ endpoints:
         name: 'values[].date_value'
         description: 'Must be a valid date.'
         required: false
-        example: '2025-11-23T08:54:57'
+        example: '2025-11-28T08:45:49'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -114,7 +114,7 @@ endpoints:
         name: 'values[].boolean_value'
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -126,8 +126,8 @@ endpoints:
           custom_field_id: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
           string_value: architecto
           number_value: 4326.41688
-          date_value: '2025-11-23T08:54:57'
-          boolean_value: false
+          date_value: '2025-11-28T08:45:49'
+          boolean_value: true
     fileParameters: []
     responses: []
     responseFields: []
@@ -165,7 +165,7 @@ endpoints:
         name: id
         description: 'The ID of the campaign.'
         required: true
-        example: 019aa527-e143-7132-8328-75478fde8b67
+        example: 019aa527-e159-72f0-a2e6-2dd89132fdf2
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -183,7 +183,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019aa527-e143-7132-8328-75478fde8b67
+      id: 019aa527-e159-72f0-a2e6-2dd89132fdf2
       customerId: architecto
     queryParameters: []
     cleanQueryParameters: []

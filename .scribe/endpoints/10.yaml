@@ -1,27 +1,29 @@
-name: '🏢 Negocios'
+name: '✅ Redemptions'
 description: |-
 
-  CRUD de negocios (businesses)
+  Endpoints para canjear premios desbloqueados
 endpoints:
   -
     custom: []
     httpMethods:
       - POST
-    uri: api/v1/businesses
+    uri: api/v1/staff/verify-redemption-pin
     metadata:
       custom: []
-      groupName: '🏢 Negocios'
+      groupName: '✅ Redemptions'
       groupDescription: |-
 
-        CRUD de negocios (businesses)
+        Endpoints para canjear premios desbloqueados
       subgroup: ''
       subgroupDescription: ''
-      title: 'Store a newly created resource in storage.'
-      description: ''
+      title: 'Verificar PIN y mostrar premio (Staff)'
+      description: |-
+        El staff escanea el QR del cliente y luego ingresa el PIN.
+        El sistema valida el PIN y muestra el premio ganado.
       authenticated: true
       deprecated: false
     headers:
-      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
@@ -29,187 +31,130 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      user_id:
+      customer_code:
         custom: []
-        name: user_id
-        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the users table.'
+        name: customer_code
+        description: 'Must be 6 characters.'
         required: true
-        example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+        example: bngzmi
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      name:
+      campaign_code:
         custom: []
-        name: name
-        description: 'Must not be greater than 255 characters.'
+        name: campaign_code
+        description: 'The <code>code</code> of an existing record in the campaigns table. Must be 4 characters.'
         required: true
-        example: g
+        example: yvdl
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      slug:
+      pin:
         custom: []
-        name: slug
-        description: 'Must match the regex /^[a-z0-9]+(?:-[a-z0-9]+)*$/. Must not be greater than 255 characters.'
-        required: false
-        example: z
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      description:
-        custom: []
-        name: description
-        description: 'Must not be greater than 1000 characters.'
-        required: false
-        example: 'Velit et fugiat sunt nihil accusantium.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      logo:
-        custom: []
-        name: logo
-        description: 'Must be a valid URL. Must not be greater than 500 characters.'
-        required: false
-        example: 'n'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      branding_json:
-        custom: []
-        name: branding_json
-        description: ''
-        required: false
-        example: null
-        type: object
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      branding_json.primary_color:
-        custom: []
-        name: branding_json.primary_color
-        description: 'Must match the regex /^#[0-9A-Fa-f]{6}$/.'
-        required: false
-        example: '#fEEeDb'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      branding_json.secondary_color:
-        custom: []
-        name: branding_json.secondary_color
-        description: 'Must match the regex /^#[0-9A-Fa-f]{6}$/.'
-        required: false
-        example: '#fEEeDb'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      address:
-        custom: []
-        name: address
-        description: 'Must not be greater than 500 characters.'
-        required: false
-        example: l
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'Must match the regex /^\+?[1-9]\d{1,14}$/.'
+        name: pin
+        description: 'Must match the regex /^[0-9]{4}$/. Must be 4 characters.'
         required: true
-        example: '9425593'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      email:
-        custom: []
-        name: email
-        description: 'Must be a valid email address. Must not be greater than 255 characters.'
-        required: false
-        example: lafayette.considine@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      website:
-        custom: []
-        name: website
-        description: 'Must be a valid URL. Must not be greater than 500 characters.'
-        required: false
-        example: a
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      city:
-        custom: []
-        name: city
-        description: 'Must not be greater than 100 characters.'
-        required: true
-        example: 'y'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      state:
-        custom: []
-        name: state
-        description: 'Must not be greater than 100 characters.'
-        required: true
-        example: k
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      country:
-        custom: []
-        name: country
-        description: 'Must not be greater than 100 characters.'
-        required: true
-        example: c
+        example: jnik
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      user_id: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-      name: g
-      slug: z
-      description: 'Velit et fugiat sunt nihil accusantium.'
-      logo: 'n'
-      branding_json:
-        primary_color: '#fEEeDb'
-        secondary_color: '#fEEeDb'
-      address: l
-      phone: '9425593'
-      email: lafayette.considine@example.com
-      website: a
-      city: 'y'
-      state: k
-      country: c
+      customer_code: bngzmi
+      campaign_code: yvdl
+      pin: jnik
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/staff/redeem-reward
+    metadata:
+      custom: []
+      groupName: '✅ Redemptions'
+      groupDescription: |-
+
+        Endpoints para canjear premios desbloqueados
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Canjear premio (Staff)'
+      description: |-
+        Después de verificar el PIN, el staff confirma el canje.
+        Esto cambia el estado del unlock a 'redeemed' y actualiza contadores.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      customer_code:
+        custom: []
+        name: customer_code
+        description: 'Must be 6 characters.'
+        required: true
+        example: bngzmi
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      campaign_code:
+        custom: []
+        name: campaign_code
+        description: 'The <code>code</code> of an existing record in the campaigns table. Must be 4 characters.'
+        required: true
+        example: yvdl
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      pin:
+        custom: []
+        name: pin
+        description: 'Must match the regex /^[0-9]{4}$/. Must be 4 characters.'
+        required: true
+        example: jnik
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      unlock_id:
+        custom: []
+        name: unlock_id
+        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the reward_unlocks table.'
+        required: true
+        example: 5e4f00df-4238-35bd-9edc-0b98dc359c80
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      customer_code: bngzmi
+      campaign_code: yvdl
+      pin: jnik
+      unlock_id: 5e4f00df-4238-35bd-9edc-0b98dc359c80
     fileParameters: []
     responses: []
     responseFields: []
@@ -224,37 +169,25 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/businesses/{id}'
+    uri: api/v1/customers/me/unlocks
     metadata:
       custom: []
-      groupName: '🏢 Negocios'
+      groupName: '✅ Redemptions'
       groupDescription: |-
 
-        CRUD de negocios (businesses)
+        Endpoints para canjear premios desbloqueados
       subgroup: ''
       subgroupDescription: ''
-      title: 'Display the specified resource.'
+      title: 'Listar premios desbloqueados del customer (Customer)'
       description: ''
       authenticated: true
       deprecated: false
     headers:
-      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the business.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: architecto
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -264,7 +197,7 @@ endpoints:
       -
         custom: []
         status: 401
-        content: '{"message":"Unauthenticated."}'
+        content: '{"success":false,"message":"Invalid token. Token not found in database."}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -282,510 +215,44 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - GET
-    uri: 'api/v1/businesses/slug/{slug}'
+      - POST
+    uri: api/v1/customers/me/unlocks/generate-pin
     metadata:
       custom: []
-      groupName: '🏢 Negocios'
+      groupName: '✅ Redemptions'
       groupDescription: |-
 
-        CRUD de negocios (businesses)
+        Endpoints para canjear premios desbloqueados
       subgroup: ''
       subgroupDescription: ''
-      title: 'Display the specified resource by slug.'
-      description: ''
+      title: 'Generar PIN para canjear premio (Customer)'
+      description: |-
+        El cliente presiona "Canjear" en un premio desbloqueado.
+        Se genera un PIN de 4 dígitos válido por 3 minutos.
       authenticated: true
       deprecated: false
     headers:
-      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      slug:
-        custom: []
-        name: slug
-        description: 'The slug of the slug.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      slug: architecto
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-          access-control-expose-headers: '*'
-        description: null
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PUT
-    uri: 'api/v1/businesses/{id}'
-    metadata:
-      custom: []
-      groupName: '🏢 Negocios'
-      groupDescription: |-
-
-        CRUD de negocios (businesses)
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update the specified resource in storage.'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the business.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: architecto
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      user_id:
+      unlock_id:
         custom: []
-        name: user_id
-        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the users table.'
-        required: false
+        name: unlock_id
+        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the reward_unlocks table.'
+        required: true
         example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      name:
-        custom: []
-        name: name
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: g
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      slug:
-        custom: []
-        name: slug
-        description: 'Must match the regex /^[a-z0-9]+(?:-[a-z0-9]+)*$/. Must not be greater than 255 characters.'
-        required: false
-        example: z
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      description:
-        custom: []
-        name: description
-        description: 'Must not be greater than 1000 characters.'
-        required: false
-        example: 'Velit et fugiat sunt nihil accusantium.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      logo:
-        custom: []
-        name: logo
-        description: 'Must be a valid URL. Must not be greater than 500 characters.'
-        required: false
-        example: 'n'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      branding_json:
-        custom: []
-        name: branding_json
-        description: ''
-        required: false
-        example: null
-        type: object
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      branding_json.primary_color:
-        custom: []
-        name: branding_json.primary_color
-        description: 'Must match the regex /^#[0-9A-Fa-f]{6}$/.'
-        required: false
-        example: '#fEEeDb'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      branding_json.secondary_color:
-        custom: []
-        name: branding_json.secondary_color
-        description: 'Must match the regex /^#[0-9A-Fa-f]{6}$/.'
-        required: false
-        example: '#fEEeDb'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      address:
-        custom: []
-        name: address
-        description: 'Must not be greater than 500 characters.'
-        required: false
-        example: l
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'Must match the regex /^\+?[1-9]\d{1,14}$/.'
-        required: false
-        example: '9425593'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      email:
-        custom: []
-        name: email
-        description: 'Must be a valid email address. Must not be greater than 255 characters.'
-        required: false
-        example: lafayette.considine@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      website:
-        custom: []
-        name: website
-        description: 'Must be a valid URL. Must not be greater than 500 characters.'
-        required: false
-        example: a
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      city:
-        custom: []
-        name: city
-        description: 'Must not be greater than 100 characters.'
-        required: false
-        example: 'y'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      state:
-        custom: []
-        name: state
-        description: 'Must not be greater than 100 characters.'
-        required: false
-        example: k
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      country:
-        custom: []
-        name: country
-        description: 'Must not be greater than 100 characters.'
-        required: false
-        example: c
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
     cleanBodyParameters:
-      user_id: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-      name: g
-      slug: z
-      description: 'Velit et fugiat sunt nihil accusantium.'
-      logo: 'n'
-      branding_json:
-        primary_color: '#fEEeDb'
-        secondary_color: '#fEEeDb'
-      address: l
-      phone: '9425593'
-      email: lafayette.considine@example.com
-      website: a
-      city: 'y'
-      state: k
-      country: c
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PATCH
-    uri: 'api/v1/businesses/{id}'
-    metadata:
-      custom: []
-      groupName: '🏢 Negocios'
-      groupDescription: |-
-
-        CRUD de negocios (businesses)
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update the specified resource in storage.'
-      description: ''
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {user_token} Requiere token de usuario (owner/admin)'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the business.'
-        required: true
-        example: 019aa527-a3dd-7342-b115-95e9fcbba615
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: 019aa527-a3dd-7342-b115-95e9fcbba615
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      user_id:
-        custom: []
-        name: user_id
-        description: 'Must be a valid UUID. The <code>id</code> of an existing record in the users table.'
-        required: false
-        example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      name:
-        custom: []
-        name: name
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: g
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      slug:
-        custom: []
-        name: slug
-        description: 'Must match the regex /^[a-z0-9]+(?:-[a-z0-9]+)*$/. Must not be greater than 255 characters.'
-        required: false
-        example: z
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      description:
-        custom: []
-        name: description
-        description: 'Must not be greater than 1000 characters.'
-        required: false
-        example: 'Velit et fugiat sunt nihil accusantium.'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      logo:
-        custom: []
-        name: logo
-        description: 'Must be a valid URL. Must not be greater than 500 characters.'
-        required: false
-        example: 'n'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      branding_json:
-        custom: []
-        name: branding_json
-        description: ''
-        required: false
-        example: null
-        type: object
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      branding_json.primary_color:
-        custom: []
-        name: branding_json.primary_color
-        description: 'Must match the regex /^#[0-9A-Fa-f]{6}$/.'
-        required: false
-        example: '#fEEeDb'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      branding_json.secondary_color:
-        custom: []
-        name: branding_json.secondary_color
-        description: 'Must match the regex /^#[0-9A-Fa-f]{6}$/.'
-        required: false
-        example: '#fEEeDb'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      address:
-        custom: []
-        name: address
-        description: 'Must not be greater than 500 characters.'
-        required: false
-        example: l
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'Must match the regex /^\+?[1-9]\d{1,14}$/.'
-        required: false
-        example: '9425593'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      email:
-        custom: []
-        name: email
-        description: 'Must be a valid email address. Must not be greater than 255 characters.'
-        required: false
-        example: lafayette.considine@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      website:
-        custom: []
-        name: website
-        description: 'Must be a valid URL. Must not be greater than 500 characters.'
-        required: false
-        example: a
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      city:
-        custom: []
-        name: city
-        description: 'Must not be greater than 100 characters.'
-        required: false
-        example: 'y'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      state:
-        custom: []
-        name: state
-        description: 'Must not be greater than 100 characters.'
-        required: false
-        example: k
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      country:
-        custom: []
-        name: country
-        description: 'Must not be greater than 100 characters.'
-        required: false
-        example: c
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      user_id: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-      name: g
-      slug: z
-      description: 'Velit et fugiat sunt nihil accusantium.'
-      logo: 'n'
-      branding_json:
-        primary_color: '#fEEeDb'
-        secondary_color: '#fEEeDb'
-      address: l
-      phone: '9425593'
-      email: lafayette.considine@example.com
-      website: a
-      city: 'y'
-      state: k
-      country: c
+      unlock_id: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
     fileParameters: []
     responses: []
     responseFields: []

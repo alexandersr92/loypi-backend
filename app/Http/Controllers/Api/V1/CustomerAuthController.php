@@ -277,6 +277,39 @@ class CustomerAuthController extends Controller
     }
 
     /**
+     * Validar token de customer y obtener businesses y campaigns
+     * 
+     * Valida el token del customer autenticado y retorna:
+     * - Array de IDs de businesses donde el customer tiene campaigns
+     * - Array de IDs de campaigns del customer
+     * 
+     * @authenticated
+     * @guard customer
+     */
+    public function validateToken(Request $request): JsonResponse
+    {
+        $customer = $request->user();
+        
+        // Obtener campaigns del customer (business_id ya está en la tabla campaigns)
+        $campaigns = $customer->campaigns()->get();
+        
+        // Extraer business_ids únicos
+        $businessIds = $campaigns->pluck('business_id')->unique()->values()->toArray();
+        
+        // Extraer campaign_ids
+        $campaignIds = $campaigns->pluck('id')->values()->toArray();
+        
+        return response()->json([
+            'success' => true,
+            'valid' => true,
+            'data' => [
+                'businesses' => $businessIds,
+                'campaigns' => $campaignIds,
+            ],
+        ], 200);
+    }
+
+    /**
      * Obtener customer autenticado con sus campaigns y stamps
      * 
      * Devuelve la información del customer autenticado, incluyendo:

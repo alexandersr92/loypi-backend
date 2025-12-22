@@ -20,38 +20,19 @@ class RegisterCustomerToCampaignRequest extends FormRequest
                 'size:4',
                 'exists:campaigns,code',
             ],
-            'phone' => [
-                'required',
-                'string',
-                'regex:/^\+?[1-9]\d{1,14}$/',
-            ],
             'business_slug' => [
                 'required',
                 'string',
                 'exists:businesses,slug',
             ],
-            // Si el customer es nuevo, requiere estos campos (se validará en el controller)
-            'name' => [
-                'sometimes',
-                'required',
-                'string',
-                'max:255',
-            ],
-            'otp_code' => [
-                'sometimes',
-                'required',
-                'string',
-                'size:6',
-            ],
-            // Custom field values
+            // Custom field values - name y phone vienen aquí
             'field_values' => [
-                'sometimes',
+                'required',
                 'array',
             ],
             'field_values.*.custom_field_id' => [
-                'required_with:field_values',
-                'uuid',
-                'exists:custom_fields,id',
+                'required',
+                'string',
             ],
             'field_values.*.string_value' => [
                 'nullable',
@@ -72,21 +53,46 @@ class RegisterCustomerToCampaignRequest extends FormRequest
         ];
     }
 
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            $fieldValues = $this->input('field_values', []);
+            $allowedDefaults = ['default-name-field', 'default-phone-field'];
+            
+            foreach ($fieldValues as $index => $fieldValue) {
+                $customFieldId = $fieldValue['custom_field_id'] ?? null;
+                
+                if (!$customFieldId) {
+                    continue;
+                }
+                
+                // Si es un campo default, está permitido
+                if (in_array($customFieldId, $allowedDefaults)) {
+                    continue;
+                }
+                
+                // Si no es default, debe ser un UUID válido
+                if (!preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i', $customFieldId)) {
+                    $validator->errors()->add(
+                        "field_values.{$index}.custom_field_id",
+                        'El custom_field_id debe ser un UUID válido o un campo default (default-name-field, default-phone-field).'
+                    );
+                }
+            }
+        });
+    }
+
     public function messages(): array
     {
         return [
             'campaign_code.required' => 'El código de la campaign es requerido.',
             'campaign_code.size' => 'El código de la campaign debe tener 4 caracteres.',
             'campaign_code.exists' => 'La campaign no existe.',
-            'phone.required' => 'El número de teléfono es requerido.',
-            'phone.regex' => 'El formato del número de teléfono no es válido.',
             'business_slug.required' => 'El slug del negocio es requerido.',
             'business_slug.exists' => 'El negocio no existe.',
-            'name.required' => 'El nombre es requerido para nuevos customers.',
-            'otp_code.required' => 'El código OTP es requerido para nuevos customers.',
-            'otp_code.size' => 'El código OTP debe tener 6 dígitos.',
-            'field_values.*.custom_field_id.required_with' => 'Cada valor debe tener un custom_field_id.',
-            'field_values.*.custom_field_id.exists' => 'Uno de los custom fields no existe.',
+            'field_values.required' => 'Los valores de los campos son requeridos.',
+            'field_values.array' => 'Los valores de los campos deben ser un array.',
+            'field_values.*.custom_field_id.required' => 'Cada valor debe tener un custom_field_id.',
         ];
     }
 }

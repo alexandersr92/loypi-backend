@@ -16,6 +16,8 @@ class CustomerCampaign extends Model
         'campaign_id',
         'stamps',
         'redeemed_at',
+        'status',
+        'validated_at',
     ];
 
     protected function casts(): array
@@ -23,6 +25,7 @@ class CustomerCampaign extends Model
         return [
             'stamps' => 'integer',
             'redeemed_at' => 'datetime',
+            'validated_at' => 'datetime',
         ];
     }
 

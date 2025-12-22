@@ -27,7 +27,7 @@ class VerifyOtpRequest extends FormRequest
                 'string',
                 'regex:/^\+?[1-9]\d{1,14}$/',
             ],
-            'code' => [
+            'otp' => [
                 'required',
                 'string',
                 'size:6',
@@ -45,8 +45,8 @@ class VerifyOtpRequest extends FormRequest
         return [
             'phone.required' => 'El número de teléfono es requerido.',
             'phone.regex' => 'El formato del número de teléfono no es válido.',
-            'code.required' => 'El código OTP es requerido.',
-            'code.size' => 'El código OTP debe tener 6 dígitos.',
+            'otp.required' => 'El código OTP es requerido.',
+            'otp.size' => 'El código OTP debe tener 6 dígitos.',
         ];
     }
 }

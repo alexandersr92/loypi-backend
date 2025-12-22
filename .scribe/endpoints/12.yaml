@@ -30,14 +30,14 @@ endpoints:
         name: id
         description: 'The ID of the campaign.'
         required: true
-        example: 019aa527-e143-7132-8328-75478fde8b67
+        example: 019aa527-e159-72f0-a2e6-2dd89132fdf2
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019aa527-e143-7132-8328-75478fde8b67
+      id: 019aa527-e159-72f0-a2e6-2dd89132fdf2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -89,14 +89,14 @@ endpoints:
         name: id
         description: 'The ID of the campaign.'
         required: true
-        example: 019aa527-e143-7132-8328-75478fde8b67
+        example: 019aa527-e159-72f0-a2e6-2dd89132fdf2
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019aa527-e143-7132-8328-75478fde8b67
+      id: 019aa527-e159-72f0-a2e6-2dd89132fdf2
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -130,7 +130,7 @@ endpoints:
         description: ''
         required: false
         example:
-          - false
+          - true
         type: 'boolean[]'
         enumValues: []
         exampleWasSpecified: false
@@ -142,7 +142,7 @@ endpoints:
       sort_orders:
         - 84
       required_overrides:
-        - false
+        - true
     fileParameters: []
     responses: []
     responseFields: []
@@ -180,7 +180,7 @@ endpoints:
         name: id
         description: 'The ID of the campaign.'
         required: true
-        example: 019aa527-e143-7132-8328-75478fde8b67
+        example: 019aa527-e159-72f0-a2e6-2dd89132fdf2
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -198,7 +198,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 019aa527-e143-7132-8328-75478fde8b67
+      id: 019aa527-e159-72f0-a2e6-2dd89132fdf2
       fieldId: architecto
     queryParameters: []
     cleanQueryParameters: []
