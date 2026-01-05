@@ -34,7 +34,7 @@ class StoreCustomFieldRequest extends FormRequest
             'extra' => ['nullable', 'array'],
             'active' => ['nullable', 'boolean'],
             // Opciones para campos tipo select
-            'options' => ['required_if:type,select', 'array', 'min:1'],
+            'options' => ['required_if:type,select', 'array', Rule::when($this->input('type') === 'select', 'min:1')],
             'options.*.value' => ['required_with:options', 'string', 'max:255'],
             'options.*.label' => ['required_with:options', 'string', 'max:255'],
             'options.*.sort_order' => ['nullable', 'integer', 'min:0'],
