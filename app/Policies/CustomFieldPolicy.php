@@ -29,8 +29,8 @@ class CustomFieldPolicy
      */
     public function create(User $user): bool
     {
-        // Solo owners con negocio pueden crear custom fields
-        return $user->isOwner() && $user->business !== null;
+        // Owners y admins con negocio pueden crear custom fields
+        return ($user->isOwner() || $user->isAdmin()) && $user->business !== null;
     }
 
     /**
@@ -38,8 +38,10 @@ class CustomFieldPolicy
      */
     public function update(User $user, CustomField $customField): bool
     {
-        // Solo puede actualizar custom fields de su propio negocio
-        return $user->business && $user->business->id === $customField->business_id;
+        // Owners y admins pueden actualizar custom fields de su propio negocio
+        return ($user->isOwner() || $user->isAdmin()) 
+            && $user->business 
+            && $user->business->id === $customField->business_id;
     }
 
     /**
@@ -47,9 +49,10 @@ class CustomFieldPolicy
      */
     public function delete(User $user, CustomField $customField): bool
     {
-        // Solo puede eliminar custom fields de su propio negocio
+        // Owners y admins pueden eliminar custom fields de su propio negocio
         // Y solo si no tiene valores de customers
-        return $user->business 
+        return ($user->isOwner() || $user->isAdmin())
+            && $user->business 
             && $user->business->id === $customField->business_id
             && !$customField->hasCustomerValues();
     }
