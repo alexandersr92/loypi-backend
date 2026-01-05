@@ -55,7 +55,7 @@ class CustomFieldController extends Controller
     {
         $user = $request->user()->load('business');
         
-        $this->authorize('create', CustomField::class);
+
 
         if (! $user->business) {
             return response()->json([
@@ -63,6 +63,8 @@ class CustomFieldController extends Controller
                 'message' => 'You must have a business to create custom fields.',
             ], 403);
         }
+
+        $this->authorize('create', CustomField::class);
 
         $validated = $request->validated();
         $options = $validated['options'] ?? [];
