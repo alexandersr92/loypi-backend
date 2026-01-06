@@ -66,7 +66,7 @@ class StoreCampaignRequest extends FormRequest
             'custom_fields.*.key' => ['required_with:custom_fields', 'string', 'max:255', 'regex:/^[a-z0-9_]+$/'],
             'custom_fields.*.label' => ['required_with:custom_fields', 'string', 'max:255'],
             'custom_fields.*.description' => ['nullable', 'string'],
-            'custom_fields.*.type' => ['required_with:custom_fields', 'string', 'in:text,number,date,boolean,select'],
+            'custom_fields.*.type' => ['required_with:custom_fields', 'string', 'in:text,number,date,boolean,select,phone'],
             'custom_fields.*.required' => ['nullable', 'boolean'],
             'custom_fields.*.extra' => ['nullable', 'array'],
             'custom_fields.*.options' => ['nullable', 'array'],
