@@ -24,7 +24,7 @@ class StaffLoginRequest extends FormRequest
         return [
             'business_slug' => ['required', 'string', 'exists:businesses,slug'],
             'code' => ['required', 'string'],
-            'pin' => ['required', 'string', 'min:4', 'max:6'],
+            'pin' => ['required', 'numeric', 'min:4', 'max:6'],
         ];
     }
 
@@ -40,8 +40,8 @@ class StaffLoginRequest extends FormRequest
             'business_slug.exists' => 'The business does not exist.',
             'code.required' => 'The staff code is required.',
             'pin.required' => 'The PIN is required.',
-            'pin.min' => 'The PIN must be at least 4 characters.',
-            'pin.max' => 'The PIN must not exceed 6 characters.',
+            'pin.min' => 'The PIN must be at least 4 digits.',
+            'pin.max' => 'The PIN must not exceed 6 digits.',
         ];
     }
 }
